@@ -4,7 +4,7 @@ This module introduces the Software Development Lifecycle, the Waterfall and Agi
 
 ## Table of Contents
 
-[[__TOC__]]
+[__toc__]
 
 ### Helpful References/Links
 
