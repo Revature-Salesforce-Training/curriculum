@@ -4,27 +4,7 @@ This module introduces the Software Development Lifecycle, the Waterfall and Agi
 
 ## Table of Contents
 
-* [Team Development in the Software Industry](#team-development-in-the-software-industry)
-* [Software Development Lifecycle (SDLC)](#software-development-lifecycle-(sdlc))
-* [The Waterfall Methodology](#the-waterfall-methodology)
-  * [Waterfall Drawbacks](#waterfall-drawbacks)
-  * [Benefits of Waterfall](#benefits-of-waterfall)
-* [Term Definitions](#term-definitions)
-* [The Agile Methodology](#the-agile-methodology)
-  * [Agile Drawbacks](#agile-drawbacks)
-    * [Benefits of Agile](#benefits-of-agile)
-    * [The Scrum Framework](#the-scrum-framework)
-      * [Scrum Advantages](#scrum-advantages)
-      * [Scrum Disadvantages](#scrum-disadvantages)
-    * [Kanban](#kanban)
-      * [Kanban Advantages](#kanban-advantages)
-      * [Kanban Disadvantages](#kanban-disadvantages)
-    * [Scrumban](#scrumban)
-    * [eXtreme Programming (XP)](#extreme-programming-(xp))
-      * [XP Downsides](#xp-downsides)
-      * [XP Benefits](#xp-benefits)
-    * [Agile Planning](#agile-planning)
-* [A Home for Waterfall](#a-home-for-waterfall)
+[[__TOC__]]
 
 ### Helpful References/Links
 
