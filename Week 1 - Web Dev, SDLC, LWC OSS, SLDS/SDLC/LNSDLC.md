@@ -110,7 +110,7 @@ Openness, so that developers are open with each other about any challenges or di
 - <mark>An Agile framework that implements a Kanban board, a visual representation of the progress of a project</mark>
 - e.g.
 
-<p align="center"><img src="img/kanban_board.jpg/></p>
+<p align="center"><img src="img/kanban_board.jpg"></p>
 
 - There is no firm requirement for the number of columns on a Kanban board, but we should generally have at least column per SDLC phase
 - <mark>Kanban cards, i.e. visual representation of a single requirement or work item, are placed in the columns</mark>
