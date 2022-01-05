@@ -7,7 +7,7 @@
   - Methodologies are categories of development concepts and practices
   - Frameworks are specific implementations of a methodology’s concepts
 - The SDLC has 8 steps
-  1. <mark>Gathering Requirements</mark>
+  1. <mark>Requirements gathering</mark>
   2. <mark>Analyzing Requirements</mark>
   3. <mark>Design</mark>
   4. <mark>Development</mark>
@@ -21,6 +21,8 @@
     - In UAT, the end client (or someone acting as them) manually testing our product to ensure that it fulfills their needs
     - UAT is useful because it can often surface bugs that our test code may not have caught and ensure client satisfaction
   - The delivery phase (where we release the product and maintain/support it)
+ 
+> Mnemonic for the 8 steps: __RADDTURM__
  
 ## Big Bang Methodology
 
@@ -79,7 +81,7 @@ Openness, so that developers are open with each other about any challenges or di
     - They use the information gathered from the customer to create the product backlog and prioritize the tasks within it
 - <mark>The Scrum Master ensures that the team is following and committed to Scrum ceremonies</mark>
 
-<p align="center"><img src="scrum_iteration.jpg"></p>
+<p align="center"><img src="img/scrum_iteration.jpg"></p>
 
 - Before the sprint beings, the team moves some requirements from the project backlog (which is list of all of the requirements for the entire project) to the sprint backlog (the list of features that team is planning complete in the upcoming sprint)
 - Throughout the sprint, the Scrum Master will lead <mark>15 minute daily standups</mark>
@@ -108,7 +110,7 @@ Openness, so that developers are open with each other about any challenges or di
 - <mark>An Agile framework that implements a Kanban board, a visual representation of the progress of a project</mark>
 - e.g.
 
-<p align="center"><img src="./kanban_board.jpg></p>
+<p align="center"><img src="img/kanban_board.jpg></p>
 
 - There is no firm requirement for the number of columns on a Kanban board, but we should generally have at least column per SDLC phase
 - <mark>Kanban cards, i.e. visual representation of a single requirement or work item, are placed in the columns</mark>
