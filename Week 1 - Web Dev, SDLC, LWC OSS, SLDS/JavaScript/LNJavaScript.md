@@ -241,7 +241,7 @@ for an example:
     }
 ```
 
-###Loops
+### Loops
 
 Example of a 'for' loop. We define a variable to be used to increment, the evaulation, and then 
 define our increment itself.

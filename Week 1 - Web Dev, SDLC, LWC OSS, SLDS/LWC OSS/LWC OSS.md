@@ -1,11 +1,11 @@
-#LWC OSS
+# LWC OSS
 Salesforce’s web development framework to create single page applications for use outside of the Salesforce platform. Similar to React, Vue, or Angular.
 
 > Lightning web components are custom elements built using HTML and modern JavaScript.
 
 The Lightning Web Components UI framework uses core Web Components standards and provides only what’s necessary to perform well in browsers. Because it’s built on code that runs natively in browsers, the framework is lightweight and delivers exceptional performance. Most of the code you write is standard JavaScript and HTML.
 
-##Structure of a LWC OSS Application
+## Structure of a LWC OSS Application
 - whenever we create a new LWC OSS application with npx create-lwc-app command, we get a default Node.js project the contents of this project include
   - node_modules
     - Node.js applications are meant to be portable by not having any dependence on the software installed on the system they’re running
@@ -32,16 +32,16 @@ The Lightning Web Components UI framework uses core Web Components standards and
    - lwc.config.json
      - this is where we put any special behavior or commands that we want the framework to observe whenever it is building or previewing our applications
 
-##Components  
+## Components  
 A reusable piece of user interface that we can use like lego pieces to build up our application. 
 
-##Component Bundles  
+## Component Bundles  
 All the parts required to build a LWC component. required: html, JavaScript files. optional: CSS file. They all must share same name as component, just ending with their respective file types. .css, .js, .html
 
-##Template tag 
+## Template tag 
 Html files in our component bundle must contain <template> tags to wrap everything in. 
 
-##Composition
+## Composition
 - when we use composition, we’re nesting custom components inside of other components
 - when nesting a component inside of another, we’ll instantiate it like a standard HTML element
   - i.e. we’ll just write the name of the component with kebab case
@@ -63,7 +63,7 @@ Sidebar: Casing Conventions
   - every letter in the name is lowercase and words are separated by hyphens
 >>>
 
-##Data binding
+## Data binding
 A way to render data through binding a property in JS onto our component. We can use curly braces for the correct syntax. Ex: {myBindedProperty}
 
 Our html:
@@ -79,7 +79,7 @@ userName = ‘some name’;
 }
 ```
 
-##Template directives 
+## Template directives 
 Allow additional functionality on certain elements
 - if:true, if:false = used to conditionally render UI elements. Takes a Boolean value
 - for:each, for:item, key attribute = used to iterate over data and display that data. 
@@ -89,20 +89,20 @@ Allow additional functionality on certain elements
   - first = a Boolean value indicating whether the item is first in the list
   - last = a Boolean value indicating whether the item is last in the list
 
-##Render Multiple Templates
+## Render Multiple Templates
 Can create multiple HTML files in the component bundle. Import them all and add a condition in the render() method to return the correct template depending on the component’s state.
 
 The returned value from the render() method must be a template reference, which is the imported default export from an HTML file.
 
-##Reactivity
+## Reactivity
 All fields are reactive. If the value of a field changes and the field is used in a template or in the getter of a property used in a template, the component re-renders and the renderedCallback() lifecycle hook is called(see lifecycle hooks below). When a component re-renders, all the expressions used in the template are re-evaluated.
 
-##Decorators 
+## Decorators 
 Can modify the behavior of a property or function. We have these available:
 - @track = allows you to have reactivity applied when using an object or an array
 - @api = makes our child component’s properties public for use by parent components
 
-##Lifecycle Hooks 
+## Lifecycle Hooks 
 A lifecycle hook is a JavaScript callback method triggered at a specific phase of a component instance’s lifecycle.
 
 connectedCallback() = this lifecycle hook is invoked when a component is inserted into the DOM. To access the host element, use “this”. You can’t access child elements in the component body because they don’t exist yet. 
@@ -124,7 +124,7 @@ To check whether a component is connected to the DOM, you can use this.isConnect
 disconnectedCallback() = is invoked when a component is removed from the DOM
 renderedCallback() = called after every render of the component. When a component re-renders, all the expressions used in the template are reevaluated.
 
-##CSS considerations
+## CSS considerations
 * Css file must be same name as component.
 * Cannot use IDs to style components
   * (see shadow DOM section below)
@@ -134,16 +134,16 @@ renderedCallback() = called after every render of the component. When a componen
   * You can then reference that css file in other components
   * Just simply use the following syntax in your .css file for the component you want to share the styles with = @import ‘my/nameOfComponentThatHasCssFile’;
 
-##Shadow DOM
+## Shadow DOM
 * The shadow DOM encapsulates the internal DOM structure of a web component. It allows the protection of the component from any manipulation. 
 * One consequence is styling. If we have a child component, it will not inherit styles from the parent as it is in another shadow tree. We also cannot use IDs to style with either. 
 * We need to use this.template.querySelector() to manipulate the DOM we can’t simply use document.querySelector()
 
-##ES Modules
+## ES Modules
 https://lwc.dev/guide/es_modules
 
 
-##Events
+## Events
 Events in LWC OSS are a way to communicate between your components in the composition of your app. We can go up our composition tree, and we can go back down the tree as well. To communicate down the component hierarchy we can pass properties to a child via HTML attributes, or call its public methods. Let’s take a look at that now. 
 
 EX 
