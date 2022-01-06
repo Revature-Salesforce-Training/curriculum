@@ -26,6 +26,28 @@ Initializing Repositories
     * because its name starts with a period, this is a hidden directory - it's not visible by default through tools like the `File Explorer` on windows
     * the `.git/` directory is the local repository - it stores information such as commits, the address of any remote repositories, and other details
 
+Git Config
+
+We can change the name and email that is associated with your Git commits using the git config command.
+
+To set this globally, meaning for every repository on your computer, execute the following command:
+
+```
+git config --global user.name "YOUR NAME"
+git config --global user.email "email@example.com"
+```
+
+And to change these settings for a single repository:
+
+```
+git config user.name "YOUR NAME"
+git config user.email "email@example.com"
+
+```
+
+Add the email address to your account on GitHub, so that your commits are attributed to 
+you and appear in your contributions graph on your profile!
+
 Terminology
 
 <p align="center"><img src="img/terminology.png"/></p>
