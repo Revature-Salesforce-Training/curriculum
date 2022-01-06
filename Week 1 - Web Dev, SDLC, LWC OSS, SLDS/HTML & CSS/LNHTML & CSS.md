@@ -103,10 +103,10 @@ include our code at the end of the `body` instead in order to improve the visual
 HTML documents render sequentially, so any JavaScript in the `head` will finish loading before any visual 
 elements in the body begin to load. This can be problematic and visibly slow our page if we have a large 
 amount of code in the `head`. We could alternatively use the 'defer' attribute, like in our example below. 
-This will ensure that the script is only run after the page has finished parsing. We also have the 'async' 
-option. This will download the script in parallel to parsing the page, and then execute as soon as it's 
-available. Your use case will determine the method you use. We will explore JavaScript more fully in a 
-later module.
+This will ensure that the script is only run after the page has finished parsing and will function 
+the same as placing our scripts at the end of the body. We also have the 'async' option. This will 
+download the script in parallel to parsing the page, and then execute as soon as it's available. 
+Your use case will determine the method you use. We will explore JavaScript more fully in a later module.
 
 Lastly, `<base>` allows us to give a base url for all hyperlinks in our document (i.e. all hyperlinks 
 will specify an addition to the end of the url to take us to a specific page whose url starts with 

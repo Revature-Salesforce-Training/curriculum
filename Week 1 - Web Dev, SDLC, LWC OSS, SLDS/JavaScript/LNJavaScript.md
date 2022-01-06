@@ -42,85 +42,182 @@ This module introduces JavaScript, the DOM, and AJAX.
 * [JavaScript and HTML DOM Reference (w3schools)](https://www.w3schools.com/jsref/default.asp)
 * [JavaScript (MDN web docs)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-## JavaScript for Aura Component Developers
-
-We'll begin this module by saying what it's not: this module is not (and is not intended to be) a comprehensive overview of JavaScript. Because of a restructuring of the order of the curriculum, JavaScript is no longer taught along with HTML and CSS. Additionally, HTML and CSS are taught as a quick segue into Visualforce, so there will be various times throughout this module where we will state a concept, indicate that an explanation of it resides outside of our current scope, and move on without addressing it further.
-
-So what is this module intended to be? This module serves as an introduction to JavaScript in order to provide familiarity before seeing JavaScript as part of the Lightning Aura Component model. Many of the concepts that we will detail here are not strictly a part of Aura, rather they will serve as an introduction to analogous functionality within the framework. Alright, disclaimer over; onto the material!
 
 ## JavaScript Introduction
 
-JavaScript (JS) is the main scripting language of the web - it's used for client-side functionality by a great deal of websites and can be interpreted by all major browsers. The language drawn from concepts of the C language, can be used for object-oriented, functional, or procedural programming, and was built mainly for modifying and interacting with the DOM (both the HTML elements and their associated CSS; we will discuss this in more detail later) on the client-side. As such, JS cannot normally be run outside of a web browser. But starting in the late aughts, frameworks such as Node.js were created to allow JS to be executed outside of a browser. However, in our studies, we will only deal with this language within the browser.
+JavaScript (JS) is the main scripting language of the web - it's used for client-side functionality 
+by a great deal of websites and can be interpreted by all major browsers. The language drawn from 
+concepts of the C language, can be used for object-oriented, functional, or procedural programming, 
+and was built mainly for modifying and interacting with the DOM (both the HTML elements and their 
+associated CSS; we will discuss this in more detail later) on the client-side. As such, JS cannot 
+normally be run outside of a web browser. We do have frameworks such as Node.js that were created 
+to allow JS to be executed outside of a browser, however. In our studies, we will only deal with 
+this language within the browser.
 
-Unlike Apex, JS is case-sensitive, loosely typed, and dynamically typed. Loose typing means that we don't declare the type of a variable when declaring said variable. Dynamic typing means that the type of the variable is determined at runtime (instead of compile time) and can change throughout the program with implicit conversion. Lastly, JS is an interpreted language. Compiled languages (such as C) have a compiler - a sort of middleman translator that breaks the language down into machine code that can be understood and run by the processor; while interpreted languages can be read and run one line at a time by the interpreter (the browser in the case of JavaScript).
+JS is case-sensitive, loosely typed, and dynamically typed. Loose typing means that we don't 
+declare the type of a variable when declaring said variable. Dynamic typing means that the type of 
+the variable is determined at runtime (instead of compile time) and can change throughout the program 
+with implicit conversion. Lastly, JS is an interpreted language. Compiled languages (such as C) have 
+a compiler - a sort of middleman translator that breaks the language down into machine code that can 
+be understood and run by the processor; while interpreted languages can be read and run one line at 
+a time by the interpreter (the browser in the case of JavaScript).
 
 ### JavaScript Comments and Printing to the Console
 
-Just as in Apex, JS has single-line and block comments, with single line comments prepended by // and block comments wrapped within /* and */. The console.log() function allows us to print output to the console, similar to how the System.debug() function lets us print information to the debug log in Apex.
+JS has single-line and block comments, with single line comments prepended by // and block comments 
+wrapped within /* and */. The console.log() function allows us to print output to the console.
 
 ### JavaScript Variables
 
-JavaScript variables, containers used to store values, are not declared with data types, but they are declared with one of three scope-enforcing keywords: var, let, and const. In non-strict JS, variables declared without a scope default to var, which gives either global or function scope depending on where the variable is defined. If the var variable is defined outside of any function, it has global scope and can be referenced anywhere within the file. If it is defined within a function, it has function scope and can be referenced anywhere within that function, but not outside of it. Variables declared with the let keyword can have block scope, meaning that they can be referred to in the block of code that declares them and any inner code blocks. Const can also enforce block scope, but cannot have its value changed after initial assignment (this rule gets a little funky with objects - we cannot assign a different _object_ to a const variable, but we can change the _properties_ of an object assigned to a const variable).
+JavaScript variables, containers used to store values, are not declared with data types, but 
+they are declared with one of three scope-enforcing keywords: var, let, and const. In non-strict 
+JS, variables declared without a scope default to var, which gives either global or function 
+scope depending on where the variable is defined. If the var variable is defined outside of any 
+function, it has global scope and can be referenced anywhere within the file. If it is defined 
+within a function, it has function scope and can be referenced anywhere within that function, but 
+not outside of it. Variables declared with the let keyword can have block scope, meaning that they 
+can be referred to in the block of code that declares them and any inner code blocks. Const can also 
+enforce block scope, but cannot have its value changed after initial assignment (this rule gets a 
+little funky with objects - we cannot assign a different _object_ to a const variable, but we can 
+change the _properties_ of an object assigned to a const variable).
 
-Although we do not declare data types for variables, JS still has data types. There are six primitive types: string, boolean, number, undefined, symbol, and null. Unlike in Apex, strings can be enclosed in either single or double quotes. Booleans again take true or false values. Numbers can have decimals, but are not required to - in contrast to Apex, JS has just one data type for all numbers. Variables take an undefined value if they are not assigned a value when they are declared. The symbol data type is mostly used for the keys corresponding to an object's properties. Finally, the null type is similar to undefined except that it is explicitly assigned. All variables that do not hold one of these six primitive types are objects.
+Although we do not declare data types for variables, JS still has data types. There are six 
+primitive types: string, boolean, number, undefined, symbol, and null. Strings can be enclosed in 
+either single or double quotes. Booleans again take true or false values. Numbers can have 
+decimals, but are not required to - in contrast to some other languages, JS has just one data type for 
+all numbers. Variables take an undefined value if they are not assigned a value when they are 
+declared. The symbol data type is mostly used for the keys corresponding to an object's properties. 
+Finally, the null type is similar to undefined except that it is explicitly assigned. All variables 
+that do not hold one of these six primitive types are objects.
 
-In order to determine a variable's type, we can use the typeof operator (except for the null type, where the typeof operator is a dirty liar), as below:
+In order to determine a variable's type, we can use the typeof operator (except for the null type, 
+where the typeof operator is a dirty liar), as below:
 
+```
     var a = 5;
-    console.log(typeof a);
+	var b;
+	var c = null;
+	
+	//will print 'number'
+    console.log(typeof(a));
+	
+	//will print 'undefined'
+	console.log(typeof(b));
+	
+	//will print 'object'
+	console.log(typeof(c));
+```
 
 ### JavaScript Objects
 
-The JS object type includes collections, which are either arrays or objects, (yes objects are part of, but not the entirety of, the object data type; for clarity, we will henceforth refer to these more specific objects as key-value objects), and functions. Arrays are zero-indexed lists of elements that can contain comma-separated values of different primitive or object data types. Contrary to in Apex, JS arrays have dynamic size - there is not a separate list collection. Arrays can be initialized with or without values and with square brackets or the Array constructor (although the latter is not considered a best practice); see below:
+The JS object type includes collections, which are either arrays or objects, (yes objects are part 
+of, but not the entirety of, the object data type; for clarity, we will henceforth refer to these 
+more specific objects as key-value objects), and functions. Arrays are zero-indexed lists of 
+elements that can contain comma-separated values of different primitive or object data types. 
+JS arrays have dynamic size. Arrays can be initialized with or without values and with square 
+brackets or the Array constructor (although the latter is not considered a best practice); see below:
 
+```
     var myArray = [];
     var myArray2 = [1, '2', 3];
+```
 
 The length of an array can be found through its length property.
 
-We will almost always declare key-value objects with the object literal, i.e. curly braces, optionally with comma-separated key-value pairs, which are themselves colon-separated. Their values are accessed through dot notation (if the key is a symbol) or square brackets (if the key is a string literal) and can be either properties (i.e. variables) or methods (i.e. functions). Let's take a look at an example:
+We will almost always declare key-value objects with the object literal, i.e. curly braces, 
+optionally with comma-separated key-value pairs, which are themselves colon-separated. Their 
+values are accessed through dot notation (if the key is a symbol) or square brackets (if the key 
+is a string literal) and can be either properties (i.e. variables) or methods (i.e. functions). 
+Let's take a look at an example:
 
+```
     var myObj = {};
     var myObj2 = {key1: 1, "key2": 2};
     console.log(myObj2.key1);
     console.log(myObj2["key2"]);
+```
 
-Lastly, functions are code blocks written to perform certain logic. They can be defined separately, with the function keyword, then a name, parameters in parentheses, and opening and closing curly braces. But they can also be assigned as values to variables, in which case a name is not included in the function declaration and they are classified as anonymous functions (because of the lack of a declared name). Take the following example:
+Lastly, functions are code blocks written to perform certain logic. They can be defined separately, 
+with the function keyword, then a name, parameters in parentheses, and opening and closing curly 
+braces. But they can also be assigned as values to variables, in which case a name is not included 
+in the function declaration and they are classified as anonymous functions (because of the lack of 
+a declared name). Take the following example:
 
+```
     function myFunc(){
     }
     var myFunc2 = function(){
     };
+```
 
 ### Falsy Values
 
-Falsy (or falsey) values are those that evaluate to false in a conditional expression. There are six falsy values in JS: false (pretty unexpected, right?), 0, empty string (either '' or "" because the language accepts either single or double quotes), null, undefined, and NaN (which paradoxically is a number). Every other value in JS is truthy - 1, -2, "a", true, etc.
+Falsy (or falsey) values are those that evaluate to false in a conditional expression. There are 
+six falsy values in JS: false (pretty unexpected, right?), 0, empty string (either '' or "" because 
+the language accepts either single or double quotes), null, undefined, and NaN (which paradoxically 
+is a number). Every other value in JS is truthy - 1, -2, "a", true, etc.
+
+### JavaScript Operators/Comparison_Operators
+
+[Check out this link for more info about operators!](https://www.w3schools.com/js/js_operators.asp)
 
 ### JavaScript Control Flow
 
-Since we've just talked about values in conditional expressions, it's a great time to talk about control flow in JS. As we said in the Apex Introduction module, control flow allows us to skip certain lines of code/only execute certain code or repeat code. Many of the JavaScript control flow statements look the same as their Apex counterparts. For example, the if-else statements are identical in both languages, executing blocks of code if their conditions evaluate to true or the else statement is reached with no prior valid condition.
+Since we've just talked about values in conditional expressions, it's a great time to talk about 
+control flow in JS. Control flow allows us to skip certain lines of code/only execute certain code 
+or repeat code. 
 
-The switch statement has slightly different syntax compared to its Apex sister. The declaration begins with the switch keyword, followed by the tested expression in parentheses and the opening and closing curly braces. Within the curly braces, each value is preceded by the case keyword and succeeded by a colon and an inner code block. If the inner code block does not end in a break statement, the code will continue execution until it reaches a break statement. Rather than the when else keyword representing the default case, the default keyword performs that job. See the code below for example if-else and switch control flows:
+An if statement evaluates the code wrapped in parentheses to either true or false. If true, the 
+code block is executed. If false, nothing is executed.
 
-    var a;
-    if(a){
-        /* perhaps this code is designed to access array values in which case we might 
-        want to wrap it in an if statement to avoid any errors caused by trying to 
-        access the elements of an undefined variable - because a is undefined, the 
-        conditional will evaluate to false and this block will not execute */
-    }
+```
+if(conditionToTestIfTrue) {
+		//code to be executed here
+	}
+```
 
-    var b = 3;
-    if(b < 3){
-        console.log('b is less than 3');
-    }
-    else if(b == 3){
-        console.log('b is equal to 3');
-    }
-    else{
-        console.log('b is greater than 3');
-    }
+You will often see an if statement used in combination with an else clause. An else clause is a 
+fallback to an if statement and will only get executed if the previous if statement is false.
 
+```
+if(conditionToTestIfTrue) {
+		//code to be executed here
+	} else {
+		//code to execute if condition was false
+	}
+```
+
+Ff statements can also be combined with an else if clause. This is like an else statement, but 
+with its own condition. It will only run if its condition is true, and the previous statement's 
+condition was false.
+
+```
+if(conditionToTestIfTrue) {
+		//code to be executed here
+	} else if(conditionToTestIfTrue) {
+		//code to execute if first condition was false
+	} else {
+		//code to execute if both were false
+	}
+```
+
+The ternary operator is used as a shortcut for the if-else statement. This operator tests a 
+condition; if the condition is true, it returns a certain value, otherwise it returns a different 
+value:
+
+```
+	conditionToTest ? valueToBeReturnedIfTrue : valueToBeReturnedIfFalse
+```
+
+
+The switch statement begins with the switch keyword, followed by the tested expression in 
+parentheses and the opening and closing curly braces. Within the curly braces, each value is 
+preceded by the case keyword and succeeded by a colon and an inner code block. If the inner code 
+block does not end in a break statement, the code will continue execution until it reaches a break 
+statement. The default keyword will run its code block of no other case matches. See the code below 
+for an example:
+
+```
     var orderNumber = 1;
     switch(orderNumber){
         /* the switch expression has been evaluated (it's only evaluated once) and the 
@@ -142,39 +239,87 @@ The switch statement has slightly different syntax compared to its Apex sister. 
         default:
             console.log('Unknown order.');
     }
+```
 
-As you can see from the above illustration, many of the operators in JS are the same as those in Apex. Additionally, for loops, while loops, and do-while loops all have the same syntax in both languages. On the other hand, the Apex for-each loop is analogous to the for-of loop in JavaScript, but they have slightly different appearances. The JS version begins with the for keyword, followed by an opening parenthesis, an iteration variable, the of keyword, the name of the array through which we are iterating, the closing parenthesis, and then the opening and closing curly braces. Let's give some examples of JS loops:
+###Loops
 
+Example of a 'for' loop. We define a variable to be used to increment, the evaulation, and then 
+define our increment itself.
+
+```
     var myArray = [];
     for(let i=0; i < myArray.length; i++){
         // iteration code
     }
+```
 
+Example of a 'while' loop. Notice we have to increment inside the loop or we could potentially 
+create an infinite loop.
+```
     var a = 0;
     while(a < 5){
         // iteration code
         a++;
     }
+```
 
+Example of a 'do-while' loop. Notice how we alsways run the loop once no matter what in our 
+'do' block. Then we evaluate if we should continue with 'while'.
+```
     var b = false;
     /* because b is false, this do-while loop will only execute once and stop
     iterating once it checks its condition after the first execution */
     do{
         // iteration code
     } while(b);
+```
 
-    for(let c of myArray){
-        // iteration code
-    }
+Example of a 'for-of' loop. This will iterate over iterable objects. 
+```
+    const array1 = ['a', 'b', 'c'];
+
+	for (const element of array1) {
+	  console.log(element);
+	}
+
+	// expected output: "a"
+	// expected output: "b"
+	// expected output: "c"
+```
+
+Example of a 'for-in' loop. This iterates over all enumerable properties of an object.
+```
+	const object = { a: 1, b: 2, c: 3 };
+
+	for (const property in object) {
+	  console.log(property + ': ' + object[property]);
+	}
+
+	// expected output:
+	// "a: 1"
+	// "b: 2"
+	// "c: 3"
+```
+
 
 ## Running JavaScript in HTML
 
-Once we move into the context of the Aura Component model, the framework will automatically wire our markup and JS together. But for now, it is useful to briefly discuss how to view and test our code. One of the easiest ways to accomplish this is to embed our program in an HTML page. We can do so in three ways: inline, internally, or externally. We write inline code by adding it to the appropriate event attribute of the opening tag of an HTML element. Although it is common for the values of these attributes to be function calls, we can define all of the desired functionality in the tag (our code is not enclosed within a function if we do this). See the following button with an output statement tied to the onclick attribute:
+We have three ways to make use of our JavaScript in HTML: inline, internally, or externally. We 
+write inline code by adding it to the appropriate event attribute of the opening tag of an HTML 
+element. Although it is common for the values of these attributes to be function calls, we can 
+define all of the desired functionality in the tag (our code is not enclosed within a function if 
+we do this). See the following button with an output statement tied to the onclick attribute:
 
+```
     <button type="button" onclick="console.log('button clicked');">Hey, I'm a button!</button>
+```
 
-Internal and external JavaScript both make use of the \<script\> tag (a non-self-closing tag). With internal code, we define our functions in between the opening and closing \<script\> tags and later add function calls to our event attributes in our elements. Take the following example HTML file:
+Internal and external JavaScript both make use of the \<script\> tag (a non-self-closing tag). 
+With internal code, we define our functions in between the opening and closing \<script\> tags and 
+later add function calls to our event attributes in our elements. Take the following example HTML 
+file:
 
+```
     <!DOCTYPE html>
     <html>
         <head>
@@ -189,16 +334,49 @@ Internal and external JavaScript both make use of the \<script\> tag (a non-self
             </button>
         </body>
     </html>
+```
 
-Recall that only the \<!DOCTYPE html\> line is required for all non-HTML5 pages, the rest (the \<html\>, \<head\>, and \<body\> tags) are just adhering to best practices.
+Recall that only the \<!DOCTYPE html\> line is required for all non-HTML5 pages, the rest 
+(the \<html\>, \<head\>, and \<body\> tags) are just adhering to best practices.
 
-External JS makes use of the same \<script\> tag, only this time with the src attribute of the tag set to the relative path to the JS file. For example, a file named buttonHandlers located in the same folder as our HTML page would be accessed through the tags \<script src="./buttonHandlers.js"\>\</script\> (all JS files end with the .js extension). It is advisible to keep our code external to our markup if we use the same logic in many different webpages, or if we simply want to keep our markup file as short and readable as possible.
+External JS makes use of the same \<script\> tag, only this time with the src attribute of the 
+tag set to the relative path to the JS file. For example, a file named buttonHandlers located in 
+the same folder as our HTML page would be accessed through the tags 
+\<script src="./buttonHandlers.js"\>\</script\> (all JS files end with the .js extension). 
+It is advisible to keep our code external to our markup if we use the same logic in many different 
+webpages, or if we simply want to keep our markup file as short and readable as possible.
 
-We can use as many \<script\> tags, for either internal or external logic, as we would like to throughout our HTML file in the file's head, body, or both. However, because our HTML pages load sequentially, we generally want to include all JS scripts at the end of our pages so that our visible elements can load first and the page does not appear slow to the user.
+We can use as many \<script\> tags, for either internal or external logic, as we would like to 
+throughout our HTML file in the file's head, body, or both. However, because our HTML pages load 
+sequentially, we may want to include all JS scripts at the end of our pages so that our 
+visible elements can load first and the page does not appear slow to the user.
+
+We could alternatively use the 'defer' attribute, like in our example below. 
+This will ensure that the script is only run after the page has finished parsing and will function 
+the same as placing our scripts at the end of the body. We also have the 'async' option. This will 
+download the script in parallel to parsing the page, and then execute as soon as it's available. 
+Your use case will determine the method you use.
+
+```
+<head>
+	<title>My Title</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Place the meta description text here.">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="path/to/css/file">
+	<script src="demo_defer.js" defer></script>
+</head>
+```
 
 ## The JavaScript Browser Console
 
-As we stated earlier, all modern browsers can interpret JavaScript code. This is why we include our JS in an HTML page to test it - when we open the HTML page, it will open in our default browser, which has a JS console in which we can execute our functions through direct function calls. To open up the JavaScript console in Chrome, click the button enclosed in the top red rectangle in the first below image, hover over More tools, then select Developer tools (enclosed in the lower red rectangle; you could also use the shortcut shown in the picture). The second below image shows the console that will be opened, through which we can call functions as shown.
+As we stated earlier, all modern browsers can interpret JavaScript code. This is why we include our JS 
+in an HTML page to test it - when we open the HTML page, it will open in our default browser, which has a 
+JS console in which we can execute our functions through direct function calls. To open up the JavaScript 
+console in Chrome, click the button enclosed in the top red rectangle in the first below image, hover over 
+More tools, then select Developer tools (enclosed in the lower red rectangle; you could also use the 
+shortcut shown in the picture). The second below image shows the console that will be opened, through which 
+we can call functions as shown.
 
 <p align="center"><img src="img/chrome_console_path.png"/></p>
 
@@ -234,6 +412,8 @@ Additionally, we can retrieve objects through querySelector, which allows us to 
 Once we've retrieved the reference to the element, we can edit its innerHTML, which holds the markup between the tag, or outerHTML, which holds the entire element (including the markup between the tags). See below for further clarification.
 
 <p align="center"><img src="img/inner_outer_html.png"/></p>
+
+[We have more options available than just innerHTML! Check out these differences!](https://dev.to/developertharun/javascript-dom-part-4-innerhtml-vs-innertext-vs-textcontent-video-article-1b90)
 
 ## Events and Event Listeners
 
@@ -287,7 +467,11 @@ Our last major section in this module is about Asynchronous JavaScript and XML, 
 
 The XMLHttpRequest (XHR) object is the heart of our AJAX request, it's common to abbreviate our instantation of this object as xhr.
 
-Each XHR object has an onreadystatechange property that holds a function that is called when the XHR object's readyState property, which indicates the current status of our request, changes. A table explaining the various readyState values is included later in this section, after we have further defined relevant methods, but a readyState value of 4 means that our request has completed and we have received a response from the server. Recall from the Apex Integration Services module that an HTTP status code of 200 means "OK", corresponding to a successful request.
+Each XHR object has an onreadystatechange property that holds a function that is called when the XHR 
+object's readyState property, which indicates the current status of our request, changes. A table 
+explaining the various readyState values is included later in this section, after we have further defined 
+relevant methods, but a readyState value of 4 means that our request has completed and we have received a 
+response from the server. A HTTP status code of 200 means "OK", corresponding to a successful request.
 
 So the anonymous function assigned to the object's onreadystatechange property first checks for a completed and successful call, then executes logic to handle the returned response. In the case of our example, the balldontlie API returns its response in the form of a JSON object (we will not detail JavaScript Object Notation, or JSON, here, but it looks a lot like a JS object literal except all keys/names must be in double quotes). We parse this object for the value that we want - Kevin Durant's 2018 three-point field goal percentage - and log it to the console. Again, the function isn't called when it's defined, rather it's called every time the readyState property of the XHR object changes - no extra work required from us.
 
@@ -307,20 +491,34 @@ To summarize: AJAX allows our JS to make a server call (through the send method)
 
 ## Out of Scope
 
-As we said at the beginning of this module, our JavaScript introduction is not meant to be comprehensive. As such, there are many topics related to our studies that we did not discuss because they were out of the scope of this module. However, your author always seeks to be as helpful as possible, so links to documentation on some of these topics are included in the Helpful References/Links section. Let's touch on them and briefly explain some other topics.
+As we said at the beginning of this module, our JavaScript introduction is not meant to be comprehensive. 
+As such, there are many topics related to our studies that we did not discuss because they were out of the 
+scope of this module. However, your author always seeks to be as helpful as possible, so links to 
+documentation on some of these topics are included in the Helpful References/Links section. Let's touch on 
+them and briefly explain some other topics.
 
-First, useful string and array methods that we did not talk about in the JavaScript Variables section can be found at the JavaScript String Reference (w3schools) and JavaScript Array Reference (w3schools) links, respectively.
+First, useful string and array methods that we did not talk about in the JavaScript Variables section can be 
+found at the JavaScript String Reference (w3schools) and JavaScript Array Reference (w3schools) links, 
+respectively.
 
-In the JavaScript Control Flow section, we said that many Apex operators have identical counterparts in JS. However, we did not touch on the strict equality/inequality (see the Equality comparisons and sameness (MDN web docs) and Comparison operators (MDN web docs) links), ternary (Conditional (ternary) operator (MDN web docs)), or modulus (JavaScript Arithmetic (w3schools)) operators. We also didn't talk about break/continue statements (JavaScript Break and Continue (w3schools)), for-in loops (for...in (MDN web docs)), or for-await-of loops (for await...of (MDN web docs)).
+When discussing falsy values in the appropriately named Falsy Values section, we neglected to say that null 
+and undefined values are only equal to other null and undefined values, respectively. In addition, NaN is 
+not equal to any value, not even itself.
 
-When discussing falsy values in the appropriately named Falsy Values section, we neglected to say that null and undefined values are only equal to other null and undefined values, respectively. In addition, NaN is not equal to any value, not even itself.
+In our DOM sections, we did not talk about other ways to manipulate the DOM including creating, inserting, 
+removing, and appending elements or getting the parents, siblings, or children nodes of an object on the DOM 
+tree, information about these topics can be found at the JavaScript HTML DOM Elements (Nodes) (w3schools) 
+and The HTML DOM Element Object (w3schools) references, respectively.
 
-In our DOM sections, we did not talk about other ways to manipulate the DOM including creating, inserting, removing, and appending elements or getting the parents, siblings, or children nodes of an object on the DOM tree, information about these topics can be found at the JavaScript HTML DOM Elements (Nodes) (w3schools) and The HTML DOM Element Object (w3schools) references, respectively.
+Additional methods and properties of the XMLHttpRequest object can be found at The XMLHttpRequest Object 
+(w3schools). Some further information about JSON is located at JSON - Introduction (w3schools).
 
-Additional methods and properties of the XMLHttpRequest object can be found at The XMLHttpRequest Object (w3schools). Some further information about JSON is located at JSON - Introduction (w3schools).
+JS has no single authoritative documentation source. But this is not to say that there is not good 
+documentation to be found. A couple particularly good websites are w3schools (see the JavaScript and HTML 
+DOM Reference (w3schools) link) and the MDN web docs (see JavaScript (MDN web docs)); w3schools is your 
+author's personal preference for a quick cheatsheet.
 
-Unlike Salesforce and its languages, JS has no single authoritative documentation source. But this is not to say that there is not good documentation to be found. A couple particularly good websites are w3schools (see the JavaScript and HTML DOM Reference (w3schools) link) and the MDN web docs (see JavaScript (MDN web docs)); w3schools is your author's personal preference for a quick cheatsheet.
-
-Some final words of caution: don't use the document.write() method or the eval() method; document.write() erases and replaces any existing DOM elements and eval() is a door to malicious code injection.
+Some final words of caution: don't use the document.write() method or the eval() method; document.write() 
+erases and replaces any existing DOM elements and eval() is a door to malicious code injection.
 
 Alright, now go forth and script!
