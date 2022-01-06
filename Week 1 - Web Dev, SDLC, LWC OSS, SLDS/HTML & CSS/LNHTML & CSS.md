@@ -97,11 +97,37 @@ The `<meta>` tag holds metadata, i.e. information, about our page. We specify th
 
 Next is `<link>`, which we will most frequently use to declare the external CSS document we are using for the page (we'll discuss CSS later in this module). We do this by giving a value of `stylesheet` to the `rel` attribute (which holds the relationship between the linked document and our HTML page), `text/css` to the `type` attribute, and the relative path to the CSS file from the directory containing the HTML document to the `href` attribute. Alternatively, we can include internal styling by using the `<style>` element, which holds the design for our page.
 
-`<script>` can contain either internal JavaScript or a relative path to an external JavaScript file. While we are discussing this tag in the context of the page's `head`, we may at times find it useful to include our code at the end of the `body` instead in order to improve the visual performance of our page. HTML documents render sequentially, so any JavaScript in the `head` must finish loading before any visual elements in the body begin to load. This can be problematic and visibly slow our page if we have a large amount of code in the `head`. We will explore JavaScript more fully in a later module.
+`<script>` can contain either internal JavaScript or a relative path to an external JavaScript file. 
+While we are discussing this tag in the context of the page's `head`, we may at times find it useful to 
+include our code at the end of the `body` instead in order to improve the visual performance of our page. 
+HTML documents render sequentially, so any JavaScript in the `head` will finish loading before any visual 
+elements in the body begin to load. This can be problematic and visibly slow our page if we have a large 
+amount of code in the `head`. We could alternatively use the 'defer' attribute, like in our example below. 
+This will ensure that the script is only run after the page has finished parsing. We also have the 'async' 
+option. This will download the script in parallel to parsing the page, and then execute as soon as it's 
+available. Your use case will determine the method you use. We will explore JavaScript more fully in a 
+later module.
 
-Lastly, `<base>` allows us to give a base url for all hyperlinks in our document (i.e. all hyperlinks will specify an addition to the end of the url to take us to a specific page whose url starts with that base url). We can also set the behavior of hyperlinks (whether they open in a new tab, the same tab, etc.) through the `target` attribute of this tag.
+Lastly, `<base>` allows us to give a base url for all hyperlinks in our document (i.e. all hyperlinks 
+will specify an addition to the end of the url to take us to a specific page whose url starts with 
+that base url). We can also set the behavior of hyperlinks (whether they open in a new tab, the same 
+tab, etc.) through the `target` attribute of this tag.
 
-This is not a complete list of tags that can be used in the `head` of a document. Other tags, such as images or hyperlinks can be placed within the `head` and will still render, but it is a best practice to reserve the `head` solely for metadata tags (i.e. those that we have discussed in this section).
+This is not a complete list of tags that can be used in the `head` of a document. Other tags, 
+such as images or hyperlinks can be placed within the `head` and will still render, but it is a best 
+practice to reserve the `head` solely for metadata tags (i.e. those that we have discussed in this section).
+
+```
+<head>
+	<title>My Title</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Place the meta description text here.">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="path/to/css/file">
+	<script src="demo_defer.js" defer></script>
+</head>
+```
+[More info on meta tags and search engine optimization](https://ahrefs.com/blog/seo-meta-tags/#meta-robots)
 
 ### The \<body\> Tag and Common HTML Elements
 
@@ -250,11 +276,24 @@ Rather than specifying the `margin` property, we can give values to the `margin-
 
 ### Borders
 
-Border properties include `border`, `border-bottom`, `border-left`, `border-top`, `border-right`, and `border-color`; the first five of which are shorthand properties. In the `border` property, we can specify (in order) the width, style (which is required), and color of the border.
+Border properties include `border`, `border-bottom`, `border-left`, `border-top`, `border-right`, and 
+`border-color`; the first five of which are shorthand properties. In the `border` property, we can 
+specify (in order) the width, style (which is required), and color of the border.
 
-The width can be `thin`, `medium`, `thick`, a relative size, or an absolute size and can also take single or multiple values in an analogous way to that of the `margin` property. Style determines the line style of the border and can take values such as `dotted`, `solid`, or `dashed`. Lastly, color determines the border's color. There are many ways to specify colors in CSS, including hexadecimal values prepended with a hashtag, color names such as `black` or `blue`, and the `rgb` function, which takes the comma-separated integer values (between 0 and 255) for red, green, and blue as parameters (e.g. `rgb(1, 23, 28)`).
+The width can be `thin`, `medium`, `thick`, a relative size, or an absolute size and can also take 
+single or multiple values in an analogous way to that of the `margin` property. Style determines the 
+line style of the border and can take values such as `dotted`, `solid`, or `dashed`. Lastly, color 
+determines the border's color. There are many ways to specify colors in CSS, including hexadecimal values 
+prepended with a hashtag, color names such as `black` or `blue`, the `rgb` function, which takes the 
+comma-separated integer values (between 0 and 255) for red, green, and blue as parameters (e.g. `rgb(1, 
+23, 28)`). We also have HSL(hue, saturation, lightness).
 
-`border-bottom`, `border-left`, `border-top`, and `border-right` have the same possible subproperties as `border`, but they only apply to the bottom, left, top, and right of the border, respectively, and we can only write one width value per property. Finally, we can specify the border's color individually through the `border-color` property.
+`border-bottom`, `border-left`, `border-top`, and `border-right` have the same possible subproperties as 
+`border`, but they only apply to the bottom, left, top, and right of the border, respectively, and we can 
+only write one width value per property. Finally, we can specify the border's color individually through 
+the `border-color` property.
+
+[We also have a border-radius property as well](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius)
 
 ### Padding
 
@@ -273,3 +312,9 @@ The `bottom`, `left`, `top`, and `right` properties take absolute or relative le
 Lastly, we have arrangement properties to modify how our elements are displayed on the page. We can give the `display` property values such as `inline` (making the element an inline element), `block` (making the element a block element), or `flex`, among other possibilities.
 
 The `flex` value allows us to use the flexbox, which is a responsive container for holding HTML elements. With this value, we can also specify the `flex-direction`, `flex-flow`, and `flex-wrap` properties. `flex-direction` can take various values, including `row` (which displays the elements in a row), `row-reverse` (which does the same but displays the elements in the reverse of the order they are defined in our document), `column` (which displays the elements in a column), and `column-reverse` (analogous to `row-reverse`, but for columns). Giving a value of `wrap` to `flex-wrap` lets elements wrap to the next line when the end of the window is reached. Alternatively, we can specify values for both the wrap and direction of the flexbox with the shorthand `flex-flow` property.
+
+[Flexbox video tutorial](https://www.youtube.com/watch?v=fYq5PXgSsbE)
+
+[Game to help learn flexbox!](https://flexboxfroggy.com/)
+
+[CSS Grids is another important tool!](https://www.youtube.com/watch?v=9zBsdzdE4sM&t=1s)
