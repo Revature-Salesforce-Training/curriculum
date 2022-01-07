@@ -107,7 +107,7 @@ Can modify the behavior of a property or function. We have these available:
 ## Lifecycle Hooks 
 A lifecycle hook is a JavaScript callback method triggered at a specific phase of a component instance’s lifecycle.
 
-connectedCallback() = this lifecycle hook is invoked when a component is inserted into the DOM. To access the host element, use “this”. You can’t access child elements in the component body because they don’t exist yet. 
+* connectedCallback() = this lifecycle hook is invoked when a component is inserted into the DOM. To access the host element, use “this”. You can’t access child elements in the component body because they don’t exist yet. 
 
 ```
 import { LightningElement } from 'lwc'
@@ -123,8 +123,9 @@ Note
 To check whether a component is connected to the DOM, you can use this.isConnected.
 >>>
 
-disconnectedCallback() = is invoked when a component is removed from the DOM
-renderedCallback() = called after every render of the component. When a component re-renders, all the expressions used in the template are reevaluated.
+* disconnectedCallback() = is invoked when a component is removed from the DOM
+
+* renderedCallback() = called after every render of the component. When a component re-renders, all the expressions used in the template are reevaluated.
 
 ## CSS considerations
 * Css file must be same name as component.

@@ -491,7 +491,7 @@ To summarize: AJAX allows our JS to make a server call (through the send method)
 
 ## Out of Scope
 
-As we said at the beginning of this module, our JavaScript introduction is not meant to be comprehensive. 
+Our JavaScript introduction is not meant to be comprehensive. 
 As such, there are many topics related to our studies that we did not discuss because they were out of the 
 scope of this module. However, your author always seeks to be as helpful as possible, so links to 
 documentation on some of these topics are included in the Helpful References/Links section. Let's touch on 
