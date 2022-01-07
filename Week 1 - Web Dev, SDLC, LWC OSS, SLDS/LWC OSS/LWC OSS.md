@@ -3,10 +3,12 @@ Salesforce’s web development framework to create single page applications for 
 
 > Lightning web components are custom elements built using HTML and modern JavaScript.
 
+## Some benefits of LWC OSS
+
 The Lightning Web Components UI framework uses core Web Components standards and provides only what’s necessary to perform well in browsers. Because it’s built on code that runs natively in browsers, the framework is lightweight and delivers exceptional performance. Most of the code you write is standard JavaScript and HTML.
 
 ## Structure of a LWC OSS Application
-- whenever we create a new LWC OSS application with npx create-lwc-app command, we get a default Node.js project the contents of this project include
+- whenever we create a new LWC OSS application with npx create-lwc-app command, we get a default Node.js project. The contents of this project include:
   - node_modules
     - Node.js applications are meant to be portable by not having any dependence on the software installed on the system they’re running
     - Rather, they include any dependencies that they need in the node_modules directory
@@ -39,7 +41,7 @@ A reusable piece of user interface that we can use like lego pieces to build up 
 All the parts required to build a LWC component. required: html, JavaScript files. optional: CSS file. They all must share same name as component, just ending with their respective file types. .css, .js, .html
 
 ## Template tag 
-Html files in our component bundle must contain <template> tags to wrap everything in. 
+Html files in our component bundle must contain '<template>' tags to wrap everything in. 
 
 ## Composition
 - when we use composition, we’re nesting custom components inside of other components
@@ -51,17 +53,17 @@ Html files in our component bundle must contain <template> tags to wrap everythi
 	<namespace-child-component></namespace-child-component>
 </template>
 ```
-    - will render the component that’s named childComponent (we name components and their files using camelCase)
+- will render the component that’s named childComponent (we name components and their files using camelCase)
 
->>>
-Sidebar: Casing Conventions
-- camelCase
-  - the first letter of every word except the first word in a variable name is capitalized
-- pascal case
-  - the first letter of every word in a variable name is capitalized
-- kebab case
-  - every letter in the name is lowercase and words are separated by hyphens
->>>
+
+>Sidebar: Casing Conventions
+>- camelCase
+>  - the first letter of every word except the first word in a variable name is capitalized
+>- pascal case
+>  - the first letter of every word in a variable name is capitalized
+>- kebab case
+>  - every letter in the name is lowercase and words are separated by hyphens
+
 
 ## Data binding
 A way to render data through binding a property in JS onto our component. We can use curly braces for the correct syntax. Ex: {myBindedProperty}
