@@ -41,7 +41,7 @@ A reusable piece of user interface that we can use like lego pieces to build up 
 All the parts required to build a LWC component. required: html, JavaScript files. optional: CSS file. They all must share same name as component, just ending with their respective file types. .css, .js, .html
 
 ## Template tag 
-Html files in our component bundle must contain '<template>' tags to wrap everything in. 
+Html files in our component bundle must contain ```<template>``` tags to wrap everything in. 
 
 ## Composition
 - when we use composition, we’re nesting custom components inside of other components
