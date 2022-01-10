@@ -1,0 +1,39 @@
+///////////////////////////////////////////////////////////////////
+//
+// Name: Example Future Method
+// Author: Ben Learn, Salesforce Tech Team
+// Created: 4/29/21
+// Updated: 12/25/21
+// Description: Example of the @future annotation with 
+//              asynchronous apex. 
+//
+////////////////////////////////////////////////////////////////////
+
+public with sharing class ExampleFutureMethod {
+    
+    // @future denotes a method is asynchronous.
+    @future
+    public static void FutureExample(){
+        PermissionSet ps = new PermissionSet(Name='ExampleSet', Label='Example Label');
+        insert ps;
+    }
+    
+    // Inside this method we call our asynchronous method, but despite calling it first
+    // when we execute the system.debug's you'll note it won't have any information yet.
+    //
+    // This is because code normally runs synchronously, so we would wait for line 1 to 
+    // complete, and then execute what is one line two, and so on until the transaction 
+    // is completed. Asynchronous code on the other hand gets executed out of that direct
+    // order. This is beneficial in specific use cases, such as making a callout to an 
+    // api for example, when we do not want the application to hang on a piece of code 
+    // that may take longer to complete.
+    public static void ExampleInvoker(){
+        FutureExample();
+        system.debug([SELECT name FROM PermissionSet WHERE name = 'ExampleSet']);
+        Account a = new Account(name='Bob\'s Account');
+        insert a;
+        List<PermissionSet> permList = [SELECT name FROM PermissionSet WHERE name = 'ExampleSet'];
+        List<Account> aList = [SELECT name FROM Account WHERE name = 'Bob\'s Account'];
+        system.debug(permList + ' ' + aList);
+    }
+}

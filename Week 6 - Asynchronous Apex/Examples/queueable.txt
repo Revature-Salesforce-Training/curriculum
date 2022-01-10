@@ -1,0 +1,26 @@
+///////////////////////////////////////////////////////////////////
+//
+// Name: Example Queueable
+// Author: Ben Learn, Salesforce Tech Team
+// Created: 4/29/21
+// Updated: 12/25/21
+// Description: Example of the queueable interface with 
+//              asynchronous apex. 
+//
+////////////////////////////////////////////////////////////////////
+
+// Note we implement the queueable interface.
+public class ExampleQueueable implements Queueable {
+    // The interface requires a single method, execute.
+    public void execute(QueueableContext qc) {
+        Account acc = new Account(Name='Test');
+        // Queueable gives us a few advantages over @future. One is 
+        // that it provides us with a way to track its status, and 
+        // can execute other queueable methods inside of it.
+        Integer numJobs = [SELECT COUNT() FROM AsyncApexJob WHERE 
+            JobType='Queueable'];
+        if((numJobs < 2) && !Test.isRunningTest()){
+            System.enqueueJob(new ExampleQueueable());
+        }
+    }
+}

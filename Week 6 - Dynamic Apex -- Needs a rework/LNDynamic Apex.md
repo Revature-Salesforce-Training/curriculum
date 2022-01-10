@@ -28,7 +28,7 @@ Let's close our eyes for a second and imagine ideal Apex code. It promotes reusa
 
 ## Dynamic Apex Through the Schema Namespace
 
-In the our discussion of the Apex `System` and `Schema` namespaces, we briefly mentioned the `DescribeSObjectResult` and `DescribeFieldResult` classes contained within `Schema`. We commonly use these classes to implement dynamic Apex with, e.g. picklist values. By its very nature, hardcoding any value (picklist values included) is antithetical to dynamic code.
+We have the `DescribeSObjectResult` and `DescribeFieldResult` classes contained within the `Schema` namespace. We commonly use these classes to implement dynamic Apex with, e.g. picklist values. By its very nature, hardcoding any value (picklist values included) is antithetical to dynamic code.
 
 Unfortunately, we may often see hardcoded picklist field values in a custom controller for a Visualforce page or Lightning component. Take the following Visualforce page and associated controller:
 
@@ -146,7 +146,7 @@ public class AccountFinderController {
             String queryString = 'SELECT Id, Name, NumberOfEmployees FROM' +
                 ' Account';
             Integer n;
-            if(String.isEmpty(this.numEmployees)){
+            if(!String.isEmpty(this.numEmployees)){
                 n = Integer.valueOf(this.numEmployees);
                 queryString += ' WHERE NumberOfEmployees >=:n';
             }
