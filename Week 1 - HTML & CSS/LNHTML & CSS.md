@@ -206,6 +206,42 @@ See below for other common HTML elements, note that this is by no means an exhau
 * `<br/>` - self-closing tag for line breaks
 * `<!-- -->` - holds comments
 
+#### Semantic Markup
+
+Many HTML tags have semantic meaning. That is, the element itself conveys some information about the 
+type of content contained between the opening and closing tags.
+
+For example, when a browser encounters an h1 heading it interprets that tag to mean that the contents 
+of the h1 element constitute the most important heading of the section that contains the element. The 
+semantic meaning of an h1 tag is that it is used to identify the most important header of a specific 
+web page or section.
+
+But what's the purpose of semantic markup? Well when we use semantic markup we get the benefit of 
+increased search engine optimization with search engine web crawlers. Also better compatibility with 
+browser translation tools and increased accessibility for people who use screen readers. 
+
+Some common semantic tags:
+* <header></header>
+* <nav></nav>
+* <section></section>
+* <article></article>
+* <aside></aside>
+* <footer></footer>
+
+Note that we must use these tags correctly for them to actually be helpful and semantic. We wouldn't 
+use footer for a navigation bar for example. Take a look at the image below for an example of where 
+these elements are suppose to go. 
+
+<img src='img/img_sem_elements.gif'>
+
+#### Web Accessibility
+
+In our last section we described how semantic markup can be used to enhance the accessibility of our 
+site. In this section we will provide some more tools.
+
+[ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA)
+[tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex)
+
 ## Responsive Web Design
 
 Simply put, the best designed HTML pages are responsive. Have you ever viewed a website on your phone that made you scroll horizontally to see the entire width of the page or one with distorted images/page elements? This experience is becoming more and more rare as websites continue to adopt responsive web design, i.e. the implementation of webpages that adapt to the device viewing it and the size of that device. There are many ways to implement responsive web design in our HTML pages, one of which we previously discussed in `The <head> Tag` section: setting the viewport. Introduced in HTML5, the viewport allows us to tell the browser how to control the size and scale of the document based on the device viewing it.

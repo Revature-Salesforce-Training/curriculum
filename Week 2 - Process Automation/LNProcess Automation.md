@@ -10,7 +10,13 @@ This module introduces process automation in Salesforce.
 
 ## The Declarative Frontier
 
-We've discussed previously that it is a best practice to use declarative customizations over programmatic customizations whenever possible and we have now arrived at the limit of those declarative tools. We will begin this module by discussing basic automation tools such as formula fields, validation rules, duplicate rules, and matching rules, before moving on to more complex devices such as workflows and approval processes and ending with the most powerful declarative instruments available to us: processes and flows. Behold the landscape, beyond the declarative tools discussed in this module lies only wilderness.... well actually code is what lies beyond this module, but that's beside the point.
+We've discussed previously that it is a best practice to use declarative customizations over 
+programmatic customizations whenever possible and we have now arrived at the limit of those 
+declarative tools. We will begin this module by discussing basic automation tools such as formula 
+fields, before moving on to more complex devices such as workflows and approval processes and ending 
+with the most powerful declarative instruments available to us: processes and flows. Behold the 
+landscape, beyond the declarative tools discussed in this module lies only wilderness.... well 
+actually code is what lies beyond this module, but that's beside the point.
 
 ## Formula Fields
 
@@ -23,136 +29,128 @@ After selecting the `Formula` field data type in the first step of creating a ne
 Here, we choose the return type of our formula. The available options are `Checkbox` (i.e. a Boolean), `Currency`, `Date`, `Date/Time`, `Number`, `Percent`, `Text`, and `Time`. Note that when choosing the `Currency`, `Number`, or `Percent` return types, we are prompted to choose the number of decimal places for our returned value. If we choose to use a whole number for currency (e.g. zero decimal places), Salesforce will round the returned value to the nearest even number to give that whole number (e.g. $16.50 becomes $16 and $99.3 becomes $100).
 
 
-* Process Automation
-  * Workflows
-    * Outbound Calls/Email Alerts
-    * Field Update/Create Task
-  * Approval Process
-  * Process Builder
-    * Process Builder & Apex
-  * Duplicate & Matching Rules
-  * Cloud Flow Designer & Flows
-  * Formula Fields
-  * Validation Rules
-
 # Process Automation
-### Workflows
-##### What is a workflow?
-		A workflow is an automatic process triggered by specific criteria set when it is created. A workflow rule is the container of this process and can be summed up as an if/then statement.
 
-##### What are the possible evaluation criteria for a workflow rule?
-		When the record is:
-			Created  - The rule is evaluated only once, when the record is created.
-			Created and every time it is edited - The rule is evaluated multiple times, both when it is initially created and every time it is edited regardless of if the edit pertains to the criteria.
-			Created, and any time is is edited to subsequently meet criteria (default) - Allows the rule to be run multiple times. When the record is created, and when edited, but not when the edits are unrelated to the rule criteria.
+Challenges:
 
-##### What are the types of rule criteria settings you can choose?
-		Criteria are met - You select a field from the record, an evaluation, and value. e.g. Amount equal or greater than 50,000.
-		Formula evaluates to true - You build a formula that evaluates to a boolean value. These can be more complex than a 'simple criteria are met' evaluation.
+Create a workflow that edits some record when you update an existing record.
 
-##### What automated actions can be taken by a workflow?
-		Email Alert - Sends an email to the designated user using an email template.
-		Field Update - Updates a field on the record the workflow was invoked on.
-		Outbound Message - Sends an outbound message via the soap api.
-		Create Task - Creates a task.
-		Bonus: Flow Trigger - Launches a flow, this is currently pilot program only.
+Create an approval process that updates a field when it is approved.
 
-### Approval Process
-##### What is an approval process?
-		Approval processes allow you to create a multi-step process through which you can designate specific actions in reaction to the stage and approval status.
+Create a process that when a record is created, it launches a flow that updates another record.
 
-##### What actions can you perform as part of an approval process?
-		Create Task, Email Alert, Field Update, Outbound Message. These behave identically to the workflow actions of the same name.
-		Additionally you can lock or unlock the record in specific steps.
+## Workflows 
 
-##### What are the different types of steps in an approval process?
-		Initial Submission - When the record is submitted for approval, what actions are to be taken.
-		Approval steps - We can designate multiple steps each with their own actions.
-		Final approval - After it finshes all steps and finally approved, what do we want to have happen?
-		Final rejection - After it finishes all steps and finally rejected, what do we want to have happen?
-		Recall - If the submission is recalled, what do we want to have happen?
+- A workflow is an automatic process triggered by specific criteria set when it is created. A 
+workflow rule is the container of this process.
 
-##### Who can edit a locked record?
-		Admins, or users with the view and modify all permissions, always have access. Further we can designate during the creation of the approval process if the approver has access to editing the record.
+  - Possible evaluation criteria for workflow rule? 
+    - Created
+    - Created and every time it’s edited
+    - Created and any time it’s edited to subsequently meet criteria
+  - Rule criteria settings
+    - Criteria are met - You select a field from the record, an evaluation, and value. e.g. Amount equal or greater than 50,000.
+    - Formula evaluates to true - You build a formula that evaluates to a boolean value. These can be more complex than a 'simple criteria are met' evaluation.
+  - Types of actions a workflow can perform:
+   - Create a task
+   - Update field for record that invoked workflow
+   - Send Email alert
+   - Send Outbound SOAP message
+   - CUSS
+   - Time dependent workflow actions are available as well
+   
+   
+## Approval processes
+- Approval processes allow you to create a multi-step process through which you can designate 
+specific actions to be taken based on the stage and approval status.
+  - Actions that can be performed with an approval process are:
+    - Create task
+    - Update a field
+    - Send email alert
+    - Send outbound SOAP message
+    - CUSS
+  - When creating we have the jump start wizard and standard setup wizard.
+    - More options in standard setup wizard, we can change things such as: setting up an automated approver based on a field on the record, set up the approval page layout, and specify which users are allowed to submit the initial request for approval.
+  - There are multiple stages we can define and customize during the approval process. Each of these 
+  stages can have our CUSS actions we defined earlier.
+    - Initial submission actions
+    - Approval steps, where we can define additional approvers and customize approve and reject actions for each step we define.
+    - Final approval actions
+    - Final rejection actions
+    - Recall actions
+  - By default the record is locked from being edited when it has been submitted for approval. Only 
+  admins and users with View and modify all permissions could edit it at that point. This is 
+  customizable, however.
+  - Must click submit for approval… But can set up flows to automatically submit for approval as well.
+  
+## Process builder
+- The process builder allows you to create automated processes that execute upon specific criteria 
+being met. It is similar in this respect to workflows but has many additional features and enhanced 
+capabilities.
+  - (Process types) starts when:
+    - (record change process) A record change
+      - We specify the object and choose to start when either: a record is created or when a record is created or edited.
+    - (event process) Platform event message is received
+    - (invokable process) Is invoked by another process
+  - Then we select the criteria for executing actions
+    - Conditions are met
+      - Can check status of a certain field and then take actions based on that
+    - Formula evaluates to true
+    - No criteria – just execute the actions!
+  - We can then specify immediate actions to take as well as scheduled actions
+    - Run Apex code
+      - Class must be annotated with @InvocableMethod
+    - Create a record
+    - Update a record
+    - Send Email alerts 
+    - Launch Flows
+    - Post to chatter
+    - Launch invokable Process
+    - Quick actions
+    - Work with Quip documents, chat rooms, folders (service that hosts cloud documents)
+    - Send custom notification
+    - Submit for approval
+  - Process builder best practices
+    - Only one process per object
+    - User isNew() on new record creation only
+	
+## Flows 
+- Flows are a powerful declarative tool to perform actions in either your salesforce org or even external systems. We have 5 types of flows available:
+  - Record triggered flow – launched when record is created, updated, or deleted
+  - Autolaunched flow – launches from Apex, processes, REST API, and more
+  - Platform event-triggered flow – launches from platform event messages
+  - Screen flow – guides a user through a business process that’s launched from lightning pages, experience cloud sites, quick actions, and more
+  - Schedule-triggered flow – launches at specified time and frequency for each record in a batch
+  - R.A.P.S.S.
+- Flows can:
+  - Create/update/delete records
+  - Create chatter posts
+  - Submit approval requests
+  - Send emails
+  - Call apex code
+  - Create tasks
+  - Launch other flows
+  - Send custom notifications
+  - They CANNOT send outbound SOAP messages
+- Flow builder 
+  - The flow builder is a gui for flow creation. It features a canvas which represents the flow itself, and a toolbox which includes the elements and resources you can use to build the flow.
+    - Flow elements represent actions that a flow can execute, such as reading/writing data, displaying information through screens, and executing business logic.
+    - Flow resources reference values that can be referenced throughout the flow.
+- We can configure a record trigger flow to trigger when a record is created/updated/ created or updated / deleted
+  - When updating records, we can specify if we want the flow to run for every time a record is updated and meets condition requirements or only when a record is updated to meet condition requirements.  
+- Record triggered flows can also be configured and we can add a scheduled path if you want part of or the entire flow to run sometime after the triggering record is created. That scheduled time can be based on when the record is created or based on a field value in the record.
 
-### Process Builder
-##### What is process builder?
-		Process builder allows you to create automated processes execute upon specific criteria being met. It is similar in this respect to workflows, but has many additional features and enhanced capabilities.
 
-##### What types of processes are there?
-		A record change process starts when a record is created or updated.
-		An event process starts when a platform event message is received.
-		An invocable process starts when something else, like another process, invokes it.
+## The default workflow user 
+- Required for scheduled paths in record-triggered flows and time-dependent actions in workflow rules. If the user who triggered the automation is no longer active, the default workflow user is associated with the actions that are executed by the automation. The default workflow user always runs schedule-triggered flows.
 
-##### What are the trigger options for when to start a process for a record change process?
-		Record created.
-		Record created or edited.
+## What is a platform event?
+Secure, scalable, and custom event notifications within salesforce or from external sources based on a publish-subscribe architecture. They can trigger a process or a flow. They are similar to custom objects and are defined in the same way but have an __e suffix. These can be published through processes, flows, Apex, or API.
 
-##### What are the potential criteria for a process?
-		Conditions are met - the process evaluates specific fields to see if they meet the designated values.
-		Formula evaluates to true - a formula built evaluates true, this allows for more complex criteria.
-		No Criteria - The actions are always executed.
-		Optionally at this point you can also select for it to only evaluate when the record is created or edited to meet criteria.
+## Monitoring Processes
+- Setup > environments > Monitoring > Time-based workflow
 
-##### What actions can a process take?
-		Create Record - creates a new record using either the values you type or values of related records.
-		Invoke Process - invokes an invocable process.
-		Create Chatter Post - creates a chatter post on the feed of a user, group, or the record that started the process.
-		Use Quick Action - calls a quick action allowing for record creation, updates, or logging calls.
-		Work with Quip documents. - create quip documents, chat rooms and folder.
-		Launch a flow - launches a flow.
-		Send an Email - sends an email through the use of an email alert.
-		Send custom notification - sends a custom notification through salesforce.
-		Submit a record for approval - submits a record for an approval process. 
-		Send a survey - sends an email invitation linking to a survey question.
-		Update records - Update the fields of the launching record or related record.
-		Call Apex - call an invocable method from an apex class. With this it is essentially possible to do anything possible in salesforce with a process.
+From here we can monitor the queue of pending automations. This includes scheduled record triggered flows, time-dependent workflow actions, scheduled actions build in process builder, and flow resume events.
 
-### Process Builder & Apex
-##### How do you invoke apex from a process?
-		First the class must annotate the method you want to use with @InvocableMethod.
-		Select the call apex action and name the action.
-		Choose the apex class.
-
-### Duplicate and Matching Rules
-##### What are duplicate rules?
-		Duplicate rules are administrative tools to automatically detect duplicate records, and determine if they are allowed with warning, or prevented from being created. To determine if a duplicate exists they use matching rules.
-
-##### What are matching rules?
-		Matching rules specify what and how we check if a duplicate exists. We determine the fields that are checked, and if we check for a exact or fuzzy match.
-
-##### What is fuzzy matching.
-		Fuzzy matching is a type of matching that is allowed on certain fields, like name fields. An exact match would only catch John Smith, whereas a fuzzy match rule would also catch Jon Smith, Johnny Smith, Jonathan Smith, etc. However, fuzzy matching is not perfect, and when it comes to names tends to mainly work with western names.
-
-### Flow Builder & Flows
-##### What are flows?
-		Flows are a powerful click-not-code tool to perform actions in either your salesforce org or even exernal systems. 
-		Three types of flows exist: screen flows, before-save flows, and autolaunched flows.
-
-##### What is a screen flow?
-		Screen flows are used to automate processes that require user input. Through it we can create guided wizards that take a user through a complex process in a guided experience.
-
-##### What is an autolaunched flow?
-		When user input is not needed, we can leverage the same powerful capabilities of a flow that can act behind the scenes. Examples can include starting a flow on a button push or through a process.
-
-##### What is a before-save flow?
-		A before-save (or before-save update) flow is a new feature in the Spring '20 release of Salesforce; they allow for similar record-update functionality as processes, but are much faster because they occur much earlier in the Order of Execution, and therefore do not require a record to go through the entire Order of Execution again.
-
-##### What are the flow elements?
-		Flow elements represent actions that a flow can execute, such as reading/writing data, displaying information through screens, and executing business logic.
-
-##### What are flow resources?
-		Flow resources reference values that can be referenced throughout the flow.
-
-##### What is the flow builder?
-		The flow builder is a gui for flow creation. It features a canvas which represents the flow itself, and a toolbox which includes the elements and resources you can use to build the flow.
-
-### Validation Rules
-##### What are validation rules?
-		Validation rules are used to improve the quality of your data, ensuring that the data imput meets the requirments of your org.
-		Validation can use formulas, which must return a true or false value, and when true is returned an error is displayed.
-
-##### What is regex?      
-		RegEx, or Regular Expressions are a sequence of characters that define a search pattern. This can be used in conjunction with validation rules to ensure things like phone numbers, zip codes, and more match the desired input format.
-
-https://help.salesforce.com/articleView?id=process_which_tool.htm&type=5
+- Setup > process automation > paused and failed flow interviews
+Here we can see any flows that are actively paused or any flows that have failed.

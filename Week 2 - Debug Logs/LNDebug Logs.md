@@ -105,3 +105,5 @@ The method signature (with namespace where applicable).
  <img src="images/gailphorsh.png" width="50"> <br>
  <strong>Gail Phorsh Says</strong>: System.debug lines are one of the most common tools used with debug logs. Feel free when writing out code to make heavy use of them to check your values and state, you can always refactor them out later. 
 >>>
+
+[Check out this link for more info on setting up debug logging and trace flags!](https://help.salesforce.com/s/articleView?id=sf.code_add_users_debug_log.htm&type=5)

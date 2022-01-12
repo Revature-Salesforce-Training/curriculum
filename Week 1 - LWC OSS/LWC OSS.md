@@ -1,7 +1,9 @@
 # LWC OSS
-Salesforce’s web development framework to create single page applications for use outside of the Salesforce platform. Similar to React, Vue, or Angular.
+Salesforce’s web development framework to create single page applications for use outside of the 
+Salesforce platform. Similar to React, Vue, or Angular.
 
 > Lightning web components are custom elements built using HTML and modern JavaScript.
+> SPAs differ from multipage apps in that content gets rendered dynamically through JavaScript. This provides a faster user experience because there is fewer calls to and from the server.
 
 ## Some benefits of LWC OSS
 

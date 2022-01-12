@@ -53,19 +53,34 @@ While we're only just now talking about creating good data, we've actually previ
 
 To provide a consistent format for fields on records, we can create validation rules. Consider a validation rule that checks to see that a value entered for a state field is one of the 50 two-letter U.S. state abbreviations, thereby eliminating the possibility of some records having full state names while others are abbreviated.
 
-Currency can be achieved through workflows and process builder because we can invoke a workflow/process to update a field on a parent record when a field on a child record is updated and we can similarly invoke a process to update all related children when a field on a parent record is updated. In this way we can, e.g., update the mailing addresses of any contacts when the business address of their related account changes.
+Currency can be achieved through process automation because we can invoke a field update on a parent 
+when a field on a child record is updated and we can similarly invoke a process to update all related 
+children when a field on a parent record is updated. In this way we can, e.g., update the mailing 
+addresses of any contacts when the business address of their related account changes.
 
-Processes also increase accuracy because any automatic record updates reduce the amount of input users must manually enter and therefore decrease the possiblity of human error. We can also reduce the chances of human error with paths and flows. Recall that each stage in a path can have stage-specific instructions and screen flows can be used as wizards with a set of instructions for each screen, so each tool can give the user guidance and information to assist them in collecting correct data.
+Processes also increase accuracy because any automatic record updates reduce the amount of input users 
+must manually enter and therefore decrease the possiblity of human error. We can also reduce the 
+chances of human error with paths and flows. Recall that each stage in a path can have stage-specific 
+instructions and screen flows can be used as wizards with a set of instructions for each screen, so 
+each tool can give the user guidance and information to assist them in collecting correct data.
 
-Of course, if our users are to enter accurate data in our org, they must be _provided_ with accurate data. A user has no hope of entering the correct information for, e.g. a lead, if that lead provides them inaccurate information. To help mitigate this possibility, we can turn to one of the numerous AppExchange solutions for data accuracy, such as the popular `D&B Optimizer` managed package, which draws on information from Dun & Bradstreet (DNB), a large data aggregation firm.
+Unique data is much easier to achieve because we can create duplicate rules to guarantee that no 
+redundant data is entered. On the other hand, implementing the final factor of quality data, validity 
+is not done with a declarative tool so much as it is accomplished before any customization begins. 
+When forming our data model, we should constantly be asking ourselves if all of the objects and fields 
+we are planning on creating are absolutely necessary.
 
-Unique data is much easier to achieve because we can create duplicate rules to guarantee that no redundant data is entered. On the other hand, implementing the final factor of quality data, validity is not done with a declarative tool so much as it is accomplished before any customization begins. When forming our data model, we should constantly be asking ourselves if all of the objects and fields we are planning on creating are absolutely necessary.
-
-If, for instance, we are creating a solution for a large chain of auto body shops, it may be valuable to have the cell phone numbers of the chain's customers, but there is no good reason to collect information about the make and model of those cell phones - including fields for these values would just clutter our org and raise the possiblity of our users wasting their time by collecting and entering unneeded data.
+If, for instance, we are creating a solution for a large chain of auto body shops, it may be valuable 
+to have the cell phone numbers of the chain's customers, but there is no good reason to collect 
+information about the make and model of those cell phones - including fields for these values would 
+just clutter our org and raise the possiblity of our users wasting their time by collecting and 
+entering unneeded data.
 
 ## Bulk Data Management Tools
 
-As we've said before, Salesforce is designed to be used by large companies who store hundreds of thousands or millions of records (or even more!). Because of this, we may need to perform operations on large amounts of records at once.
+As we've said before, Salesforce is designed to be used by large companies who store hundreds of 
+thousands or millions of records (or even more!). Because of this, we may need to perform operations 
+on large amounts of records at once.
 
 ### Mass Transfer
 
