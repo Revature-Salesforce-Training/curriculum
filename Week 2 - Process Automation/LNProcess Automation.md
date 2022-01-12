@@ -52,12 +52,12 @@ workflow rule is the container of this process.
     - Criteria are met - You select a field from the record, an evaluation, and value. e.g. Amount equal or greater than 50,000.
     - Formula evaluates to true - You build a formula that evaluates to a boolean value. These can be more complex than a 'simple criteria are met' evaluation.
   - Types of actions a workflow can perform:
-   - Create a task
-   - Update field for record that invoked workflow
-   - Send Email alert
-   - Send Outbound SOAP message
-   - CUSS
-   - Time dependent workflow actions are available as well
+    - Create a task
+    - Update field for record that invoked workflow
+    - Send Email alert
+    - Send Outbound SOAP message
+    - CUSS
+    - Time dependent workflow actions are available as well
    
    
 ## Approval processes
@@ -87,7 +87,7 @@ specific actions to be taken based on the stage and approval status.
 - The process builder allows you to create automated processes that execute upon specific criteria 
 being met. It is similar in this respect to workflows but has many additional features and enhanced 
 capabilities.
-  - (Process types) starts when:
+  - We have several process types:
     - (record change process) A record change
       - We specify the object and choose to start when either: a record is created or when a record is created or edited.
     - (event process) Platform event message is received
@@ -99,7 +99,7 @@ capabilities.
     - No criteria – just execute the actions!
   - We can then specify immediate actions to take as well as scheduled actions
     - Run Apex code
-      - Class must be annotated with @InvocableMethod
+      - Method must be annotated with @InvocableMethod
     - Create a record
     - Update a record
     - Send Email alerts 
@@ -128,6 +128,8 @@ capabilities.
   - Submit approval requests
   - Send emails
   - Call apex code
+    - Method must be annotated with @InvocableMethod 
+	- [OR you can use the Process.Plugin interface](https://help.salesforce.com/s/articleView?id=sf.flow_build_extend_apex.htm&type=5)
   - Create tasks
   - Launch other flows
   - Send custom notifications
@@ -138,7 +140,7 @@ capabilities.
     - Flow resources reference values that can be referenced throughout the flow.
 - We can configure a record trigger flow to trigger when a record is created/updated/ created or updated / deleted
   - When updating records, we can specify if we want the flow to run for every time a record is updated and meets condition requirements or only when a record is updated to meet condition requirements.  
-- Record triggered flows can also be configured and we can add a scheduled path if you want part of or the entire flow to run sometime after the triggering record is created. That scheduled time can be based on when the record is created or based on a field value in the record.
+- Record triggered flows can also be configured to add a scheduled path if you want part of or the entire flow to run sometime after the triggering record is created. That scheduled time can be based on when the record is created or based on a field value in the record.
 
 
 ## The default workflow user 
@@ -148,9 +150,10 @@ capabilities.
 Secure, scalable, and custom event notifications within salesforce or from external sources based on a publish-subscribe architecture. They can trigger a process or a flow. They are similar to custom objects and are defined in the same way but have an __e suffix. These can be published through processes, flows, Apex, or API.
 
 ## Monitoring Processes
-- Setup > environments > Monitoring > Time-based workflow
+Setup > environments > Monitoring > Time-based workflow
 
-From here we can monitor the queue of pending automations. This includes scheduled record triggered flows, time-dependent workflow actions, scheduled actions build in process builder, and flow resume events.
+- From here we can monitor the queue of pending automations. This includes scheduled record triggered flows, time-dependent workflow actions, scheduled actions build in process builder, and flow resume events.
 
-- Setup > process automation > paused and failed flow interviews
-Here we can see any flows that are actively paused or any flows that have failed.
+Setup > process automation > paused and failed flow interviews
+
+- Here we can see any flows that are actively paused or any flows that have failed.
