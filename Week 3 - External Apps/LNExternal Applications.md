@@ -141,27 +141,3 @@ To enable similar functionality for Gmail, navigate to `Setup` > `Email` > `Gmai
 Once the Salesforce preparation is complete, users can add the `Salesforce` extension in the `Chrome Web Store`, navigate to Gmail and then login to the Salesforce org to be able to use the included features.
 
 For information on supported email clients and email server configuration, see the `Outlook Integration System Requirements`, `Considerations for Setting Up the Outlook Integration`, `Gmail Integration System Requirements`, and `Considerations for Setting Up the Gmail Integration` links in the `Helpful Links/References` section. Note that Outlook Integration is the preferred replacement for the soon-to-be-deprecated Salesforce for Outlook, offering comparable abilities without the need to manually upgrade the software when a new version of Salesforce is released.
-
-
-
-# IGNORE EVERYTHING FROM HERE DOWN
-
-  * External Email Services
-  * Heroku
-
-https://help.salesforce.com/articleView?id=email_int_overview.htm&type=5
-https://help.salesforce.com/articleView?id=outlookcrm_sync.htm&type=5
-
-
-
-## When to Turn to AppExchange
-
-Way back in the `Introduction to Salesforce` module, we said that AppExchange is the official Salesforce app marketplace. It offers prebuilt solutions that are native to and designed for the Force.com platform, meaning that installing a package from the marketplace falls within the Salesforce best practice of using out-of-the-box functionality before developing your own. So if an AppExchange app fulfills use case requirements, it should always be installed instead of creating a solution for ourselves, right? Such scenarios are commonly presented in certification exam questions and there is no hard line distinguishing when you should turn to AppExchange and when you should do your own development (whether declarative or programmatic). But we will address a few factors to consider when making this subjective decision.
-
-First, consider cost: while this may be a question that will be answered more often by a project lead or business analyst than by a developer, it is a major factor in the decision. Many packages on AppExchange are not free, whether they have a one-time purchase price or a subscription-based payment model. This cost should be weighed against an estimate of the money that your company would spend when developing and then later maintaining a custom solution.
-
-In a related vein, consider the cost of time. If your Salesforce developers currently have their hands full with other, higher priority projects, it may be beneficial to pay for and temporarily use an AppExchange product rather than moving your developers to a lower priority feature - you can always create the solution for yourself later when your team is less busy.
-
-Additionally, keep in mind what you are paying for and how closely that matches your user stories - if an app fulfills all your requirements but also has a lot of other, unneeded features, it may not be worth paying for something that you will not fully use. Obviously, you shouldn't pay for something that doesn't fulfill all needed client requirements.
-
-You should also factor in simplicity and ability. If a use case can be completed quickly and easily through declarative changes, there is no need to turn to AppExchange. However, if a lot of programmatic customization is needed and your team either doesn't have Salesforce developers or doesn't have developers with the necessary abilities, you should consider turning to the market where a seasoned Salesforce programmer may have written all the complicated functionality already.
