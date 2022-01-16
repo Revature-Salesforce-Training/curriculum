@@ -2,8 +2,6 @@
 
 This module introduces reports and dashboards in Salesforce.
 
-[[_TOC_]]
-
 #### Helpful References/Links
 
 * [Report Type Reference (Salesforce Help)](https://help.salesforce.com/articleView?id=reports_report_type_reference.htm&type=5)
@@ -59,6 +57,70 @@ to "Report Types" in your org settings. Here is what that looks like below.
 
 <img src="images/customReportsCreation.png">
 <img src="images/custom_reports.png">
+
+#### Report Formats
+
+There are four main types of report formats: Tabular, Summary, Matrix, and Joined.
+
+Quite simply, these formats allow us to look at our reports in different ways. This helps us better 
+visualize our data based on business requirments. 
+	
+##### What is the tabular format?
+It provides a list of records including what fields you selected, and ordered by the field the user that made the report defined.
+Similar to a spreadsheet.
+Cannot be used for charts.
+Cannot be used in dashboards unless rows are limited.
+
+##### What is the summary report format?
+It provides the aggregate information Sum, Average, Min, Max, based on a selected column.
+They can be used to generate charts, and be used as a source report for a dashboard component.
+
+Let's take a look at a quick example below. 
+
+<img src="images/summaryFormat.png">
+
+Here we can see that we are in a cases report. In the outline pane, we can simply group rows by the field 
+we wish. If we were to group by priority, for example, we can get a quick summary report of our cases broken 
+down by their priority. 
+	
+##### What is the matrix report format?
+Similar to summary, but can be grouped by both rows and columns.
+They can be used to generate charts, and be used as a source report for a dashboard component.
+
+Let's see an example below. 
+
+<img src="images/matrixFormat.png">
+
+Here we can see, that to create a matrix format, we must specify a grouping both for rows and columns. This 
+example shows a matrix format of summed opportunity ammounts by close month and by type. 
+
+##### What is the joined report format?
+Joined reports let you create multiple report blocks that provide different views of your data. Each block acts like a “sub-report,” with its own fields, columns, sorting, and filtering. A joined report can even contain data from different report types.
+Joined reports are available only in Enterprise, Performance, Unlimited, and Developer Editions.
+
+<img src="images/joinedFormat.png">
+
+#### Report Folders
+
+Reports are stored in folders, through which we can grant three levels of access.
+	* View - Allows user/group to view.
+	* Edit - Allow user/group to view/edit.
+	* Manage - Allow user to view/edit, and grant access to other users.
+	
+Folders can be:
+	* Public
+	* Hidden
+	* Shared
+	
+You can control access to folder contents based on:
+ * roles
+ * permissions
+ * public groups
+ * territories
+ * license types
+ 
+With all these options we can easily make a folder available to the entire orginization or only the original owner. 
+We can even create sub-folders (up to 3 levels deep), they will have the same contol access as their root folder.
 
 #### Filters
 
@@ -126,97 +188,6 @@ to help us out. Let's take a look at that below.
 As we can see, we are saying filter by "1 OR 2". So we get the results we are looking for. You can have more complex logic 
 here as well if need be. Maybe your filter logic is based on three filters? It could look like this: "1 AND (2 OR 3)". It 
 really just depends on your business case needs. You have three operators to choose from when using filter logic: AND, OR, and NOT.
-		
-#### Report Formats
-
-There are four main types of report formats: Tabular, Summary, Matrix, and Joined.
-
-Quite simply, these formats allow us to look at our reports in different ways. This helps us better 
-visualize our data based on business requirments. 
-	
-##### What is the tabular format?
-It provides a list of records including what fields you selected, and ordered by the field the user that made the report defined.
-Similar to a spreadsheet.
-Cannot be used for charts.
-Cannot be used in dashboards unless rows are limited.
-
-##### What is the summary report format?
-It provides the aggregate information Sum, Average, Min, Max, based on a selected column.
-They can be used to generate charts, and be used as a source report for a dashboard component.
-
-Let's take a look at a quick example below. 
-
-<img src="images/summaryFormat.png">
-
-Here we can see that we are in a cases report. In the outline pane, we can simply group rows by the field 
-we wish. If we were to group by priority, for example, we can get a quick summary report of our cases broken 
-down by their priority. 
-	
-##### What is the matrix report format?
-Similar to summary, but can be grouped by both rows and columns.
-They can be used to generate charts, and be used as a source report for a dashboard component.
-
-Let's see an example below. 
-
-<img src="images/matrixFormat.png">
-
-Here we can see, that to create a matrix format, we must specify a grouping both for rows and columns. This 
-example shows a matrix format of summed opportunity ammounts by close month and by type. 
-
-##### What is the joined report format?
-Joined reports let you create multiple report blocks that provide different views of your data. Each block acts like a “sub-report,” with its own fields, columns, sorting, and filtering. A joined report can even contain data from different report types.
-Joined reports are available only in Enterprise, Performance, Unlimited, and Developer Editions.
-
-<img src="images/joinedFormat.png">
-
-#### Report Folders
-
-Reports are stored in folders, through which we can grant three levels of access.
-	* View - Allows user/group to view.
-	* Edit - Allow user/group to view/edit.
-	* Manage - Allow user to view/edit, and grant access to other users.
-	
-Folders can be:
-	* Public
-	* Hidden
-	* Shared
-	
-You can control access to folder contents based on:
- * roles
- * permissions
- * public groups
- * territories
- * license types
- 
-With all these options we can easily make a folder available to the entire orginization or only the original owner. 
-We can even create sub-folders (up to 3 levels deep), they will have the same contol access as their root folder.
-
-## Report Charts 
-
-Before we get into dashboards, if you just want to add a chart to your report we can do that as well. Simply 
-click the chart icon on your report to set that up. 
-
-<img src="images/reportChart.png">
-
-#### Exporting Reports
-
-You can export reports for use outside of your Salesforce org. Simply click export in the dropdown selection 
-beside the name of your report. 
-
-<img src="images/reportExport.png">
-
-As you can see, we can choose to export the report as formatted or details only. Formatted allows an Excel file. 
-While Details Only allow Excel or CSV file. Both options can handle up to 100,000 rows and 100 columns.
-
-#### Scheduling Reports
-
-We have the ability to schedule reports to run at a time we specify. Simply select "Subscribe" on the 
-report we wish to set up a schedule for. We will then see this:
-
-<img src="images/scheduleReports.png">
-
-As you can see we can specify: the time to run the report, an attachment (the exported report see above), and we can 
-additionally specify recipients (if in shared folder), who the report is run as, as well as any custom conditions.
 
 #### Summary Formulas
 
@@ -280,6 +251,33 @@ number of employees.
 <img src="images/bucket.png">
 <img src="images/bucket2.png">
 <img src="images/bucket3.png">
+
+#### Exporting Reports
+
+You can export reports for use outside of your Salesforce org. Simply click export in the dropdown selection 
+beside the name of your report. 
+
+<img src="images/reportExport.png">
+
+As you can see, we can choose to export the report as formatted or details only. Formatted allows an Excel file. 
+While Details Only allow Excel or CSV file. Both options can handle up to 100,000 rows and 100 columns.
+
+#### Scheduling Reports
+
+We have the ability to schedule reports to run at a time we specify. Simply select "Subscribe" on the 
+report we wish to set up a schedule for. We will then see this:
+
+<img src="images/scheduleReports.png">
+
+As you can see we can specify: the time to run the report, an attachment (the exported report see above), and we can 
+additionally specify recipients (if in shared folder), who the report is run as, as well as any custom conditions.
+
+## Report Charts 
+
+Before we get into dashboards, if you just want to add a chart to your report we can do that as well. Simply 
+click the chart icon on your report to set that up. 
+
+<img src="images/reportChart.png">
 
 ## Dashboards
 
