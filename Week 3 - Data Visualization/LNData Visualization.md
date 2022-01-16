@@ -58,7 +58,7 @@ This allows the user to define the information they want available in it. To cre
 to "Report Types" in your org settings. Here is what that looks like below. 
 
 <img src="images/customReportsCreation.png">
-<img src="images/customreports.png">
+<img src="images/custom_reports.png">
 
 #### Filters
 
