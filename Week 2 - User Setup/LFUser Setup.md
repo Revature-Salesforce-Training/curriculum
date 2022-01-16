@@ -22,6 +22,8 @@ As we discussed in the `Security & Access` module, the profiles available to cho
 
 Once we click the `Save` button, our user automatically becomes `Active` - we can't create a user with any other status.
 
+We can also create multiple users at once (Up to 10 at a time). Although we will only be able to specify their first/last name, username, profile, and role. When creating individual users, we have much more fine grain details we can give.
+
 ## User Statuses
 
 In addition to the Active status, the remaining three user statuses are Inactive, Frozen, and Locked. As we said in the previous section, the Active status is the default. This status consumes the associated user license and allows the user to login to our org.
