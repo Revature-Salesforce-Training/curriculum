@@ -221,12 +221,12 @@ increased search engine optimization with search engine web crawlers. Also bette
 browser translation tools and increased accessibility for people who use screen readers. 
 
 Some common semantic tags:
-* <header></header>
-* <nav></nav>
-* <section></section>
-* <article></article>
-* <aside></aside>
-* <footer></footer>
+* ```<header></header>```
+* ```<nav></nav>```
+* ```<section></section>```
+* ```<article></article>```
+* ```<aside></aside>```
+* ```<footer></footer>```
 
 Note that we must use these tags correctly for them to actually be helpful and semantic. We wouldn't 
 use footer for a navigation bar for example. Take a look at the image below for an example of where 
