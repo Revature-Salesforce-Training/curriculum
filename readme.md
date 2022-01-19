@@ -27,6 +27,26 @@ Our projects and their requirements will be found on GitHub as well. For P0, you
 that it is broken down into three parts. Each week we will be exploring new content that 
 will build on (and add new requirements) to your first project. 
 
+### How I grade our 1 on 1s
+
+You will record a video based on self assesment prompts that I give out on Mondays. 
+You will then turn those videos in to me by the end of the day. I don't care what method 
+you use for recording, even a phone! I also don't care what platform it's hosted on, just 
+send me the link! Just make sure I can hear you and see you properly. 
+
+I will also pull people into 1-on-1 sessions in a zoom breakout room randomly on Mondays. 
+This is to talk about any concerns you may have and to get a sense of where we are at.
+
+
+| 50%          | 50%          |      |
+|--------------|--------------|------|
+| Soft Skills  | Correctness  |      |
+| :thumbsup:   | :thumbsup:   | 100% |
+| :thumbsup:   | :no_entry:   | 75%  |
+| :no_entry:   | :no_entry:   | 50%  |
+| :no_entry:   | :thumbsdown: | 25%  |
+| :thumbsdown: | :thumbsdown: | 0%   |
+
 ### Best ways to contact me?
 
 Either my email: ethan.wilson@revature.com
