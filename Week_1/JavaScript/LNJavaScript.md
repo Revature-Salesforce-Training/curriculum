@@ -41,7 +41,7 @@ This module introduces JavaScript, the DOM, and AJAX.
 * [JSON - Introduction (w3schools)](https://www.w3schools.com/js/js_json_intro.asp)
 * [JavaScript and HTML DOM Reference (w3schools)](https://www.w3schools.com/jsref/default.asp)
 * [JavaScript (MDN web docs)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-
+* [DOM Manipulation](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
 
 ## JavaScript Introduction
 
