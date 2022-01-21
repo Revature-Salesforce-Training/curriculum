@@ -1,0 +1,19 @@
+<template>
+    <div class="childcontainer">
+        <h2>This header won't get styled from parent. but we could import the resource module here too</h2> 
+        <p>
+            This is the child component. Let's send an event to the 
+            parent! Just put some text in the box and hit enter. Watch 
+            your message pass to the username field on the parent.
+        </p>
+        <input type="text" label="Enter new name for parent component!" onchange={handleChange}></input>
+        <h2 class="slds-text-heading_large">{messagetochild}</h2>
+
+        <h2 class="slds-text-heading_large">{parentCallingChildMethod}</h2>
+        <p class="reactive"></p>
+
+
+        <h2 class="slds-text-heading_large">Blue box is grandchild component!</h2>
+        <my-grandchild ongrandchildev={handleChildEv}></my-grandchild>
+    </div>
+</template>

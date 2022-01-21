@@ -1,0 +1,121 @@
+<template>
+    <h2>Red box is parent component!</h2>
+    <div class="container">
+        <h2>Example of Data Binding</h2>
+        <p>Hi my name is: {username}!</p>
+
+        <h2>Example of for:each, for:item, key template directives</h2>
+        <template for:each={people} for:item="person">
+            <p key={person.id}>{person.name}</p>
+        </template>
+
+        <h2>Test @track decorator by pressing button below!</h2>
+        <button onclick={testTrack}>Click this to change element of person array with track!</button>
+
+        <h2>Press button below to call child method from parent!</h2>
+        <button onclick={handleChildMethodCall} class="btn">CLICK ME!</button>
+        
+        <h2>Example of conditional rendering and lifecycle hooks</h2>
+        <input type="checkbox" label="Click ME!" onchange={handleChange}></input>
+
+        <h2 class="childStatus">{status}</h2>
+        <template if:true={areDetailsVisible}>
+            <h2>Purple box is child component!</h2>
+            <my-child ongrandchildfired={handleGrandchild} oninputchange={handleInputChange} messagetochild={valueToSendToChild}></my-child>
+        </template>
+        <template if:false={areDetailsVisible}>
+            Click chckbox to render child component!
+        </template> 
+    </div>
+
+    <h2>Below here are SLDS Examples</h2>
+    <p>Here we see example of slds-grid, slds-wrap, and 
+        utilizing slds-size. Notice how it is human readable. 
+        We could specify any size within the 12 column support, like 
+        below. We could also do things like: 
+
+        slds-size_5-of-10, slds-size_6-of-12, slds-size_1-of-2
+    </p>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_4-of-12 col">
+          <span>Col 1</span>
+        </div>
+        <div class="slds-col slds-size_8-of-12 col">
+          <span>Col 2</span>
+        </div>
+        <div class="slds-col slds-size_2-of-12 col">
+          <span>Col 3</span>
+        </div>
+      </div>
+
+      <p>Here are some examples of some component blueprints we 
+          can get from the slds documentation.
+      </p>
+
+      <div class="slds-badge slds-theme_error">Example Badge</div>
+      <button class="slds-button">Button</button>
+      <button class="slds-button slds-button_neutral">Neutral Button</button>
+      <button class="slds-button slds-button_brand">Brand Button</button>
+      <button class="slds-button slds-button_outline-brand">Outline Brand Button</button>
+      <button class="slds-button slds-button_destructive">Destructive Button</button>
+      <button class="slds-button slds-button_text-destructive">Text Destructive Button</button>
+      <button class="slds-button slds-button_success">Success Button</button>
+
+      <div class="demo-only demo--inverse" style="height:6rem;position:relative">
+        <div role="status" class="slds-spinner slds-spinner_medium">
+          <span class="slds-assistive-text">Loading</span>
+          <div class="slds-spinner__dot-a"></div>
+          <div class="slds-spinner__dot-b"></div>
+        </div>
+      </div>
+
+      <div class="slds-form-element">
+        <label class="slds-checkbox_toggle slds-grid">
+          <span class="slds-form-element__label slds-m-bottom_none">Toggle Label</span>
+          <input type="checkbox" name="checkbox-toggle-16" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16" />
+          <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="assertive">
+            <span class="slds-checkbox_faux"></span>
+            <span class="slds-checkbox_on">Enabled</span>
+            <span class="slds-checkbox_off">Disabled</span>
+          </span>
+        </label>
+      </div>
+
+      <fieldset class="slds-form-element">
+        <legend class="slds-form-element__legend slds-form-element__label">Scheduled Day(s)</legend>
+        <div class="slds-form-element__control">
+          <div class="slds-checkbox_button-group">
+            <span class="slds-button slds-checkbox_button">
+              <input type="checkbox" id="unique-id-monday-13" value="unique-id-monday-13" name="checkbox" />
+              <label class="slds-checkbox_button__label" for="unique-id-monday-13">
+                <span class="slds-checkbox_faux">Mon</span>
+              </label>
+            </span>
+            <span class="slds-button slds-checkbox_button">
+              <input type="checkbox" id="unique-id-tuesday-13" value="unique-id-tuesday-13" name="checkbox" />
+              <label class="slds-checkbox_button__label" for="unique-id-tuesday-13">
+                <span class="slds-checkbox_faux">Tue</span>
+              </label>
+            </span>
+            <span class="slds-button slds-checkbox_button">
+              <input type="checkbox" id="unique-id-wednesday-13" value="unique-id-wednesday-13" name="checkbox" />
+              <label class="slds-checkbox_button__label" for="unique-id-wednesday-13">
+                <span class="slds-checkbox_faux">Wed</span>
+              </label>
+            </span>
+            <span class="slds-button slds-checkbox_button">
+              <input type="checkbox" id="unique-id-thursday-13" value="unique-id-thursday-13" name="checkbox" />
+              <label class="slds-checkbox_button__label" for="unique-id-thursday-13">
+                <span class="slds-checkbox_faux">Thu</span>
+              </label>
+            </span>
+            <span class="slds-button slds-checkbox_button">
+              <input type="checkbox" id="unique-id-friday-13" value="unique-id-friday-13" name="checkbox" />
+              <label class="slds-checkbox_button__label" for="unique-id-friday-13">
+                <span class="slds-checkbox_faux">Fri</span>
+              </label>
+            </span>
+          </div>
+        </div>
+      </fieldset>
+</template>
