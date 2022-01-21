@@ -189,7 +189,7 @@ App.html:
 App.js
 ```
 Import { LightningElement } from ‘lwc’;
-Export default class App extends LightningElement {
+export default class App extends LightningElement {
 	handleClick() {
 	this.template.queryselector(‘my-child’).myChildMethod();
 	}
@@ -199,7 +199,7 @@ Export default class App extends LightningElement {
 child.js
 ```
 import { LightningElement, api } from 'lwc';
-export default class TodoItem extends LightningElement {
+export default class Child extends LightningElement {
     @api myChildMethod() {
 	Console.log(“this is my child method!”);
     };
