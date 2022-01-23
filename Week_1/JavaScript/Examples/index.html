@@ -5,59 +5,121 @@
         <meta charset="utf-8">
         <meta name="description" content="Place the meta description text here.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="assets/styles/index.css">
+        <!-- 
+          This page won't use JS, but the other one does!
+          Oh! This is a HTML comment!
         <script src="index.js" defer></script>
+        -->
     </head>
     <body>
-        
-        <div id="myDiv" class="exampleClass">
-            <p>My Paragraph!</p>
-            <a href="www.google.com">Link to google!</a>
+        <header>
+            <h1>Revature HTML & CSS Training</h1>
+            <nav>
+                <a href="index.html">HTML & CSS</a>
+                <a href="javascript.html">JavaScript</a>
+            </nav>
+        </header>
+        <div id="main">
+            <p>
+                Hi I'm Ethan, your trainer! I hope everyone has fun 
+                and learns a lot! We are going to be going at a 
+                pretty quick pace, it is a bootcamp after all! But with 
+                hard work, I know we can do it!
+            </p>
+
+            <h2>How you will be evaluated.</h2>
+            <ol>
+                <li>Projects</li>
+                <li>QC</li>
+                <li>Self assesments</li>
+                <li>Quizes</li>
+            </ol>
+
+            <h2>How I conduct 1-on-1s and grade self assesments.</h2>
+            <p>
+                Each Monday I will send out self assesments prompts. These 
+                prompts will contain questions about content we covered the 
+                previous week. You will create a video answering these questions 
+                and send that to me. I do not care how you record the video, even 
+                if it's a phone. I also don't care where you upload the video, just 
+                send me the link. (Unlisted Youtube videos are a pretty good option.) 
+                The breakdown of how I grade is in the table below. There is room for 
+                variance. If for example someone was awesome and middling they don't 
+                necessarily get a 75%. It's just a ballpark estimate. Much like a real 
+                interview situation, there is a little subjectivity involved. I'm always 
+                open to hear counter points though if someone doesn't agree with their grade. 
+                We can discuss it in a 1-on-1 session. 
+            </p>
+
+            <p>
+                That brings me to my next topic. Monday afternoons I will be pulling 
+                5 or 6 people randomly into a private breakout room to talk about any 
+                concerns they may have and talk about their performance. If anyone would 
+                like to meet with me then, or any other time. Just let me know, we can put 
+                something on the schedule if need be. 
+            </p>
+            <table>
+                <thead>
+                  <tr>
+                    <th>50%</th>
+                    <th>50%</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Soft Skills</td>
+                    <td>Correctness<br></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Awesome</td>
+                    <td>Awesome</td>
+                    <td>100%</td>
+                  </tr>
+                  <tr>
+                    <td>Awesome</td>
+                    <td>Middling</td>
+                    <td>75%</td>
+                  </tr>
+                  <tr>
+                    <td>Middling</td>
+                    <td>Middling</td>
+                    <td>50%</td>
+                  </tr>
+                  <tr>
+                    <td>Middling</td>
+                    <td>No Effort</td>
+                    <td>25%</td>
+                  </tr>
+                  <tr>
+                    <td>No Effort</td>
+                    <td>No Effort</td>
+                    <td>0%</td>
+                  </tr>
+                </tbody>
+                </table>
+
+                <h2>Things you will need to succeed in this course.</h2>
+                <ul>
+                    <li>Grit</li>
+                    <li>Time</li>
+                    <li>Patience</li>
+                    <li>Teamwork</li>
+                    <li>Good study habits</li>
+                </ul>
+
+                <h2>The Box Model.</h2>
+                <p>
+                    Open the dev console and take a look at the element 
+                    below. Notice the diffent layers we have set: padding, 
+                    border, and margin.
+                </p>
+                <div id="box-model">CONTENT</div>
         </div>
-
-        <ol> <!-- ordered lists render as 1, 2, 3, etc.. -->
-            <li class="myClass">First item</li>
-            <li class="myClass">Second item</li>
-            <li class="myClass">Third item</li>
-        </ol>
-        <ul> <!-- list items in here will just be bullet points -->
-            <li id="myID">First item</li>
-            <li>Second item</li>
-            <li>Third item</li>
-        </ul>
-
-        <div id="myBox">THE BOX MODEL</div>
-
-
-        <button id="btn" class="classBtn" type="button">Hey, I'm a button!</button>
-    
-
-        <div id="calc">
-            <div id="screen"></div>
-            <div class="calcRow">
-                <button class="button">7</button>
-                <button class="button">8</button>
-                <button class="button">9</button>
-                <button class="button">*</button>
-            </div>
-            <div class="calcRow">
-                <button class="button">4</button>
-                <button class="button">5</button>
-                <button class="button">6</button>
-                <button class="button">-</button>
-            </div>
-            <div class="calcRow">
-                <button class="button">1</button>
-                <button class="button">2</button>
-                <button class="button">3</button>
-                <button class="button">+</button>
-            </div>
-            <div class="calcRow">
-                <button class="button">0</button>
-                <button class="button">/</button>
-                <button class="button">Enter</button>
-                <button class="button">Clear</button>
-            </div>
-        </div>
+        <footer>
+            <img src="assets/img/revature-logo.png"/>
+        </footer>
     </body>
 </html>

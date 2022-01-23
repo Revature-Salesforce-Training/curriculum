@@ -522,3 +522,12 @@ Some final words of caution: don't use the document.write() method or the eval()
 erases and replaces any existing DOM elements and eval() is a door to malicious code injection.
 
 Alright, now go forth and script!
+
+## Notes for future Ethan
+* Rewrite this a little less verbose if possible
+* need to add: 
+  * classes
+  * modules
+  * decorators
+  * es6+ notations 
+  * string/array/dom manipulation

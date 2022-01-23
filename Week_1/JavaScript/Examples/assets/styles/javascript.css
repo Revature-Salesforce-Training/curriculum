@@ -1,0 +1,10 @@
+/* We can also import whole stylesheets! */
+@import 'index.css';
+
+h2 {
+    margin: 5vh 0vw;
+}
+
+#main {
+    height: 100vh;
+}

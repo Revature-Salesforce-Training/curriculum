@@ -1,0 +1,105 @@
+/* This is a CSS comment! */
+/* This is an example of importing a custom font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu&display=swap');
+
+/* This is an example of a CSS reset */
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+:root {
+    --mainColor: rgb(71, 76, 85);
+    --secondaryColor: rgb(242, 106, 37);
+} 
+
+#box-model {
+    margin: 15px;
+    padding: 15px;
+    border: 5px solid 
+}
+
+#main {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--mainColor);
+    color: white;
+    padding: 1rem;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+a {
+    color: inherit;
+    background-color: var(--secondaryColor);
+    padding: 7px;
+    white-space: nowrap;
+    margin: 0px 3px 0px 3px;
+    transition: border-radius 0.5s;
+    border-radius: 15px;
+}
+
+a:hover {
+    border-radius: 0px;
+}
+
+p {
+    margin: 5vh 0vw;
+    text-align: center;
+}
+
+ul, ol {
+    margin: 5vh 0vw;
+}
+
+li {
+    margin: 1vh 0vw;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    max-width: 150px;
+    margin: 5vh 0vw 2vh 0vw;
+}
+
+table {
+    margin: 0vh 0vw 5vh 0vw;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px;
+}
+
+@media all and (max-width: 600px) {
+    h1 {
+        font-size: 1rem;
+    }
+}
