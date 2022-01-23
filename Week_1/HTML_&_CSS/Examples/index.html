@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <!--This is a HTML comment!-->
+      <!--This is a HTML comment!
+          This is our head element. Metadata goes here. 
+      -->
         <title>My Website!</title>
         <meta charset="utf-8">
         <meta name="description" content="Place the meta description text here.">
@@ -10,6 +12,13 @@
         <script src="scripts/index.js" defer></script>
     </head>
     <body>
+      <!--
+        The content of our page goes in the body tag. Notice the use of 
+        semantic elements: header and nav. We are also using a container div 
+        to help apply styling to content that is not in the header or footer.
+        
+        You can see some examples of links and linking to other pages in the nav.
+      -->
         <header>
             <h1>Revature HTML & CSS Training</h1>
             <nav>
@@ -18,6 +27,10 @@
             </nav>
         </header>
         <div id="main">
+
+          <!--
+            Here is an example of paragraph elements, headers, and an ordered list.
+          -->
             <p>
                 Hi I'm Ethan, your trainer! I hope everyone has fun 
                 and learns a lot! We are going to be going at a 
@@ -56,6 +69,14 @@
                 like to meet with me then, or any other time. Just let me know, we can put 
                 something on the schedule if need be. 
             </p>
+
+            <!--
+              Here we see a table.
+              We need the table tag as a container.
+              Then a table head and table body. 
+              We define table rows with <tr>, table headers with <th> and 
+              table data with <td>
+            -->
             <table>
               <thead>
                 <tr>
@@ -98,6 +119,9 @@
               </tbody>
             </table>
 
+            <!--
+              Here is an example of an unordered list.
+            -->
             <h2>Things you will need to succeed in this course.</h2>
             <ul>
                 <li>Grit</li>
@@ -122,6 +146,10 @@
               event first, then the target, then the value. Just 
               so you can explore different parts of the event object.
             </p>
+            <!--
+              Here is an example of an input tag and buttons. 
+              we can specify the type of inputs.
+            -->
             <input type="text" id="inputText">
             <p>Press the button below for an example of stopping an event. 
               It won't do anything at all! Look at the code!
