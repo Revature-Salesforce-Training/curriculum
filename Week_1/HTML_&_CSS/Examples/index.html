@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <!--This is a HTML comment!-->
         <title>My Website!</title>
         <meta charset="utf-8">
         <meta name="description" content="Place the meta description text here.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="assets/styles/index.css">
-        <!-- 
-          This page won't use JS, but the other one does!
-          Oh! This is a HTML comment!
-        <script src="index.js" defer></script>
-        -->
+        <script src="scripts/index.js" defer></script>
     </head>
     <body>
         <header>
@@ -60,63 +57,76 @@
                 something on the schedule if need be. 
             </p>
             <table>
-                <thead>
-                  <tr>
-                    <th>50%</th>
-                    <th>50%</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Soft Skills</td>
-                    <td>Correctness<br></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>Awesome</td>
-                    <td>Awesome</td>
-                    <td>100%</td>
-                  </tr>
-                  <tr>
-                    <td>Awesome</td>
-                    <td>Middling</td>
-                    <td>75%</td>
-                  </tr>
-                  <tr>
-                    <td>Middling</td>
-                    <td>Middling</td>
-                    <td>50%</td>
-                  </tr>
-                  <tr>
-                    <td>Middling</td>
-                    <td>No Effort</td>
-                    <td>25%</td>
-                  </tr>
-                  <tr>
-                    <td>No Effort</td>
-                    <td>No Effort</td>
-                    <td>0%</td>
-                  </tr>
-                </tbody>
-                </table>
+              <thead>
+                <tr>
+                  <th>50%</th>
+                  <th>50%</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Soft Skills</td>
+                  <td>Correctness<br></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Awesome</td>
+                  <td>Awesome</td>
+                  <td>100%</td>
+                </tr>
+                <tr>
+                  <td>Awesome</td>
+                  <td>Middling</td>
+                  <td>75%</td>
+                </tr>
+                <tr>
+                  <td>Middling</td>
+                  <td>Middling</td>
+                  <td>50%</td>
+                </tr>
+                <tr>
+                  <td>Middling</td>
+                  <td>No Effort</td>
+                  <td>25%</td>
+                </tr>
+                <tr>
+                  <td>No Effort</td>
+                  <td>No Effort</td>
+                  <td>0%</td>
+                </tr>
+              </tbody>
+            </table>
 
-                <h2>Things you will need to succeed in this course.</h2>
-                <ul>
-                    <li>Grit</li>
-                    <li>Time</li>
-                    <li>Patience</li>
-                    <li>Teamwork</li>
-                    <li>Good study habits</li>
-                </ul>
+            <h2>Things you will need to succeed in this course.</h2>
+            <ul>
+                <li>Grit</li>
+                <li>Time</li>
+                <li>Patience</li>
+                <li>Teamwork</li>
+                <li>Good study habits</li>
+            </ul>
 
-                <h2>The Box Model.</h2>
-                <p>
-                    Open the dev console and take a look at the element 
-                    below. Notice the diffent layers we have set: padding, 
-                    border, and margin.
-                </p>
-                <div id="box-model">CONTENT</div>
+            <h2>The Box Model.</h2>
+            <p>
+                Open the dev console and take a look at the element 
+                below. Notice the diffent layers we have set: padding, 
+                border, and margin.
+            </p>
+            <div id="box-model">CONTENT</div>
+
+            <h2>Event Object example</h2>
+            <p>Type in the text box and hit enter to see 
+              the value printed into a console.log(). This 
+              is utilzing the event object. We will print a whole
+              event first, then the target, then the value. Just 
+              so you can explore different parts of the event object.
+            </p>
+            <input type="text" id="inputText">
+            <p>Press the button below for an example of stopping an event. 
+              It won't do anything at all! Look at the code!
+            </p>
+            <button id="stopEvent">The event won't bubble up past here!</button>
         </div>
         <footer>
             <img src="assets/img/revature-logo.png"/>

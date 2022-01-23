@@ -400,7 +400,10 @@ myObj.myMethod();
     on the javascript.html page. As well as events in general. 
 */
 let addElemBtn = document.querySelector("#addElemBtn");
-addElemBtn.addEventListener("click", addElem);
+
+if (addElemBtn) {
+    addElemBtn.addEventListener("click", addElem);
+}
 
 function addElem() {
     let myDiv = document.querySelector("#addElem");
@@ -411,7 +414,9 @@ function addElem() {
 
 
 let textAreaBtn = document.querySelector("#textAreaBtn");
-textAreaBtn.addEventListener("click", createWordSalad);
+if (textAreaBtn) {
+    textAreaBtn.addEventListener("click", createWordSalad);
+}
 
 function createWordSalad() {
     let wordSalad = document.querySelector("#wordSalad");
@@ -422,4 +427,26 @@ function createWordSalad() {
     str += str.replace("or", "Are we there yet?");
     str += str.replace("and", "That rug really tied the room together.");
     wordSalad.innerHTML = str;
+}
+
+let inputText = document.querySelector("#inputText");
+if (inputText) {
+    inputText.addEventListener("change", handleChange);
+}
+
+// we can pass in event directly since this function fired from an event listener
+function handleChange(event) {
+    console.log(event);
+    console.log(event.target);
+    console.log(event.target.value);
+}
+
+let evtBtn = document.querySelector("#stopEvent");
+if (evtBtn) {
+    document.addEventListener("click", stopMyEvent);
+}
+
+//notice we don't have to say "event", this is another common way
+function stopMyEvent(e) {
+    e.stopPropagation();
 }
