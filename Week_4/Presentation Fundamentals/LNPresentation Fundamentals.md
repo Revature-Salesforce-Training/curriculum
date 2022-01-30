@@ -22,3 +22,4 @@ in our new, rapidly increasing, work from home environments.
 
 * All the same rules apply above. (Should directly address the camera to make eye contact. This goes for online interviews as well, not just presentations!)
 * When presenting with multiple people online, don't swap back and forth between sharing screens. Pick someone to be the designated "clicker" and just share that one person's screen. If you need to, some apps like zoom allow you to take control of another users screen. This will allow you to keep a seamless presentation while still allowing others to control the slides or show off a demo!
+* Have a professional background while on camera. If working with a team, strive to all have the same background. 

@@ -12,6 +12,9 @@ understanding of data modeling and how to implement a data model inside Salesfor
 The knowledge demonstrated needs to include ERD's, object creation and customization, 
 field creation and customization, and relationships. 
 
+* Minimum of 8 objects that are a mix of standard/custom (and the 8 does not include any junction objects)
+* At least one many to many relationship
+
 ## Security 
 
 You will need to establish the role hierarchy and multiple users for the system. Create 

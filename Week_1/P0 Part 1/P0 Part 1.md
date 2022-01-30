@@ -1,6 +1,6 @@
 ## Project 0 - 1
 
-This will be the first part of an ongoing and more extensive project. Keep this in 
+This will be the first part of an ongoing and more extensive individual project. Keep this in 
 mind as the foundation you build here will need to support future endeavors. 
 
 You will determine a business you want to model. This can be an actual company or 
