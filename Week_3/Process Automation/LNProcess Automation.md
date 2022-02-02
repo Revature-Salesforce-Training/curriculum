@@ -52,7 +52,7 @@ workflow rule is the container of this process.
     - Criteria are met - You select a field from the record, an evaluation, and value. e.g. Amount equal or greater than 50,000.
     - Formula evaluates to true - You build a formula that evaluates to a boolean value. These can be more complex than a 'simple criteria are met' evaluation.
   - Types of actions a workflow can perform:
-    - Create a task
+    - Create a task (Activities must be enabled on the object)
     - Update field for record that invoked workflow
     - Send Email alert
     - Send Outbound SOAP message
@@ -64,7 +64,7 @@ workflow rule is the container of this process.
 - Approval processes allow you to create a multi-step process through which you can designate 
 specific actions to be taken based on the stage and approval status.
   - Actions that can be performed with an approval process are:
-    - Create task
+    - Create task (Activities must be enabled on the object)
     - Update a field
     - Send email alert
     - Send outbound SOAP message
