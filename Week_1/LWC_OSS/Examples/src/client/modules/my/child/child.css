@@ -1,0 +1,8 @@
+/*
+@import 'my/resourceModule';
+*/
+
+.childcontainer {
+    border: 5px solid purple;
+    padding: 10px;
+}
