@@ -1,0 +1,97 @@
+///////////////////////////////////////////////////////////////
+//
+// Name: DMLandTCL
+// Author: Harvey Hill, Salesforce Tech Team
+// Date Created: 04/06/21
+// Date Updated: 12/07/21
+// Desciption: Demo of using both DML and TCL in Apex.
+//
+///////////////////////////////////////////////////////////////
+
+public class DMLandTCL {
+
+    // A blank Account object record.
+    Account aAcct = new Account();
+    // A save point, part of TCL.
+    Savepoint sp;
+    // A list of account records.
+    List<Account> accList = new List<Account>();
+    
+    /*
+    // DML is Data Manipulation Language. 
+    // DML is used to, as the name says, manipulate
+    // the data in our org. We can add to it, change it
+    // or delete it.
+    // 
+    // DML operates on the data, not the metadata.
+    // Which is to say we can use it to change records, 
+    // but not change org customizations like custom 
+    // objects.
+    */
+    public void FunWithAccounts(string name){
+        aAcct.name = name;
+        system.debug(aAcct);
+        accList.add(aAcct);
+        insert accList;
+    }
+    
+    /*
+    // We can use both DML statements, and methods 
+    // of the database class.
+    // 
+    // The database class methods allow us to set
+    // a second optional parameter to false.
+    // This is the AllOrNone parameter and it
+    // controls how the system handles an error
+    // on a record attempting to be manipulated.
+    // 
+    // AllOrNone describes the default behavior of 
+    // DML.
+    // 
+    // Either all records are saved, or none are.
+    // As such if a single record fails, all of the 
+    // changes are reverted. Through the database 
+    // class we can set this to false, and in so doing
+    // allow for partial success.
+    */ 
+    public void SaveAccount(){ 
+        //insert aAcct;
+        database.insert(aAcct, false);
+        system.debug(aAcct);
+    }
+    
+    public void updateAccount(){
+        aAcct.BillingCity = 'Raleigh';
+        aAcct.BillingState = 'NC';
+        aAcct.BillingCountry = 'USA';
+        //update aAcct;
+        database.update(aAcct);
+        system.debug(aAcct);
+    }
+    
+    public void UpsertAccount(){
+        upsert aAcct;
+        system.debug('Upserted');
+    }
+    
+    public void DeleteAccount(){
+        database.delete(aAcct);
+        system.debug('Deleted');
+    }
+    
+    /*
+    // TCL stands for Transaction Control Language
+    // and in Apex is quite limited. We can use this
+    // to allow us to set save points, and rollback
+    // should our logic dictate we should.
+    // 
+    // A savepoint is like a picture of the way 
+    // things are, and anything we do after the
+    // save point is made is erased if we rollback to it.
+    */ 
+    public void TCLExample(){ 
+        sp = Database.setSavepoint();
+        insert aAcct;
+        database.rollback(sp);
+    }
+}

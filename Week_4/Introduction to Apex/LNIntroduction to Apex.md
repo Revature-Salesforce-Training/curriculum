@@ -260,7 +260,7 @@ Map<String, Account> highValueAccs = new Map<String, Account>{
 
 [Expressions and Operators (Apex Developer Guide)](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_expressions.htm)
 
-<p align="center"><img src="./operator_precedence.png"></p>
+<p align="center"><img src="img/operator_precedence.png"></p>
 
 ## Control Flow
 

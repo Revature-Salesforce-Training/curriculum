@@ -1,0 +1,133 @@
+/*
+	SOQL - Salesforce Object Query Language
+	
+	Basic Structure:
+	[SELECT fieldName FROM ObjectName]
+	
+	
+	Optional Clauses (this order matters):
+	WHERE, WITH, GROUP BY/HAVING, ORDER BY, LIMIT, OFFSET, FOR REFERENCE, and FOR UPDATE
+
+*/
+
+public class SOQLExamples {
+	
+    //WHERE Example
+    List<Account> edgeAccs = [SELECT Name FROM Account WHERE Name=
+    'Edge Communications'];
+    
+    //WITH Example
+    List<Account> edgeAccs2 = [SELECT Name FROM Account WHERE Name=
+    'Edge Communications' WITH SECURITY_ENFORCED];
+
+    /*GROUP BY and HAVING
+    [SELECT LeadSource, COUNT(Name)
+    FROM Lead
+    GROUP BY LeadSource];
+    
+    [SELECT LeadSource, COUNT(Name)
+    FROM Lead
+    GROUP BY LeadSource
+    HAVING COUNT(Name) > 100];
+	*/
+    
+    //ORDER BY
+    List<Account> accList = [SELECT Name, AnnualRevenue FROM Account ORDER BY
+    AnnualRevenue DESC NULLS LAST];
+    
+    //LIMIT 
+    //List<Account> accList = [SELECT Name FROM Account LIMIT 3];
+    
+    //OFFSET
+    //List<Account> accList = [SELECT Name FROM Account ORDER BY Name OFFSET 10];
+
+    //FOR REFERENCE
+    // FOR REFERENCE updates system fields and recently viewed lists; by adding this clause the LastReferencedDate field on any records related to the queried record is updated to the current date and the RecentlyViewed object is updated to include the retrieved record(s). Let's explore an example where this clause is valuable. Say that we have a scheduled Apex job that runs quarterly that archives contacts if their LastReferencedDate and LastViewedDate field values are before the beginning of the last quarter. If we have queried the account related to a given contact in the last quarter with the FOR REFERENCE clause, that contact's LastReferencedDate will have been updated to a date in that quarter and thus the contact will not be archived, even though we never directly queried that contact.
+
+	//FOR UPDATE
+	//The last optional clause we will touch on is the FOR UPDATE clause. This clause locks any retrieved records to other users so that they cannot be edited by anyone other than us for the duration of the transaction. This clause is useful when querying for records that need to be updated (as the name would suggest). Note that the transaction does not start with the SOQL query and end with its return, the transaction starts from (at least) the beginning of the enclosing Apex class method and lasts until (at least) the end of said class method.
+
+	/* SOQL return types
+		 
+		Account acc = [SELECT Id FROM Account LIMIT 1];
+		List<Account> accList = [SELECT Id FROM Account];
+		Integer i = [SELECT COUNT(Id) FROM Account];
+	 */
+    
+    //Variable Binding in SOQL
+    String accountName = 'Edge Communications';
+	Account edgeComm = [SELECT Id FROM Account WHERE Name=:accountName LIMIT 1];
+
+    
+    /*
+     	Aggregate Functions
+     	Integer numAccounts = [SELECT COUNT(Name) FROM Account];
+        List<AggregateResult> uniqueSources = [SELECT COUNT_DISTINCT(AccountSource) FROM Account];
+        List<AggregateResult> minRevenue = [SELECT MIN(AnnualRevenue) FROM Account];
+        List<AggregateResult> maxRevenue = [SELECT MAX(AnnualRevenue) FROM Account];
+        List<AggregateResult> totalRevenue = [SELECT SUM(AnnualRevenue) FROM Account];
+        List<AggregateResult> avgRevenue = [SELECT AVG(AnnualRevenue) FROM Account];
+	
+		SF Docs
+		https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_SOQL_agg_fns.htm
+     
+		AggregateResult[] groupedResults
+          = [SELECT AVG(Amount)aver FROM Opportunity];
+        Object avgAmount = groupedResults[0].get('aver');
+*/
+    
+    //FORMAT function
+    Account edge = [SELECT Name, FORMAT(NumberOfEmployees) FROM Account WHERE 
+    Name='Edge Communications' LIMIT 1];
+
+    //Date functions
+    //CALENDAR_MONTH, CALENDAR_QUARTER, CALENDAR_YEAR, FISCAL_MONTH, FISCAL_QUARTER, FISCAL_YEAR, DAY_IN_WEEK, DAY_IN_MONTH, DAY_IN_YEAR
+    
+    //List<Opportunity> currYearOpps = [SELECT Id FROM Opportunity WHERE 
+    //CALENDAR_YEAR(CreatedDate)=2020];
+
+    //List<AggregateResults> accCreationDays = [SELECT DAY_IN_WEEK(CreatedDate), 
+    //COUNT(Name) FROM Account GROUP BY DAY_IN_WEEK(CreatedDate)];
+
+    //Relationship queries
+    //Child to parent
+    	//standard object example
+    	List<Contact> cons = [SELECT Name, Account.Name FROM Contact];
+    	//custom object example
+		//List<Tie_Fighter__c> ties = [SELECT Id, Star_Destroyer__r.Name FROM 
+    	//Tie_Fighter__c];
+
+    //Parent to child
+        //standard object example
+        List<Account> acc = [SELECT Id, (SELECT LastName FROM Contacts) FROM Account];
+        //custom object example
+        //List<Star_Destroyer__c> starDestroyers = [SELECT Id, (SELECT Name FROM 
+        //Tie_Fighters__r) FROM Star_Destroyer__c];
+    
+    //Field expression syntax
+    //wildcard operators %=zero or more characters _=exactly one character
+    //List<Account> accList = [SELECT Name FROM Account WHERE Name LIKE 'edge%'];
+	List<Account> warmHotAccounts = [SELECT Name, Rating FROM Account WHERE Rating IN ('Hot', 
+    'Warm')];
+
+    //SF DOCS
+    //https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_dateformats.htm
+    //Date Literals = TODAY, YESTERDAY
+	List<Account> createdToday = [SELECT Name FROM Account WHERE CreatedDate=TODAY];
+
+	//one line field retrievals
+	Id edgeCommId = [SELECT Id FROM Account WHERE Name='Edge Communications' 
+    LIMIT 1].Id;
+
+    
+    //returned fields
+    //Account edge2 = [SELECT Name FROM Account WHERE Name='Edge Communications' 
+    //LIMIT 1];
+    //System.debug(edge2.Id);
+    
+    //invalid we didn't retrive annualRevenue
+   // Account edge3 = [SELECT Name FROM Account WHERE Name='Edge Communications' 
+    //    LIMIT 1];
+	//System.debug(edge3.AnnualRevenue);
+
+}
