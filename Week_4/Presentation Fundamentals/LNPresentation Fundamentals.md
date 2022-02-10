@@ -20,7 +20,7 @@ in our new, rapidly increasing, work from home environments.
 * Show don't tell. Stay feature focused. What does that mean?
   * Present as if your audience is a client, not a room full of other developers
   * This means avoiding technical jargon, as well as not showing off the "how" of your solutions. Show off the features in action, from the end user's perspective.
-  * For example, we shouldn't be looking at any code or declaritive customizations in the a SF org like a flow builder screen. We should be looking at the end result, a webpage or the end result of that flow we created from the user's perspective.
+  * For example, we shouldn't be looking at any code or declaritive customizations in the SF org like a flow builder screen. We should be looking at the end result, a webpage or the end result of that flow we created from the user's perspective.
 
 ### Tips for giving presentations when working from home
 
