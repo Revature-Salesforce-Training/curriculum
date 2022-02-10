@@ -28,6 +28,8 @@ a collaborative process, we need to work together to achieve success!
 * QC
 * Quizzes
 
+**No plagiarism will be tolerated.**
+
 ### Projects
 
 4 Projects in total (starting at zero index)
@@ -56,6 +58,8 @@ interview situation, there is a little subjectivity involved.
 
 I will also pull people into 1-on-1 sessions in a zoom breakout room randomly on Mondays. 
 This is to talk about any concerns you may have and to get a sense of where we are at.
+
+Completing your self assessments should be your first priority after completing the quizzes on Mondays.
 
 
 | 50%          | 50%          |      |

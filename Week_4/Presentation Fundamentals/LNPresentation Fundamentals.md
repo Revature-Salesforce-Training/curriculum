@@ -17,6 +17,10 @@ in our new, rapidly increasing, work from home environments.
 * Stay on time! (If given an alloted time for the presentation, stick to it! Practice beforehand and time yourself with a stopwatch! Cut down content and only focus on the most important areas if you need to.)
 * Don't focus on any negatives! (You may have ran into challenges during whatever it is you are presenting about. But don't mention them! We want to focus on the positives. What did you accomplish?)
 * When presenting with a team, have smooth handoffs. (Practice and have an understanding with your teammates about the handoffs. ex. "So now I'll pass it to my next team member to talk about..." "Thanks for that Hannah. Now we are..")
+* Show don't tell. Stay feature focused. What does that mean?
+  * Present as if your audience is a client, not a room full of other developers
+  * This means avoiding technical jargon, as well as not showing off the "how" of your solutions. Show off the features in action, from the end user's perspective.
+  * For example, we shouldn't be looking at any code or declaritive customizations in the a SF org like a flow builder screen. We should be looking at the end result, a webpage or the end result of that flow we created from the user's perspective.
 
 ### Tips for giving presentations when working from home
 
