@@ -1,0 +1,34 @@
+{
+    "packageDirectories": [
+        {
+            "path": "SalesObjects",
+            "default": true,
+            "package": "SalesObjects",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT"
+        },
+        {
+            "path": "SalesLayouts",
+            "package": "SalesLayouts",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "default": false,
+            "dependencies": [
+                {
+                    "package": "SalesObjects",
+                    "versionNumber": "0.1.0.LATEST"
+                }
+            ]
+        }
+    ],
+    "name": "PBDDemo",
+    "namespace": "",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "52.0",
+    "packageAliases": {
+        "SalesObjects": "0Ho8c000000006ZCAQ",
+        "SalesLayouts": "0Ho8c000000006eCAA",
+        "SalesObjects@0.1.0-1": "04t8c0000011YTvAAM",
+        "SalesLayouts@0.1.0-1": "04t8c0000011YYDAA2"
+    }
+}
