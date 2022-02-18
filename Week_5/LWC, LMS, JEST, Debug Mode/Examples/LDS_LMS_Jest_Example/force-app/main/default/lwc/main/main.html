@@ -1,7 +1,7 @@
 <template>
     
     <h2>Below is a lightning-record-form example</h2> 
-    <input type="text" onchange={handleInput} label="Search Contacts"></input>
+    <input type="text" onchange={handleInput}></input>
     <template if:true={cons.data}>
         <template for:each={cons.data} for:item="con">
             <!--
@@ -33,4 +33,8 @@
     <h2>The button will use LMS!</h2>
     <button onclick={sendM}>Click to send message to another component!</button>
     <c-child></c-child>
+
+    <h2>Example Jest Section</h2>
+    <button class="myBtn" onclick={testJest}>Test Jest</button>
+    <div class="myDiv"></div>
 </template>
