@@ -1,0 +1,17 @@
+<template>
+    <div class="slds-p-around_small slds-box slds-theme_default">
+        <lightning-button label="Fetch API" onclick={handleClick}></lightning-button>
+        &nbsp; &nbsp;
+        <lightning-button label="Fetch API w/ Async/Await" onclick={handleClick}></lightning-button>
+
+        <br/>
+
+        <template if:true={promiseReturned}>
+            <lightning-formatted-text value="Date: "></lightning-formatted-text>
+            <lightning-formatted-date-time value={gameDate} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+
+            <br/>
+            <lightning-formatted-text value={gameResult}></lightning-formatted-text>
+        </template>
+    </div>
+</template>
