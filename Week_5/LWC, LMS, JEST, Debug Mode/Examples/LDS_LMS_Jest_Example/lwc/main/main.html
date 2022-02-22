@@ -1,0 +1,39 @@
+<template>
+    
+    <div class="container">
+        <h2>Below is a lightning-record-form example</h2> 
+        <input type="text" onchange={handleInput}></input>
+        <template if:true={cons.data}>
+            <template for:each={cons.data} for:item="con">
+                <!--
+                    In the example below we used the fields attribute
+                    and specified the exact fields we would like to 
+                    utitlize. We could have instead used:
+
+                    layout-type="Full" or layout-type="Compact"
+
+                    These would have displayed the fields that are the 
+                    default of either the standard page layout or compact 
+                    page layout. 
+
+                    Note we used key because this is in an iterator.
+                    We do need to specify the object-api-name and 
+                    record-id. If placed on a record detail page, these are 
+                    filled out for us.
+                -->
+                <lightning-record-form
+                key={con.Id}
+                object-api-name={objectApiName}
+                record-id={con.Id}
+                fields={fields}
+                >
+                </lightning-record-form>
+            </template>
+        </template>
+
+        <h2>The button will use LMS!</h2>
+        <button class="myBtn" onclick={sendM}>Click to send message to another component!</button>
+        <c-child></c-child>
+
+    </div>
+</template>

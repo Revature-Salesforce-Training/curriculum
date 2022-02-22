@@ -13,9 +13,6 @@ Well, there are certain browser APIs that we have available that handle our asyn
 ## Callbacks
 A callback is a function that can be passed in as an argument to another function. This allows a function to call another function and the callback can then be run after another function has finished. This was used a lot more in the past with XMLHttpRequests as an example. You would have to define callback functions for success or failure scenarios depending on the data you got back. This could often lead to very nested and ugly looking code that was hard to maintain. Hence, promises. 
 
-
-
-
 ## Promises
 Promises give you a pretty big hint of what they do right in the name. They are an action or task that is yet unfulfilled. A promise can go two ways, they can be resolved, or they can be rejected. 
 
@@ -46,12 +43,6 @@ myPromise.then(function(value) {
   //do stuff here with value
 });
 ```
-
-
-
-
-
-
 ## Async/Await
 
 Async and Await are two keywords that we can use that make promises easier to write. Async makes a function return a promise, while await makes a function wait for a promise. These keywords can help us avoid “.then()” nesting. 
@@ -68,3 +59,5 @@ async function myAsync() {
 
 myAsync();
 ```
+
+## Fetch API
