@@ -16,6 +16,7 @@ describe('c-main testing suite', () => {
             is: Main
         });
         document.body.appendChild(element);
+
         const myDiv = element.shadowRoot.querySelector('.myDiv');
         const myBtn = element.shadowRoot.querySelector('.myBtn');
         myBtn.click();

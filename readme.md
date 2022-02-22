@@ -103,4 +103,4 @@ Weeks without a project:
 Either my email: ethan.wilson@revature.com
 (Note that all corporate employee emails end in ".com" not ".net")
 
-or discord: synz#2847
+or discord: Ethan Wilson#6179
