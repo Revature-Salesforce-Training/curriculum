@@ -81,49 +81,31 @@ This module introduces the Lightning Aura Component framework and single-page ap
 * [Strict mode (MDN web docs)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
 * [Returning Errors from an Apex Server-Side Controller (Lightning Aura Components Developer Guide)](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/controllers_server_apex_custom_errors.htm)
 
-## Single-Page Applications (SPAs)
+## AURA Component Framework
 
-Throughout this module, we'll be exploring one half of the Lightning Component Framework, a programmatic Salesforce user interface framework designed for making dynamic, responsive single-page applications (SPAs) that can be used by both mobile and desktop users. But before we begin our exploration, let's discuss SPAs and their value more broadly using multi-page applications (MPAs for your authors lazy fingers), such as those created through the use of Visualforce, as a foil.
-
-When a user visits an MPA, the server sends markup to 
-When an event occurs on a 
-
-The Lightning Component Framework is made of two programming archetypes: the Lightning Web Component (LWC) and Lightning Aura Component (LAC) models. Both models allow us to create the SPAs we mentioned above, but it's the latter - Lightning Aura components - that will be our primary focus here.
-
-Before we begin working with the framework itself, let's discuss some of the benefits of doing so. Like Visualforce, the programmatic UI framework that we've previously worked with, LAC comes with a large amount of out-of-the-box, standard components that we can use. However, the LAC model has much better performance than Visualforce pages due to its SPA nature.
-
-In fact, SPAs offer many benefits over traditional, multi-page application frameworks such as Visualforce. Through 
-
-## The Value of Single-Page Applications
-
-SPAs offer many benefits over traditional, multi-page applications (such as those created through use of the Visualforce framework). Most importantly, SPAs are designed to work well with mobile devices: they include responsive styling and require fewer server calls. With responsive styling, the page automatically resizes based on the size of the device using it. Rather than components taking up a set _length_ on the screen, they take up a specific _percentage_ of the screen to make for a smooth transition between desktops, mobile devices, and tablets.
-
-Using fewer server calls mitigates any issues that may be caused by a weak or unstable internet connection from a user's mobile device. In order to reduce the amount of server calls, the code returned from a browser includes JavaScript to handle as much user interaction as possible on the client, rather than the server. The JavaScript arrives on the client, renders the initial HTML, and then changes the markup in response to events. Because the page doesn't have to make a server call and wait for the response to edit the markup, the response to an event generally appears more fluid, faster, and native to the user.
-
-However, we must keep in mind the mobile-first principle when writing our SPAs - there's just some logic and processing that phones will not perform quickly or efficiently. In these cases, we make asynchronous calls to the server. We've discussed the differences between synchronicity and asynchronicity in the past, but let's state them again here. Code normally executes synchronously - one line of code must finish executing before the next line runs. For example, if line 247 of program x calls a function, line 248 will not execute until that function has returned. Synchronous execution normally fits our purposes, but it is not ideal if a function takes a long time to execute or if we are making a call to a remote server. When making said server call, time is a factor - we don't want our users to feel as though they are waiting forever for our app to load and therefore believe that the app is slow and was poorly designed.
-
-But we also want to use asynchronicity because there is no guarantee that our call to the server will ever be returned. Perhaps the server crashes before handling our request or a natural disaster destroys the data center holding the server. In either of these cases, we would not want the continued and successful execution of our program to be depend on feedback from the server - any surviving users of our app would be waiting indefinitely for data that will never come. Therefore, our asynchronous calls are standalone - our app will make the call and continue execution without waiting for, depending on, or possibly even expecting a response.
-
-There is no hard line to determine when to do processing on the client and when to do it on the server. Obviously, anytime we want to interact with the database, we will have to make a server call - there's no way around that. Any other logic needed should generally be kept on the client in order to ensure robustness, app fluidity, and faster reactions to user input. But if the amount of required processing is so large that the app appears visibly slower to the user, the corresponding logic should be moved from the client-side to the server.
-
-
-Aura components offer many advantages over Visualforce, arguably most importantly, that they, unlike Visualforce pages, were designed for SPAs (which we'll further discuss shortly). The Aura model also promotes code-reusability through use of its components, which are self-contained, reusable units of code. It offers a responsive event-driven architecture using Salesforce's Model-View-Controller-Controller (MVCC; that's two controllers!) design system and is easy to integrate with pages on the Lightning platform. Finally, the framework features many out of the box (oob), pre-built components and allows us to make use of Salesforce styling.
-
-While there are some limitations with Aura components, notably that they can't be rendered as PDFs like Visualforce pages can be, the benefits far outweigh the disadvantages.
-
-
-
-## Components, Components, and Components
-
-In the `Embracing the New Ambience` section, we said that Aura components were self-contained, reusable units of code - these are Aura component bundles. We also said that the framework features many oob, pre-built components in `What's in a name?`. So we now once again encounter the consequences of Salesforce's not-always-the-best naming practices (there are still more on the way later, I know you're excited!). You will frequently see the component bundle referred to as a component, although there is a smaller component file that is itself part of the bundle, i.e. the component contains a component. Further, the pre-built components (e.g. `<lightning:card>`) are called components. Finally, to promote reusability and modularity, component bundles can contain other component bundles. 
-
-To summarize, component (bundles) are made up of many parts, including components (the ones that are a part of the bundle itself), (oob) components, and possibly other, smaller component (bundles). We therefore must be very careful when using the word 'component' - always take context into account and never be afraid to ask for clarification.
+The Lightning Component Framework is made of two programming archetypes: the Lightning Web Component (LWC) and Lightning Aura Component (LAC) 
+models. Both models allow us to create a SPA, but it's the latter - Lightning Aura components - that will be our primary 
+focus here.
 
 ## Aura Component Bundles
 
-Aura component bundles can be created through the Developer Console by clicking `File` > `New` > `Lightning Component` or in Visual Studio Code by using the `SFDX: Create Lightning Component` command. The component bundle is returned to the client after the initial server call and is made of up to eight pieces: the component, controller, helper, style, documentation, design, renderer, and SVG (the final seven parts are referred to as "resources"). Let's further explore the component and each resource.
+Aura component bundles can be created through the Developer Console by clicking `File` > `New` > `Lightning Component` or in Visual Studio Code by 
+using the `SFDX: Create Lightning Component` command. The component bundle is made of up 
+to eight pieces: the component, controller, helper, style, documentation, design, renderer, and SVG (the final seven parts are referred to as 
+"resources"). Let's further explore the component and each resource.
 
-The component file contains our markup, which can be both HTML and some model-specific markup similar to that of Visualforce. It has a `.cmp` file extension and is the only required part of the bundle. See the following code for an example component file.
+>Ethan's wierd mnemonic
+  * Component - Cornered
+  * Controller - Cats
+  * Helper - Have
+  * Style - Super
+  * Documentation - Dangerous
+  * Design - Daring
+  * Renderer - Reactions
+  * SVG - So, watch out!
+
+The component file contains our markup, which can be both HTML and some model-specific markup similar to that of Visualforce. It has a `.cmp` file 
+extension and is the only required part of the bundle. See the following code for an example component file.
 
 ```aura
 <aura:component>
@@ -164,9 +146,7 @@ See the below image for an example of a bundle with all eight resources in the D
 
 ### Lightning Applications
 
-The Developer Console is a great tool for viewing Visualforce pages while they are under development because of the `Preview` button, but it offers no such tool for Aura components. This is intentional: Aura _components_ are meant to be just that - components of a larger puzzle, whether that puzzle is an App or a Lightning page. Additionally, because components are meant to be reusable, Salesforce does not assign them a url like it does for a Visualforce page. This is why the analogous preview button does not exist for components - there is no url to which the button can be linked.
-
-But we still have a way to view components through the Developer Console with the use of a Lightning app, commonly referred to as a harness app. To create a Lightning app, choose `File` > `New` > `Lightning Application` in the Developer Console or use the `SFDX: Create Lightning App` command in Visual Studio Code. Lightning applications have the file extension `.app` and open and close with `<aura:application>` tags. It is a standard practice to name the harness app `harness.app` and reuse the same app across projects because it is only a temporary home for viewing while developing. The harness app is an addressable top-layer component, instantiating all components that you wish to preview. The url assigned to the app takes the following form:
+For development purposes, we have a way to view components through the Developer Console with the use of a Lightning app, commonly referred to as a harness app. To create a Lightning app, choose `File` > `New` > `Lightning Application` in the Developer Console or use the `SFDX: Create Lightning App` command in Visual Studio Code. Lightning applications have the file extension `.app` and open and close with `<aura:application>` tags. It is a standard practice to name the harness app `harness.app` and reuse the same app across projects because it is only a temporary home for viewing while developing. The harness app is an addressable top-layer component, instantiating all components that you wish to preview. The url assigned to the app takes the following form:
 
 ```url
 https://<site domain>.lightning.force.com/<namespace>/<appname>
@@ -186,7 +166,7 @@ Reusing the harness app and naming it `harness.app` are only best practices _if_
 
 We've been talking about our ability to embed Aura components in Lightning pages, but _how_ do we do this? We do it by implementing Salesforce-made interfaces. See the `Interfaces` link in the `Helpful References/Links` section for a full list of available interfaces; we will only highlight some common and important ones here. In order to implement an interface in an Aura component, we specify the `implements` attribute with a list of comma-separated interface names within the opening `<aura:component>` tag. See the code below for an example.
 
-```aura
+```
 <aura:component implements="force:appHostable,lightning:availableForFlowActions">
 </aura:component>
 ```
@@ -197,11 +177,14 @@ As can be seen from the code, the interface names have the form `namespace:inter
 
 ## Component Attributes
 
-In the `Apex Introduction` module, we said that it would be pretty nice to be able to store values in our code through variables. As expected, we then discovered that Apex has a mechanism for such functionality, and we will now make a similar discovery that the Aura framework has an analgous device: the component attribute, denoted by the `<aura:attribute>` tag. Aura attributes are used to store values within the view (i.e. the component file of the component bundle). Let's take a look at an example attribute tag:
+In the `Apex Introduction` module, we said that it would be pretty nice to be able to store values in our 
+code through variables. As expected, we then discovered that Apex has a mechanism for such functionality, 
+and we will now make a similar discovery that the Aura framework has an analgous device: the attribute component, 
+denoted by the `<aura:attribute>` tag. Aura attributes are used to store values within the 
+view (i.e. the component file of the component bundle). Let's take a look at an example attribute tag:
 
-```aura
-<aura:attribute name="exampleAtt" type="String" default="This is an example
-    string."/>
+```
+<aura:attribute name="exampleAtt" type="String" default="This is an example string."/>
 ```
 
 Some things of note: first, we're not in Apex anymore, Toto. Rather, we're in markup - just as we saw in our interface implementations, double quotes are now an available option (we can still use single quotes if we so desire). Second, there are two required attributes for each aura attribute: `name` and `type`. `name` allows us to refer to the value later (through a mechanism that will be discussed shortly), it must start with a letter or underscore, and can only contain alphanumeric characters and underscores. `type` is analogous to the data type of an Apex variable and can take on many values, these include `Boolean`, `Date`, `DateTime`, `Decimal`, `Double`, `Integer`, `Long`, `String`, `Object`, CRM objects (e.g. Account), and collections. Collections are either arrays, lists, sets, or maps. The latter three cannot contain sObjects - if we want to have a collection of, for example, accounts, we must use the array (e.g. `type="Account[]"`).
@@ -225,7 +208,10 @@ This form of instantiation is one of three ways we can populate our Aura attribu
 
 ## Expression Syntax
 
-In another commonality with the Visualforce framework, the Aura component framework makes use of expression syntax to refer to variables and actions, again with the form `{!value}`. However, the roadways of an Aura component are much busier than those of a Visualforce page, so we utilize value providers within our expressions to provide clarity and direction when performing data binding and action binding. Just like in Visualforce, action binding is the act of using expression syntax in the view to pair controller methods with events. The only change is the kind of controller on the other side of that relationship - in Visualforce, it's an Apex controller, while it's a JS controller in Aura. The definition of data binding in Aura is analogous to, but slightly different from its Visualforce couterpart: data binding in Aura is the process of using expression syntax to wire a value in the component specifically to an `<aura:attribute>`.
+The Aura component framework makes use of expression syntax to refer to variables and 
+actions, with the form `{!valueprovider.value}`. We utilize value providers within our expressions to provide clarity and direction when performing data binding 
+and action binding. Action binding is the act of using expression syntax in the view to pair controller methods with events. The definition of data 
+binding is the process of using expression syntax to wire a value in the component specifically to an `<aura:attribute>`.
 
 ## Value Providers
 
@@ -235,62 +221,13 @@ Value providers tell their containing file (either the component file or the Jav
 
 The first `c` is only available in the view and refers to actions in the JavaScript controller. This is the close coupling between the controller and component that we spoke of earlier - the circuit is already wired for us, we just have to flip the switch. Because we are within the view, we also use expression syntax with this value provider. So the format is opening curly brace, exaclamation point, value provider, period, method name, and closing curly brace (e.g. `{!c.exampleFunction}` would refer to a function in the JavaScript controller named `exampleFunction`).
 
-The second `c` can only be used in the controller and refers to methods in the Apex controller. Wait, Apex controller? We didn't talk about any Apex in the component bundle. Well, that's because there is no Apex within the component bundle - I'll explain more later. But for now: syntax. We use the `component.get()` methods again because we are within the JavaScript controller, e.g. `component.get("c.myMethod")` refers to an Apex method named `myMethod`.
+The second `c` can only be used in the controller/helper and refers to methods in the Apex controller. Wait, Apex controller? We didn't talk about any Apex in the component bundle. Well, that's because there is no Apex within the component bundle - I'll explain more later. But for now: syntax. We use the `component.get()` methods again because we are within the JavaScript controller, e.g. `component.get("c.myMethod")` refers to an Apex method named `myMethod`.
 
-As you probably assumed, the framework only differentiates between the two `c` providers based on which file they are used in - if you use `c.value` in the view, the model assumes that you are referring to the JavaScript controller because that is the only allowed behavior in the view. Similarly, `c.value` in the JavaScript controller automatically refers to the Apex controller.
-
-## Lightning Component Library
-
-The Lightning Component Framework has a large amount of pre-built components for us to use. These components, such as `<lightning:card>`, `<aura:if>`, `<ltng:require>` and `<lighting:icon>`, are hosted in the Lightning Component Library. The library is available for both Aura components and Lightning web components, which is great because we can use its for common functionality and we don't have to waste our time reinventing the wheel... er writing the wheel when it has already been written?
-
-Anyway, let's talk more specifically about those four components we listed earlier. First is `<lightning:card>` which provides an opaque container surrounding its nested elements. It's useful for visually grouping related information.
-
-`<aura:if>` allows for a sort of control flow within our Aura component. We can use this component to conditionally render markup elements based on a boolean value by specifying the required `isTrue` attribute, which can reference a boolean Aura attribute whose value can be changed by our controller and/or helper.
-
-`<ltng:require>` allows you to load external CSS and JavaScript files that you have uploaded to your org as static resources, by specifying their path in the `styles` or `scripts` parameters, respectively. The expression syntax for referencing a static resource in Aura is similar to the Visualforce counterpart: `{!$Resource.fileName}` will reference a static resource named `fileName` and `{!$Resource.archiveName + 'path/in/archive'}` will reference a static resource in an archived named `archiveName` located at `path/in/archive` within said directory.
-
-Finally, the `<lightning:icon>` component displays the icons available to us the in SLDS library; it takes the `iconName` and `alternativeText` attributes, where we give the name of the icon we want to use and alternative text if the icon cannot be displayed for whatever reason, respectively. See the below component and image for a demonstration of its use.
-
-```aura
-<aura:component >
-    <div class="slds-grid">
-        <div class="slds-col slds-size_1-of-3"/>
-        <div class="slds-col slds-size_1-of-3">
-            <lightning:icon iconName="action:check" alternativeText="Check"/>
-        </div>
-    </div>
-</aura:component>
-```
-
-<p align="center"><img src="img/lightning_icon.png"/></p>
-
-For a complete list of components in the Lightning Component Library, see the `Components` link in the `Helpful References/Links` section; we'll mention more components from the library throughout the remainder of this module when they are topically appropriate.
-
-## Lightning Data Service
-
-Maybe in an effort to get us to forgive it for the sometimes-poor naming conventions it thrusts upon us in the Aura Component model, Salesforce makes interacting with data in Aura components quite easy through the Lightning Data Service (that's LDS, not SLDS). LDS is analogous to standard controllers in Visualforce - it lets our Aura components access the database in the fastest, most efficient way possible and it doesn't require us to write any non-markup code. Pretty good deal, right?
-
-What makes LDS so efficient? It's designed to reduce any headaches we would normally encounter when following component best practices and building modular, reusable components. If we had a large app with many components that all acted on the same record and didn't use LDS, every one of our components will have to make their own asynchronous calls to Salesforce whenever they want to create, edit, read, or delete anything from the database. Each request takes resources from the client, reducing our app's efficiency. In addition, the more server calls we make, the more we require a strong and constant network connection and the further we stray away from the ideal SPA. Unless we write extra workarounds, we could have conflicting data within different components in our app - one server call may update the record in one component, but if server calls to update the same record in other components are delayed, those components will now display obsolete data.
-
-When we use LDS, the system makes the request for us. It's smart enough to only make one call for the data of any one record - no matter how many components use that record, it will only be instantiated once for our entire app, not once per component. When the LDS call is returned, the service updates all components that hold that record with the new data from the server. Finally, the system caches the record and any updates to it on the client to eliminate network connection headaches - if a user goes offline, LDS will cache the changes locally and update the server when the connection is available again.
-
-There are four LDS components in the Lightning Component Library: `<lightning:recordForm>`, `<lightning:recordViewForm>`, `<lightning:recordEditForm>`, and `<force:recordData>`. In the remainder of this section, we will provide an introduction to `<lightning:recordForm>` (we'll have a more comphrensive discussion about all four later in this module).
-
-`<lightning:recordForm`> can take many parameters, we'll talk about the `fields`, `layoutType`, `columns`, `mode`, `objectApiName`, `recordId`, and `recordtypeId` parameters in particular. `objectApiName` is the only required attribute and it's populated with the API name of the object whose record we're manipulating through LDS. `recordId` holds the Id of the record that we're retrieving if reading or updating data - if we're creating a record, we don't populate this field.
-
-`mode` works with `recordId` in determining the operation we are performing. This parameter can take values of `edit`, `view`, or `readonly`. If we have also populated `recordId`, the default mode is `view` (despite the name, this mode also allows us to edit an existing record). If we have not provided an Id, the default mode is `edit`, which also allows us to create records. The final mode, `readonly`, is a non-editable version of `view`. Our `recordId` and `mode` values cannot conflict - we cannot use `readonly` or `view` if we do not provide an Id.
-
-We can populate either the `fields` or `layoutType` parameters, but we should not use both at the same time. `layoutType` can be either `Full` or `Compact`, which correspond to a record's detail page from its object's page layout and a record's detail page from the object's compact layout, respectively. The page layout used with the `Full` value is either the original, system-created page layout (e.g. the `Broker Layout` made for a custom object named `Broker__c`), the page layout assigned to our org's default record type if we have defined record types, or the page layout assigned to the record type we specify with `recordTypeId`.
-
-If we want a more custom view, we can use `fields`, which takes a comma-separated list of field API names, e.g. `fields="Name,AnnualRevenue"`. The fields will display in the order in which we write them. This is a valuable alternative because larger companies that use Salesforce often have separate developers and administrators, so the developer writing an Aura component may not have the ability to edit an object's page layout or compact layout and thus may have to turn to the `fields` parameter. Additionally, we don't want to build the habit of updating/creating page layouts for an object just to fit a specific use case for a single Aura component.
-
-Moving on, the `recordTypeId` parameter only needs a value if there are multiple record types for the object we're interacting with (and a default record type for our organization has not been set) _or_ if we do not want to use the default record type. Finally, `columns` takes an integer that dictates the number of columns shown in our form.
-
-While this basic component is great for a lot of use cases, there are some shortcomings: we can't prepopulate values for a record's fields or delete records with `<lightning:recordForm>`. Additionally, LDS as a whole has some drawbacks: it isn't available for all objects (only those supported by the User Interface API, check the `Supported Objects` link in the `Helpful References/Links` section) and it only allows us to work with one record per form. If we want to operate outside the bounds of LDS, we will have to write our own Apex in an Apex controller - something we'll detail shortly.
+As you probably assumed, the framework only differentiates between the two `c` providers based on which file they are used in - if you use `c.value` in the view, the model assumes that you are referring to the JavaScript controller because that is the only allowed behavior in the view. Similarly, `c.value` in the JavaScript controller/helper automatically refers to the Apex controller.
 
 ## MVCC Revisited
 
-Earlier, we said that Aura components use an MVCC architecture. This architecture includes both a JavaScript controller _and_ an Apex controller hosted on the client and server, respectively. The model (i.e. the database) is also hosted on the server, while the view (i.e. the component file) is returned to the client in the initial server call. See the below image for a diagram of this design, courtesy of the `Get Started with Aura Components` unit of the `Aura Components Basics` badge on Trailhead.
+Aura components use an MVCC architecture. This architecture includes both a JavaScript controller _and_ an Apex controller hosted on the client and server, respectively. The model (i.e. the database) is also hosted on the server, while the view (i.e. the component file) is returned to the client in the initial server call. See the below image for a diagram of this design, courtesy of the `Get Started with Aura Components` unit of the `Aura Components Basics` badge on Trailhead.
 
 <p align="center"><img width=35% src="img/mvcc.png"/></p>
 
@@ -493,6 +430,55 @@ Components can handle events that they invoke, but your author struggles to thin
 ```
 
 The `name` and `value` must follow this format - a name of `init` refers to the component initialization event and a value of `{!this}` refers to the component itself. Although it is not required that we name our action `doInit`, it is commonplace.
+
+## Lightning Component Library
+
+The Lightning Component Framework has a large amount of pre-built components for us to use. These components, such as `<lightning:card>`, `<aura:if>`, `<ltng:require>` and `<lighting:icon>`, are hosted in the Lightning Component Library. The library is available for both Aura components and Lightning web components, which is great because we can use its for common functionality and we don't have to waste our time reinventing the wheel... er writing the wheel when it has already been written?
+
+Anyway, let's talk more specifically about those four components we listed earlier. First is `<lightning:card>` which provides an opaque container surrounding its nested elements. It's useful for visually grouping related information.
+
+`<aura:if>` allows for a sort of control flow within our Aura component. We can use this component to conditionally render markup elements based on a boolean value by specifying the required `isTrue` attribute, which can reference a boolean Aura attribute whose value can be changed by our controller and/or helper.
+
+`<ltng:require>` allows you to load external CSS and JavaScript files that you have uploaded to your org as static resources, by specifying their path in the `styles` or `scripts` parameters, respectively. The expression syntax for referencing a static resource in Aura is similar to the Visualforce counterpart: `{!$Resource.fileName}` will reference a static resource named `fileName` and `{!$Resource.archiveName + 'path/in/archive'}` will reference a static resource in an archived named `archiveName` located at `path/in/archive` within said directory.
+
+Finally, the `<lightning:icon>` component displays the icons available to us the in SLDS library; it takes the `iconName` and `alternativeText` attributes, where we give the name of the icon we want to use and alternative text if the icon cannot be displayed for whatever reason, respectively. See the below component and image for a demonstration of its use.
+
+```aura
+<aura:component >
+    <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-3"/>
+        <div class="slds-col slds-size_1-of-3">
+            <lightning:icon iconName="action:check" alternativeText="Check"/>
+        </div>
+    </div>
+</aura:component>
+```
+
+<p align="center"><img src="img/lightning_icon.png"/></p>
+
+For a complete list of components in the Lightning Component Library, see the `Components` link in the `Helpful References/Links` section; we'll mention more components from the library throughout the remainder of this module when they are topically appropriate.
+
+## Lightning Data Service
+
+Maybe in an effort to get us to forgive it for the sometimes-poor naming conventions it thrusts upon us in the Aura Component model, Salesforce makes interacting with data in Aura components quite easy through the Lightning Data Service (that's LDS, not SLDS). LDS is analogous to standard controllers in Visualforce - it lets our Aura components access the database in the fastest, most efficient way possible and it doesn't require us to write any non-markup code. Pretty good deal, right?
+
+What makes LDS so efficient? It's designed to reduce any headaches we would normally encounter when following component best practices and building modular, reusable components. If we had a large app with many components that all acted on the same record and didn't use LDS, every one of our components will have to make their own asynchronous calls to Salesforce whenever they want to create, edit, read, or delete anything from the database. Each request takes resources from the client, reducing our app's efficiency. In addition, the more server calls we make, the more we require a strong and constant network connection and the further we stray away from the ideal SPA. Unless we write extra workarounds, we could have conflicting data within different components in our app - one server call may update the record in one component, but if server calls to update the same record in other components are delayed, those components will now display obsolete data.
+
+When we use LDS, the system makes the request for us. It's smart enough to only make one call for the data of any one record - no matter how many components use that record, it will only be instantiated once for our entire app, not once per component. When the LDS call is returned, the service updates all components that hold that record with the new data from the server. Finally, the system caches the record and any updates to it on the client to eliminate network connection headaches - if a user goes offline, LDS will cache the changes locally and update the server when the connection is available again.
+
+There are four LDS components in the Lightning Component Library: `<lightning:recordForm>`, `<lightning:recordViewForm>`, `<lightning:recordEditForm>`, and `<force:recordData>`. In the remainder of this section, we will provide an introduction to `<lightning:recordForm>` (we'll have a more comphrensive discussion about all four later in this module).
+
+`<lightning:recordForm`> can take many parameters, we'll talk about the `fields`, `layoutType`, `columns`, `mode`, `objectApiName`, `recordId`, and `recordtypeId` parameters in particular. `objectApiName` is the only required attribute and it's populated with the API name of the object whose record we're manipulating through LDS. `recordId` holds the Id of the record that we're retrieving if reading or updating data - if we're creating a record, we don't populate this field.
+
+`mode` works with `recordId` in determining the operation we are performing. This parameter can take values of `edit`, `view`, or `readonly`. If we have also populated `recordId`, the default mode is `view` (despite the name, this mode also allows us to edit an existing record). If we have not provided an Id, the default mode is `edit`, which also allows us to create records. The final mode, `readonly`, is a non-editable version of `view`. Our `recordId` and `mode` values cannot conflict - we cannot use `readonly` or `view` if we do not provide an Id.
+
+We can populate either the `fields` or `layoutType` parameters, but we should not use both at the same time. `layoutType` can be either `Full` or `Compact`, which correspond to a record's detail page from its object's page layout and a record's detail page from the object's compact layout, respectively. The page layout used with the `Full` value is either the original, system-created page layout (e.g. the `Broker Layout` made for a custom object named `Broker__c`), the page layout assigned to our org's default record type if we have defined record types, or the page layout assigned to the record type we specify with `recordTypeId`.
+
+If we want a more custom view, we can use `fields`, which takes a comma-separated list of field API names, e.g. `fields="Name,AnnualRevenue"`. The fields will display in the order in which we write them. This is a valuable alternative because larger companies that use Salesforce often have separate developers and administrators, so the developer writing an Aura component may not have the ability to edit an object's page layout or compact layout and thus may have to turn to the `fields` parameter. Additionally, we don't want to build the habit of updating/creating page layouts for an object just to fit a specific use case for a single Aura component.
+
+Moving on, the `recordTypeId` parameter only needs a value if there are multiple record types for the object we're interacting with (and a default record type for our organization has not been set) _or_ if we do not want to use the default record type. Finally, `columns` takes an integer that dictates the number of columns shown in our form.
+
+While this basic component is great for a lot of use cases, there are some shortcomings: we can't prepopulate values for a record's fields or delete records with `<lightning:recordForm>`. Additionally, LDS as a whole has some drawbacks: it isn't available for all objects (only those supported by the User Interface API, check the `Supported Objects` link in the `Helpful References/Links` section) and it only allows us to work with one record per form. If we want to operate outside the bounds of LDS, we will have to write our own Apex in an Apex controller - something we'll detail shortly.
 
 ## Forms
 
