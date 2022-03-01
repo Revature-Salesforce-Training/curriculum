@@ -57,9 +57,54 @@
 
 ## MVCC
 
+  * Model - our orgs data model
+  * view - our aura
+  * controller - our JS controller
+  * controller - our apex controller
+
 ### JS Controller and Helper
 
+  * they contain object literals that have name-value pairs where the name is a symbol data type and the value is an anonomous function.
+  * the tight coupling of the controller with our component means that a reference of the component, any events, and an instance of our helper gets passed through automatically
+    * the component and/or event could be passed into any helper classes to implement our logic
+	```
+	controller
+	({
+    myAction : function(component, event, helper) {
+	helper.doThisMethod(component, event);
+	}
+	})
+	```
+  * We have component.find('string value that is aura:id attribute on any element') 
+  * <div aura:id="thisId"></div>
+  * We can chain this to get values from the view if we wish
+  * component.find("thisId").get("v.title")
+
 ### Apex Controllers
+
+  * apex controllers must have at least one method that is public, static, and has @AuraEnabled annotation
+  * Not part of component bundle. But a controller will be tied to a component like so:
+  ```
+  <aura:component controller="exApexController">
+</aura:component>
+  ```
+  
+  Once our component is linked we can call its methods like so:
+  ```
+  ({
+    myAction : function(component, event, helper) {
+        var method = component.get("c.exMethod2");
+        method.setParams({inputString : 'hello'});
+        method.setCallback(this, function(response){
+            if(response.getState() == "SUCCESS"){
+                // do some logic
+            }
+
+        });
+        $A.enqueueAction(method);
+    }
+})
+  ```
 
 ## Lightning Events
 

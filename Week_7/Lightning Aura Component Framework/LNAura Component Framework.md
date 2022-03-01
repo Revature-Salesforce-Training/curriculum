@@ -1,43 +1,6 @@
 # Module - Aura Component Framework
 
-This module introduces the Lightning Aura Component framework and single-page applications.
-
-## Table of Contents
-
-* [Naming](#naming)
-* [Lightning Web Components](#lightning-web-components)
-* [Embracing the New Ambience](#embracing-the-new-ambience)
-* [The Value of Single-Page Applications](#the-value-of-single-page-applications)
-* [Components, Components, and Components](#components-components-and-components)
-* [Aura Component Bundles](#aura-component-bundles)
-* [Viewing aura components](#viewing-aura-components)
-	* [Lightning applications](#lightning-applications)
-	* [Component Accessibility Interfaces](#component-accessibility-interfaces)
-* [Component Attributes](#component-attributes)
-* [Attributes and Attributes](#attributes-and-attributes)
-* [Expression Syntax](#expression-syntax)
-* [Value Providers](#value-providers)
-* [Lightning Component Library](#lightning-component-library)
-* [Lightning Data Service](#lightning-data-service)
-* [MVCC Revisited](#mvcc-revisited)
-	* [The JavaScript Controller and Helper](#the-javascript-controller-and-helper)
-* [Apex Controllers](#apex-controllers)
-	* [Calling Apex Controller Methods](#calling-apex-controller-methods)
-* [Lightning Events](#lightning-events)
-* [Component and Application Events](#component-and-application-events)
-	* [Creating Custom Events](#creating-custom-events)
-* [Firing Events](#firing-events)
-	* [Firing Lightning Component Library Events](#firing-lightning-component-library-events)
-* [Handling Events](#handling-events)
-	* [Handling System Events](#handling-system-events)
-* [Forms](#forms)
-	* [Record View and Edit Forms](#record-view-and-edit-forms)
-	* [<force:recordData>](#force-recorddata)
-* [Error Handling in the Aura Component Framework](#error-handling-in-the-aura-component-framework)
-* [Security in the Aura Component Framework](#security-in-the-aura-component-framework)
-	[Lightning Locker](#lightning-locker)
-	[Apex Security](#apex-security)
-
+This module introduces the Lightning Aura Component framework.
 
 ### Helpful References/Links
 
@@ -298,7 +261,7 @@ Once we've declared the controller, we can access its methods in our JS as follo
         var method = component.get("c.exMethod2");
         method.setParams({inputString : 'hello'});
         method.setCallback(this, function(response){
-            if(response.getState == "SUCCESS"){
+            if(response.getState() == "SUCCESS"){
                 // do some logic
             }
 
