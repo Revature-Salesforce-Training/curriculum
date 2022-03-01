@@ -76,7 +76,7 @@
 	})
 	```
   * We have component.find('string value that is aura:id attribute on any element') 
-  * <div aura:id="thisId"></div>
+  * ``` <div aura:id="thisId"></div> ```
   * We can chain this to get values from the view if we wish
   * component.find("thisId").get("v.title")
 
