@@ -1,0 +1,19 @@
+<aura:component controller="AuraExample">
+    <aura:attribute name="myAtt" type="String" default="Hello world!"/>
+    <aura:attribute name="compMessage" type="String" default="Our comp message will go here once sent!"/>
+    <aura:attribute name="appMessage" type="String" default="Our app message will go here once sent!"/>
+    <aura:handler name="compEvent" event="c:ExampleEvent" action="{!c.handleCompEvent}"/>
+    <aura:handler event="c:ExampleAppEvent" action="{!c.handleAppEvent}"/>
+    <!--Example of expression syntax, value providers, view, controller, helper, attributes-->
+    <button class="slds-align_absolute-center" onclick="{!c.handleClick}">Click to change aura attribute!</button>
+    <div aura:id="myDiv">{!v.myAtt}</div>
+
+
+  
+
+    <h2>Below here are 2 divs that contain our messages.</h2>
+    <div>{!v.compMessage}</div>
+    <div>{!v.appMessage}</div>
+    <h2>Below here is our child component.</h2>
+    <c:auraExampleChild messageFromParent="My message from the parent!"></c:auraExampleChild>
+</aura:component>

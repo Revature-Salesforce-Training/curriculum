@@ -1,0 +1,10 @@
+<aura:component>
+    <aura:registerEvent name="compEvent" type="c:ExampleEvent"/>
+    <aura:registerEvent name="appEvent" type="c:ExampleAppEvent"/>
+    <aura:attribute name="messageFromParent" type="String"/>
+    <button value="cmpBtn" class="slds-align_absolute-center" onclick="{!c.handleClick}">Click to fire component event!</button>
+    <button value="appBtn" class="slds-align_absolute-center" onclick="{!c.handleAppClick}">Click to fire app event!</button>
+
+    <h2>Below here is a message passed down from the parent!</h2>
+    <div>{!v.messageFromParent}</div>
+</aura:component>	
