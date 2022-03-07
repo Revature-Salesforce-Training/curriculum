@@ -39,9 +39,23 @@ This module introduces the Visualforce Framework.
 
 ## Visualforce
 
-So far, we've explored the Apex language on the Salesforce platform and seen the various ways we can make use of it, such as through triggers. But we haven't seen a lot of ways to code pages/features that our users will directly interact with or view. Visualforce allows us to accomplish these goals; it's a framework used to build complex user interfaces that are native to Salesforce. This framework has a markup language that uses tags and is very similar to HTML. In fact, we can use HTML directly within our Visualforce. The framework uses server-side standard controllers to provide easy integration and interaction with the database.
+Visualforce is a framework used to build complex user interfaces that are native to Salesforce. This 
+framework has a markup language that uses tags and is very similar to HTML. In fact, we can use HTML 
+directly within our Visualforce. The framework uses server-side standard controllers to provide easy 
+integration and interaction with the database.
 
-To begin writing in the framework, first create a Visualforce page (analogous to an HTML page). This action can be performed either in the `Developer Console` by clicking `File` > `New` > `Visualforce Page` or in `Visual Studio Code` with the `SFDX: Create Visualforce Page` command. We discussed both of these environments in the `Development SFDX & Visual Studio Code` module, but let's offer a quick refresher: the `Developer Console` is Salesforce's cloud-based IDE where we can create Apex classes and Visualforce pages, upload some types of static resources (a term that we will explain shortly), and create other types of files. `Visual Studio Code` is the preferred third-party tool for development for the Salesforce platform, offering a wide range of functionality when used with the `Salesforce Extension Pack` and `Salesforce CLI`, including some capabilities not found in the `Developer Console`. But the `Developer Console` offers the ability to view your Visualforce page as you're developing it, through use of the `Preview` button (enclosed in the red rectangle in the image below). You can open existing pages to continue your work in the `Developer Console` by clicking `File`, `Open`, and choosing the `Pages` entity type in the popup window.
+To begin writing in the framework, first create a Visualforce page (analogous to an HTML page). This action 
+can be performed either in the `Developer Console` by clicking `File` > `New` > `Visualforce Page` or in 
+`Visual Studio Code` with the `SFDX: Create Visualforce Page` command. We discussed both of these 
+environments in the `Development SFDX & Visual Studio Code` module, but let's offer a quick refresher: the 
+`Developer Console` is Salesforce's cloud-based IDE where we can create Apex classes and Visualforce pages, 
+as well as create other types of files. `Visual Studio Code` is the preferred third-party tool for 
+development for the Salesforce platform, offering a wide range of functionality when used with the 
+`Salesforce Extension Pack` and `Salesforce CLI`, including some capabilities not found in the 
+`Developer Console`. But the `Developer Console` offers the ability to view your Visualforce page as you're 
+developing it, through use of the `Preview` button (enclosed in the red rectangle in the image below). You 
+can open existing pages to continue your work in the `Developer Console` by clicking `File`, `Open`, and 
+choosing the `Pages` entity type in the popup window.
 
 <p align="center"><img src="img/preview.png"/></p>
 
@@ -95,12 +109,13 @@ In the above markup, the `accs` collection holds all accounts in the org that th
 If you wish to display more or less than the default number of records per page, you must write a controller extension. Note that the standard set controller displays all records shown in the last list view that you viewed for the specified object. If no records are showing on your page, go to the list view for the object, change the list view to display all records, and refresh your Visualforce page.
 
 ### Controller Extensions
+[DOC reference](https://developer.salesforce.com/docs/atlas.en-us.pages.meta/pages/pages_controller_extension.htm)
 
 Controller extensions are custom Apex classes that provide further functionality to a Visualforce page while still allowing you to make use of the prebuilt standard controller or your own custom controller, i.e. they _extend_ the controller. In order to declare an extension in your Visualforce page, pass the name of the Apex class to the `extensions` attribute of the opening `<apex:page>` tag. You can use multiple extensions in a single page, simply comma-separate the names in the `extensions` attribute. In fact, there is no maximum number of extensions per page, but be aware that controller precedence decreases from left to right, so if multiple included extensions have methods with the same signature, the method in the leftmost declared extension will be called when that method is referenced through action binding.
 
 To extend a standard controller, create an Apex class whose constructor takes an `ApexPages.StandardController` object as its sole parameter (as in the first class in the below code). To extend a custom controller, create an Apex class whose constructor takes an object of the custom controller class as its sole parameter (as in the second class in the below code, which serves as an extension of the `AccountController` custom controller). Finally, to extend a standard set controller, create an Apex class whose constructor takes an `ApexPages.StandardSetController` object as its sole parameter (as in the third class in the below code).
 
-```apex
+```
 public class accountStdExtension {
     public accountStdExtension(ApexPages.StandardController sc){
     }
@@ -118,6 +133,41 @@ public class accountSetExtension {
 ```
 
 If you are extending a standard set controller or standard controller, you can call methods from the `StandardSetController` or `StandardController` class, respectively. For example, in order to change the number of records displayed per page by a list controller, pass the desired number to the `setPageSize()` method of the `StandardSetController`.
+
+An example in action:
+
+Apex class
+```
+public class myControllerExtension {
+
+    private final Account acct;
+    
+    // The extension constructor initializes the private member
+    // variable acct by using the getRecord method from the standard
+    // controller.
+    public myControllerExtension(ApexPages.StandardController stdController) {
+        this.acct = (Account)stdController.getRecord();
+    }
+
+    public String getGreeting() {
+        return 'Hello ' + acct.name + ' (' + acct.id + ')';
+    }
+}
+```
+
+visualforce
+```
+<apex:page standardController="Account" extensions="myControllerExtension">
+    {!greeting} <p/>
+    <apex:form>
+        <apex:inputField value="{!account.name}"/> <p/>
+        <apex:commandButton value="Save" action="{!save}"/>
+    </apex:form>
+</apex:page>
+```
+
+
+
 
 ### Custom Controllers
 
