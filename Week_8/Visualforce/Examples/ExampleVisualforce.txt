@@ -1,0 +1,35 @@
+<apex:page standardController="Account" recordSetVar="accs" showHeader="false">
+<apex:stylesheet value="{!URLFOR($Resource.SiteSamples, 'SiteStyles.css')}" />
+    <h2>This is a pageBlock example!</h2>
+    <apex:form>
+    <apex:pageBlock id="myPageBlock">
+        <apex:pageBlockTable value="{!accs}" var="acc">
+            <apex:column value="{!acc.name}"/>
+            <apex:column value="{!acc.numberofemployees}"/>
+            <apex:column value="{!acc.annualrevenue}"/>
+        </apex:pageBlockTable>
+        <apex:pageBlockButtons>
+            <apex:commandButton reRender="myPageBlock" value="Previous" action="{!previous}"/>
+            <apex:commandButton reRender="myPageBlock" value="Next" action="{!next}"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+    </apex:form>
+
+    <h2>This is an inline edit example!</h2>
+    
+    <apex:form id="myForm">
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!accs}" var="acc">
+                <apex:column headerValue="Account Name">
+                    <apex:outputField value="{!acc.name}">
+                        <apex:inlineEditSupport showOnEdit="updateRecords"/>
+                    </apex:outputField>
+                </apex:column>
+            </apex:pageBlockTable>
+            <apex:pageBlockButtons >
+                <apex:commandButton reRender="myPageBlock, myForm" value="Update Records" action="{!quicksave}" style="display:none" id="updateRecords"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+
+</apex:page>
