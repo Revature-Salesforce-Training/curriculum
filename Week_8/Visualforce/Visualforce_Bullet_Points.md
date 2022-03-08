@@ -181,13 +181,78 @@ public class AccountController{
 
 ## Page Blocks
 
+* apex:pageBlock component - similar to a div element; used to make divisions on the page; styling similar to record detail page; can set the title attribute to display header for the block
+* apex:pageBlockSection component - a child of apex:pageBlock; a further division of a block of content; 
+* apex:pageBlockButtons component - child of apex:pageBlock; Holds apex:commandButton components; if you use this the buttons appear both top/bottom of the form, could just put the buttons directly in the apex:pageBlock though
+
 ## Standard input components
 
+* All input components must be placed in an apex:form component
+* apex:input - does not include styling and is not bound to a field on a record of a SF object; have to use controller extension or custom contoller to use any values from this component; we also must pass 'html-5.0' to the doctype attribute in the opening apex:page tag
+* apex:inputCheckbox - default is unchecked; not related to any field on a record of a SF object
+* apex:inputText - similar to apex:input that has type attribute set to text; not related to any field on a record of a SF object
+* apex:inputTextArea - multiline version of apex:inputText; not related to any field on a record of a SF object
+
+* apex:inputField - bound to a record field without any custom apex code; pass the field api name to value attribute with expression syntax; if in a apex:pageBlockSection, the field label will automatically display next to the input
+
+### Input field validation
+
+* inserting data with apex:inputField components will check our validation rules we've specified
+  * if the validation rule error message is set to appear on the field, then the validation rule error message will appear next to the apex:inputField
+  * If the validation rule error message is set to appear on the top of the page, then we can make use of the apex:messages or apex:pageMessages components to display the error message where we wish in markup
+  * If using a custom controller, we can pass error messages to the messages/pageMessages components by using 'ApexPages.addMessages()' method.
+  
 ## Standard output components
+
+* apex:outputField - displays field value of a salesforce record; supply the value attribute with expression syntax pointing to field name {!account.name}; automatically includes field label if placed within apex:pageBlockSection
+* apex:outputLabel - gives a label to apex:inputField elements; associate by passing an id of the input component to the for attribute of the label
+* apex:outputLink - analogous to html a tag; instead of href we use value attribute
+* apex:outputPanel - usefull when paired with apex:actionSupport; discussed later in module
+* apex:outputText - displays text to the user; wrap text with this tag if you want to give it a special format or font that differs from the rest of the page
 
 ## Displaying records in Visualforce tables
 
+* either use apex:pageBlockTable or apex:dataTable
+* total collection of data in either table across all pages can be 1000 records if we allowing editing or 10000 records if read-only
+* apex:pageBlockTable includes styling, apex:dataTable does not
+* both tables take a value attribute which is a list of records and a var attribute which serves as an individual record
+* apex:column elements will add columns to our table
+
+```
+<apex:page standardController="Account" recordSetVar="accs">
+    <apex:pageBlock>
+        <apex:pageBlockTable value="{!accs}" var="acc">
+            <apex:column value="{!acc.name}"/>
+            <apex:column value="{!acc.numberofemployees}"/>
+            <apex:column value="{!acc.annualrevenue}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>
+```
+
 ## Inline Editing
+
+* Although earlier we mention apex:outputField can't be edited this isn't entirely true
+* we can if we also make use of apex:inlineEditSupport
+
+```
+<apex:page standardController="Account" recordSetVar="accs">
+    <apex:form>
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!accs}" var="acc">
+                <apex:column headerValue="Account Name">
+                    <apex:outputField value="{!acc.name}">
+                        <apex:inlineEditSupport showOnEdit="updateRecords"/>
+                    </apex:outputField>
+                </apex:column>
+            </apex:pageBlockTable>
+            <apex:pageBlockButtons>
+                <apex:commandButton value="Update Records" action="{!save}" style="display:none" id="updateRecords"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+```
 
 ## Partial Page Rerendering
 
