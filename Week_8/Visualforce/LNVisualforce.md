@@ -99,7 +99,7 @@ When coupling record values in your Visualforce page, you will also probably wan
 
 While standard controllers only allow for interaction with one record at a time, the prebuilt standard set controllers, also known as standard list controllers, allow you to deal with groups of records at once. These controllers are not available for all standard objects, only the `Account`, `Asset`, `Campaign`, `Case`, `Contact`, `Contract`, `Idea`, `Lead`, `Opportunity`, `Order`, `Product2`, `Solution`, and `User` objects (every custom object automatically gets a set controller). To incorporate a list controller, set the `standardController` attribute to the name of the object and the `recordSetVar` attribute (also in the opening `<apex:page>` tag) to a descriptive name - this second attribute determines the name of the list of records and you will reference it throughout the remainder of your page. See below for an example of a list controller declaration.
 
-```visualforce
+```
 <apex:page standardController="Account" recordSetVar="accs">
 </apex:page>
 ```
@@ -175,7 +175,7 @@ Instead of using the prebuilt standard controller, you can create your own by ma
 
 Because you are no longer using the standard controller, you must declare any record variables as properties of your class and instantiate them with any values that you wish in your constructor. Your class may contain getters, setters, or other actions that you bind to events in your Visualforce page. To save some writing, you can use Apex properties rather than coding your own getters and setters. But if you choose to define your own methods, you they must follow the format `setVariableName` and `getVariableName` (the first letter of the variable name is capital in these methods, regardless of if it is capitalized in the variable name itself). Because Apex class variables default to a private scope, we have to declare them as public as well as declaring a setter and getter for them in order to use them in our pages. Take the following Apex class, which contains an Account variable and a setter and getter method for that variable.
 
-```apex
+```
 public class AccountController{
     public Account acc {get{
             if(acc == null){
@@ -191,7 +191,7 @@ public class AccountController{
 
 As you can see from the above code, another consequence of using a custom controller instead of a standard one is that we perform record retrieval ourselves using SOQL queries. Similarly, we can use DML to change/insert records. But we also have the option to instantiate and use the `StandardController` class within our class by passing it an instance of the object on which our controller is acting. For an example, see the following custom controller, which is used in a Visualforce page placed in a webpage that has a record Id in the url. It retrieves the corresponding record by way of the standard controller (note that we must type cast the returned object because the standard controller returns an instance of the `sObject` class).
 
-```apex
+```
 public class AccountController{
     public Account acc{get; set;}
 
@@ -235,7 +235,7 @@ The discussion about inserting data to the database using `<apex:inputField>` ma
 
 On the other hand, if we are using a standard controller and the location of the error is set to the top of the page in the validation rule, simply include an `<apex:messages>` or `<apex:pageMessages>` component on your Visualforce page. Note that these are the `<apex:messages>` and `<apex:pageMessages>` elements, not the `<apex:message>` or `<apex:pageMessage>` components, which will not display the error. Why is this the case? Because Salesforce. Let's take a look at an example of each of the valid components where a created account record validates a validation rule we've created. The first picture corresponds to the below block of code, which uses `<apex:messages>`. The second picture represents the output of the same block of code if it used `<apex:pageMessages>` instead.
 
-```visualforce
+```
 <apex:page standardController="Account" >
     <apex:form >
         <apex:pageblock>
@@ -260,7 +260,7 @@ The above code demonstrates the use of many of the concepts we've discussed so f
 
 To achieve the same functionality when using a custom controller, write a save function that follows the format of the following Apex code:
 
-```apex
+```
 public void saveRecord(){
     try{
         upsert acc;
@@ -291,7 +291,7 @@ To add columns to tables, we use the `<apex:column>` component. We can include e
 
 Let's look at a page that uses a table component and compare the output of the two tables:
 
-```visualforce
+```
 <apex:page standardController="Account" recordSetVar="accs">
     <apex:pageBlock>
         <apex:pageBlockTable value="{!accs}" var="acc">
@@ -315,7 +315,7 @@ In the `Displaying Data with Standard Output Components` we said that `<apex:out
 
 The easiest way to include inline editing is through use of an `<apex:outputField>` because it requires no custom code. Therefore, we should nest an output field within a table column if we want a quick way to allow values in the table to be changed. See the below code for an example.
 
-```visualforce
+```
 <apex:page standardController="Account" recordSetVar="accs">
     <apex:form>
         <apex:pageBlock >
@@ -366,7 +366,7 @@ Speaking of links, let's talk about a neat Visualforce feature: the `<apex:param
 
 We can use `<apex:param>` to set this `q` parameter by building off of the following markup format:
 
-```visualforce
+```
 <apex:page standardController="Account">
     <apex:outputLink value="http:/google.com/search">
         Google Account
@@ -383,7 +383,7 @@ To pass arguments to a parent `<apex:outputText>`, expression syntax within the 
 
 Wrapper classes are a special type of Apex class that is used to collect multiple values in a single object in a way analogous to making a custom data type. We can use wrapper classes to display tables of data in our Visualforce pages that mix lists of records with other properties. For instance, say that we wanted to order our accounts by their annual revenue, providing the rank in each row of the table. To accomplish this task, we could use the following Visualforce page:
 
-```visualforce
+```
 <apex:page controller="AccountSetController">
         <apex:pageBlock>
             <apex:pageBlockTable value="{!rankedAccounts}" var="ra">
@@ -397,7 +397,7 @@ Wrapper classes are a special type of Apex class that is used to collect multipl
 
 And the accompanying custom list controller:
 
-```apex
+```
 public class AccountSetController {
     public List<Account> accs {get;set;}
 
@@ -441,7 +441,7 @@ Wizards are sets of pages that guide users through a process one step at a time,
 
 To illustrate, let's create a wizard with three pages: `harryPotter.vfp`, `voldemort.vfp`, and `dumbledore.vfp` (the markup for these pages is displayed in the listed order below).
 
-```visualforce
+```
 <apex:page controller="WizardController">
     <apex:form>
         <apex:pageBlock>
@@ -453,7 +453,7 @@ To illustrate, let's create a wizard with three pages: `harryPotter.vfp`, `volde
 </apex:page>
 ```
 
-```visualforce
+```
 <apex:page controller="WizardController">
     <apex:form>
         <apex:pageBlock>
@@ -467,7 +467,7 @@ To illustrate, let's create a wizard with three pages: `harryPotter.vfp`, `volde
 </apex:page>
 ```
 
-```visualforce
+```
 <apex:page controller="WizardController">
     <apex:form>
         <apex:pageBlock>
@@ -481,7 +481,7 @@ To illustrate, let's create a wizard with three pages: `harryPotter.vfp`, `volde
 
 And the associated Apex controller:
 
-```apex
+```
 public class WizardController {
     public PageReference harry(){
         return Page.harryPotter;
@@ -503,7 +503,7 @@ There are two parts to testing Visualforce: viewing the markup and writing test 
 
 To test the Apex code, follow all of the principles we discussed in the `Apex Testing Framework` module. Note that your test method should begin with the following lines of code to associate the testing environment with the desired Visualforce page:
 
-```apex
+```
 PageReference pageRef = Page.myVisualforcePageName;
 Test.setCurrentPage(pageRef)
 ```
@@ -534,7 +534,7 @@ To include tabs within your page, wrap all of the elements for a given tab withi
 
 We can dynamically instantiate Visualforce components by using the `<apex:dynamicComponent>` component. This element has the required attribute `componentValue`, to which we pass the expression-syntax formatted name of a custom controller or controller extension method that will return a component. Note that your controller method must be the value named in the `componentValue` attribute with the first letter capitalized and prefixed with "get". Take a look at the example below, which contains an `<apex:outputText>` that is only rendered if it is after noon locally. First the Visualforce page:
 
-```visualforce
+```
 <apex:page controller="DynamicController">
     <apex:dynamicComponent componentValue="{!beforeAfterNoon}"/>
 </apex:page>
@@ -542,7 +542,7 @@ We can dynamically instantiate Visualforce components by using the `<apex:dynami
 
 And the associated Apex class:
 
-```apex
+```
 public class DynamicController {
     public Component.Apex.OutputText getBeforeAfterNoon(){
         if(DateTime.now().hour() >= 12){
@@ -561,7 +561,7 @@ Alternatively, we can achieve dynamic Visualforce through dynamic bindings. Inst
 
 ## Custom Labels
 
-The final Visualforce feature we will detail in this module is the custom label. This tool can actually be used in Apex, Visualforce, or Lightning components (a framework we will explore in a later module) to translate a base message into the language in the user's settings, provided that we have added support for that language.
+Custom labels are a tool that can be used in Apex, Visualforce, or Lightning components to translate a base message into the language in the user's settings, provided that we have added support for that language.
 
 First, enable translation workbench by navigating to `Setup` > `User Interface` > `Translation Workbench` > `Translation Language Settings` and clicking `Enable`. Once the settings have been modified, you will see a list of supported languages on the `Translation Language Settings` page. By clicking the `Add` button, you will be taken to a page where you can choose the new supported language (be sure to select the `Active` checkbox in order to use the language).
 
@@ -570,8 +570,3 @@ After you have added all desired languages, navigate to `Setup` > `User Interfac
 <p align="center"><img src="img/label_translation.png"/></p>
 
  We could then include that label in our Apex code by using `System.Label` class and appending the name of the label, e.g. `System.Label.My_Custom_Label` for label in the above image. Within Visualforce, we reference a custom label with the `$Label` expression, e.g. `{!$Label.My_Custom_Label}` for the above label.
-
-do you wanna do attributes within double quotes?
-change stuff about record ids in urls
-file extension
-a sometimes helpful friend

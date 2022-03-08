@@ -415,12 +415,41 @@ Test.setCurrentPage(pageRef)
 	
 ## Including Visualforce in the Salesforce UI
 
-
-
-## Setting styling in Visualforce
+* we can view visualforce on a salesforce tab
+* setup>user interface>tabs
+* we can add visualforce to an existing tab through lightning app builder
+  * need to enable it first at setup>custom code>visualforce pages
+  * click edit on VF page
+  * check the 'available for lightning experience, lightning communities, and the mobile app' checkbox and save
 
 ## Tabs in Visualforce pages
 
+* To include tabs within your page, wrap all of the elements for a given tab within an apex:tab and nest those tabs inside of an apex:tabPanel. You can change the default selected tab by passing its id to the selectedTab attribute of apex:tabPanel
+
 ## Dynamic Visualforce
 
-## Custom labels
+* used to dynamically render content
+* use the apex:dynamicComponent tags
+* componentValue is required attribute and takes a {!method} that will return a component
+
+VF:
+```
+<apex:page controller="DynamicController">
+    <apex:dynamicComponent componentValue="{!beforeAfterNoon}"/>
+</apex:page>
+```
+apex:
+```
+public class DynamicController {
+    public Component.Apex.OutputText getBeforeAfterNoon(){
+        if(DateTime.now().hour() >= 12){
+            Component.Apex.OutputText ot = new Component.Apex.OutputText();
+            ot.value = 'After Noon';
+            return ot;
+        }
+        else{
+            return null;
+        }
+    }
+}
+```
