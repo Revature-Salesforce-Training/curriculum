@@ -256,20 +256,171 @@ public class AccountController{
 
 ## Partial Page Rerendering
 
+* apex:actionRegion - when a dom event occurs within this tag, the server will only process components within the region (assuming they do not act on elements outside of the region). The rest of the page will be returned to the browser in the same state in which the browser sent it to the server
+* apex:actionSupport - no required attributes, but must make use of event and reRender attributes to have functionality. Event holds name of DOM event, reRender holds single id or comma seperated list of multiple ids that are refreshed when the event occurs; 
+  * can include apex:actionSupport within the opening and closing tags of a component to target that specific component
+* When using apex:commanLink or apex:commandButton you can specify a reRender attribute pointing to the id, or comma seperated list of ids of a component(s) to refresh after the user clicks those buttons
+* apex:outputPanel - we can wrap an entire block with this element. once we pass in a reRender attribute, passing in an id, the entire panel can be refreshed
+
 ## The View State and best practices
 
+* The view state is the hidden data describing the state (i.e. size, type, name, and/or value) of components on your page, values in fields on your page, and objects returned by standard and custom controllers. 
+* 170 kb size limit
+  * Best practices
+  * only ues apex:form and apex:inputField when necessary
+  * remove uneeded components from page
+  * only return relevant data with SOQL queries
+  * use the transient keyword on apex variables when the situation calls for it
+    * these variables aren't included in the view state. they are instance variables that are not saved but remade with each page refresh
+  * use stateless components and lazy loading objects
+    * For example, replacing any <apex:commandLink> or <apex:commandButton> components that redirect users to a different page with <apex:outputLink> will reduce server calls because the former two have to make a call to a Salesforce server to receive the output of the bound action (a redirection to a different url), while the latter can simply redirect the user to the specified address without needing to communicate with a Force.com server another time before doing so.
+    * Lazy loading objects refers to initializing them with null values in controller constructors in order to reduce their size and decrease the time a request takes to complete. The associated getter for a lazy loaded object should then check for the null value and initialize the object if that value is found, thereby delaying initialization until the object is needed.
+	
 ## Parameters
+
+* component used to pass a parameter to it's parent
+* has to be a child of apex:actionFunction>, apex:actionSupport, apex:commandLink, apex:outputLink, apex:outputText, or flow:interview
+
+```
+<apex:page standardController="Account">
+    <apex:outputLink value="http:/google.com/search">
+        Google Account
+        <apex:param name="q" value="{!account.name}"/>
+    </apex:outputLink>
+</apex:page>
+```
+
+* Value is only required attribute but we had to use name attribute here because url parameters are named
+* for multiple nested apex:param elements inside a apex:outputText, we use expression syntax within the value attribute to specify which param to use. {0} for first param for example
 
 ## Wrapper Classes
 
+* special type of apex class used to collect multiple values in a single object in a way analogous to making a custom data type
+* can use wrapper classes to display tables of data in our Visualforce pages that mix lists of records with other properties
+
+visualforce:
+```
+<apex:page controller="AccountSetController">
+        <apex:pageBlock>
+            <apex:pageBlockTable value="{!rankedAccounts}" var="ra">
+                <apex:column headerValue="Rank" value="{!ra.rank}"/>
+                <apex:column value="{!ra.acc.Name}"/>
+                <apex:column value="{!ra.acc.AnnualRevenue}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+</apex:page>
+```
+
+apex:
+```
+public class AccountSetController {
+    public List<Account> accs {get;set;}
+
+    public AccountSetController(){
+        this.accs = [SELECT Id, Name, AnnualRevenue FROM Account WHERE AnnualRevenue != null ORDER BY AnnualRevenue DESC];
+    }
+
+    public List<wrappedAccRank> getRankedAccounts(){
+        List<wrappedAccRank> rankedAccounts = new List<wrappedAccRank>();
+        for(Integer i = 0; i < this.accs.size(); i++){
+            rankedAccounts.add(new wrappedAccRank(i+1, this.accs[i]));
+        }
+        return rankedAccounts;
+    }
+
+    public class wrappedAccRank{
+        public Integer rank {get;set;}
+        public Account acc {get;set;}
+
+        public wrappedAccRank(Integer rank, Account acc){
+            this.rank = rank;
+            this.acc = acc;
+        }
+    }
+}
+```
+
 ## Visualforce wizards
+
+* set of pages that guide users through a process one step at a time
+* different page for each step; same custom controller for each page; Buttons that take users to the next or previous step in a process should be action bound to controller methods that return a reference to the appropriate page using the format Page.visualforcePageName
+
+page 1
+```
+<apex:page controller="WizardController">
+    <apex:form>
+        <apex:pageBlock>
+            Harry Potter
+            <br/>
+            <apex:commandButton value="Next Wizard!" action="{!tom}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+```
+page 2
+```
+<apex:page controller="WizardController">
+    <apex:form>
+        <apex:pageBlock>
+            Voldemort
+            <apex:pageBlockSection>
+                <apex:commandButton value="Previous Wizard!" action="{!harry}"/>
+                <apex:commandButton value="Next Wizard!" action="{!albus}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+```
+page 3
+```
+<apex:page controller="WizardController">
+    <apex:form>
+        <apex:pageBlock>
+            Albus Dumbledore
+            <br/>
+            <apex:commandButton value="Previous Wizard!" action="{!tom}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+```
+apex controller:
+```
+public class WizardController {
+    public PageReference harry(){
+        return Page.harryPotter;
+    }
+
+    public PageReference tom(){
+        return Page.voldemort;
+    }
+
+    public PageReference albus(){
+        return Page.dumbledore;
+    }
+}
+```
 
 ## Testing Visualforce
 
+* visual test
+  * check how it looks in variety of browsers; in every context: classic, lightning experience
+* test apex code
+  * test methods should begin with the following lines of code to associate the testing environment with the desired Visualforce page
+  * then instantiate the custom controller/controller extension and it will grab the page reference from the testing environment. 
+  * Be sure to test all setters, getters, and other action methods (including methods that redirect the user to a different page) in your controller using positive and negative (and where appropriate, restricted user and bulk) tests.
+```
+PageReference pageRef = Page.myVisualforcePageName;
+Test.setCurrentPage(pageRef)
+```
+	
 ## Including Visualforce in the Salesforce UI
+
+
 
 ## Setting styling in Visualforce
 
 ## Tabs in Visualforce pages
 
 ## Dynamic Visualforce
+
+## Custom labels
