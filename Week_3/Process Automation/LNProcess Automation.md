@@ -31,14 +31,6 @@ Here, we choose the return type of our formula. The available options are `Check
 
 # Process Automation
 
-Challenges:
-
-Create a workflow that edits some record when you update an existing record.
-
-Create an approval process that updates a field when it is approved.
-
-Create a process that when a record is created, it launches a flow that updates another record.
-
 ## Workflows 
 
 - A workflow is an automatic process triggered by specific criteria set when it is created. A 
@@ -56,9 +48,10 @@ workflow rule is the container of this process.
     - Update field for record that invoked workflow
     - Send Email alert
     - Send Outbound SOAP message
-    - CUSS
+    - mnemonic - CUSS
     - Time dependent workflow actions are available as well
    
+<img src="img/workflow.png">
    
 ## Approval processes
 - Approval processes allow you to create a multi-step process through which you can designate 
@@ -68,7 +61,7 @@ specific actions to be taken based on the stage and approval status.
     - Update a field
     - Send email alert
     - Send outbound SOAP message
-    - CUSS
+    - mnemonic - CUSS
   - When creating we have the jump start wizard and standard setup wizard.
     - More options in standard setup wizard, we can change things such as: setting up an automated approver based on a field on the record, set up the approval page layout, and specify which users are allowed to submit the initial request for approval.
   - There are multiple stages we can define and customize during the approval process. Each of these 
@@ -82,6 +75,8 @@ specific actions to be taken based on the stage and approval status.
   admins and users with View and modify all permissions could edit it at that point. This is 
   customizable, however.
   - Must click submit for approval… But can set up flows to automatically submit for approval as well.
+  
+<img src="img/approval_process.png">
   
 ## Process builder
 - The process builder allows you to create automated processes that execute upon specific criteria 
@@ -114,6 +109,8 @@ capabilities.
     - Only one process per object
     - User isNew() on new record creation only
 	
+<img src="img/process_builder.png">
+	
 ## Flows 
 - Flows are a powerful declarative tool to perform actions in either your salesforce org or even external systems. We have 5 types of flows available:
   - Record triggered flow – launched when record is created, updated, or deleted
@@ -121,7 +118,7 @@ capabilities.
   - Platform event-triggered flow – launches from platform event messages
   - Screen flow – guides a user through a business process that’s launched from lightning pages, experience cloud sites, quick actions, and more
   - Schedule-triggered flow – launches at specified time and frequency for each record in a batch
-  - R.A.P.S.S.
+  - mnemonic - R.A.P.S.S.
 - Flows can:
   - Create/update/delete records
   - Create chatter posts
@@ -129,11 +126,11 @@ capabilities.
   - Send emails
   - Call apex code
     - Method must be annotated with @InvocableMethod 
-	- [OR you can use the Process.Plugin interface](https://help.salesforce.com/s/articleView?id=sf.flow_build_extend_apex.htm&type=5)
+	- [OR you can use the Process.Plugin interface. This is an older way and not necesarrily recommended](https://help.salesforce.com/s/articleView?id=sf.flow_build_extend_apex.htm&type=5)
   - Create tasks
   - Launch other flows
   - Send custom notifications
-  - They CANNOT send outbound SOAP messages
+  - send outbound SOAP messages (on Professional, Enterprise, Performance, Unlimited, and Developer Editions)
 - Flow builder 
   - The flow builder is a gui for flow creation. It features a canvas which represents the flow itself, and a toolbox which includes the elements and resources you can use to build the flow.
     - Flow elements represent actions that a flow can execute, such as reading/writing data, displaying information through screens, and executing business logic.
@@ -142,9 +139,12 @@ capabilities.
   - When updating records, we can specify if we want the flow to run for every time a record is updated and meets condition requirements or only when a record is updated to meet condition requirements.  
 - Record triggered flows can also be configured to add a scheduled path if you want part of or the entire flow to run sometime after the triggering record is created. That scheduled time can be based on when the record is created or based on a field value in the record.
 
+<img src="img/flow_builder.png">
 
 ## The default workflow user 
 - Required for scheduled paths in record-triggered flows and time-dependent actions in workflow rules. If the user who triggered the automation is no longer active, the default workflow user is associated with the actions that are executed by the automation. The default workflow user always runs schedule-triggered flows.
+
+<img src="default_workflow_user.png">
 
 ## What is a platform event?
 Secure, scalable, and custom event notifications within salesforce or from external sources based on a publish-subscribe architecture. They can trigger a process or a flow. They are similar to custom objects and are defined in the same way but have an __e suffix. These can be published through processes, flows, Apex, or API.
@@ -154,6 +154,10 @@ Setup > environments > Monitoring > Time-based workflow
 
 - From here we can monitor the queue of pending automations. This includes scheduled record triggered flows, time-dependent workflow actions, scheduled actions build in process builder, and flow resume events.
 
+<img src="img/time_based_workflow.png">
+
 Setup > process automation > paused and failed flow interviews
 
 - Here we can see any flows that are actively paused or any flows that have failed.
+
+<img src="img/paused_and_failed_flow_interviews.png">

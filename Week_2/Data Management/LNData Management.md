@@ -16,7 +16,6 @@ This module introduces Salesforce data management tools, as well as explaining w
     * [Data Loader and External Id Fields](#data-loader-and-external-id-fields)
     * [Third-Party Tools](#third-party-tools)
     * [Data Export Service](#data-export-service)
-    * [Exporting Reports](#exporting-reports)
 
 ### Helpful Links/References
 
@@ -37,21 +36,30 @@ This module introduces Salesforce data management tools, as well as explaining w
 
 ## Quality Data
 
-Low quality data is like unwritten material - no one likes it and... well actually that's about the only similarity they have. Hmm... maybe that wasn't the best metaphor to start off with. Alright, pack it up and reset the board, we're starting this module again.
+Low quality data is like unwritten material - no one likes it and... well actually that's about the only similarity they have. Hmm... maybe that wasn't the best metaphor to start off 
+with. Alright, pack it up and reset the board, we're starting this module again.
 
 ## Quality Data (Revisited)
 
-Low quality data is like a false start to a set of lecture notes - no one likes it and honestly we might be better off if it didn't even exist. In any database, having good data is important - if our data isn't actionable, it's literally a waste of space. So what factors should we look to achieve when populating our database? We'll focus on six: accuracy, completeness, consistency, currency, uniqueness, and validity.
+Low quality data is like a false start to a set of lecture notes - no one likes it and honestly we might be better off if it didn't even exist. In any database, having good data is 
+important - if our data isn't actionable, it's literally a waste of space. So what factors should we look to achieve when populating our database? We'll focus on six: accuracy, 
+completeness, consistency, currency, uniqueness, and validity.
 
-Accurate data is essential - the decisions we make based off of our data will never be correct if the data itself is incorrect. But our information should also be as complete as possible to give us the most wholistic picture we can get of the subject.
+Accurate data is essential - the decisions we make based off of our data will never be correct if the data itself is incorrect. But our information should also be as complete as 
+possible to give us the most wholistic picture we can get of the subject.
 
-Consistency is important because a standard format will allow any person within the organization to understand the information, whether they personally collected it or not, and it'll make it much easier to programatically interact with and report on that information. We should also aim for currency because a company acting on the way the world was five months ago will only be successful if they've invented time travel. Lastly, data should be unique and valid (i.e. necessary) - redundant or unnecessary data only serves to clutter up a database.
+Consistency is important because a standard format will allow any person within the organization to understand the information, whether they personally collected it or not, and it'll 
+make it much easier to programatically interact with and report on that information. We should also aim for currency because a company acting on the way the world was five months ago 
+will only be successful if they've invented time travel. Lastly, data should be unique and valid (i.e. necessary) - redundant or unnecessary data only serves to clutter up a database.
 
 ## Ensuring Quality Data in Salesforce
 
-While we're only just now talking about creating good data, we've actually previously discussed many of the declarative tools that will help us achieve this goal. For example, a simple way to require complete information is just that - we make required fields for any information that we always need, so that records can only be inserted if they adhere to or exceed our standards for completeness.
+While we're only just now talking about creating good data, we've actually previously discussed many of the declarative tools that will help us achieve this goal. For example, a 
+simple way to require complete information is just that - we make required fields for any information that we always need, so that records can only be inserted if they adhere to or 
+exceed our standards for completeness.
 
-To provide a consistent format for fields on records, we can create validation rules. Consider a validation rule that checks to see that a value entered for a state field is one of the 50 two-letter U.S. state abbreviations, thereby eliminating the possibility of some records having full state names while others are abbreviated.
+To provide a consistent format for fields on records, we can create validation rules, which we will discuss more shorty. Consider a validation rule that checks to see that a value 
+entered for a state field is one of the 50 two-letter U.S. state abbreviations, thereby eliminating the possibility of some records having full state names while others are abbreviated.
 
 Currency can be achieved through process automation because we can invoke a field update on a parent 
 when a field on a child record is updated and we can similarly invoke a process to update all related 
@@ -64,17 +72,35 @@ chances of human error with paths and flows. Recall that each stage in a path ca
 instructions and screen flows can be used as wizards with a set of instructions for each screen, so 
 each tool can give the user guidance and information to assist them in collecting correct data.
 
-Unique data is much easier to achieve because we can create duplicate rules to guarantee that no 
-redundant data is entered. On the other hand, implementing the final factor of quality data, validity 
-is not done with a declarative tool so much as it is accomplished before any customization begins. 
-When forming our data model, we should constantly be asking ourselves if all of the objects and fields 
-we are planning on creating are absolutely necessary.
+Unique data is much easier to achieve because we can create duplicate and matching rules to guarantee that no 
+redundant data is entered. We will discuss duplicate/matching rules shortly. On the other hand, implementing the 
+final factor of quality data, validity is not done with a declarative tool so much as it is accomplished before any 
+customization begins. When forming our data model, we should constantly be asking ourselves if all of the objects and 
+fields we are planning on creating are absolutely necessary.
 
 If, for instance, we are creating a solution for a large chain of auto body shops, it may be valuable 
 to have the cell phone numbers of the chain's customers, but there is no good reason to collect 
 information about the make and model of those cell phones - including fields for these values would 
 just clutter our org and raise the possiblity of our users wasting their time by collecting and 
 entering unneeded data.
+
+## Validation rules 
+Rules that verify that data a user enters meet standards before saving a record. Can have a custom 
+error message appear by the field or on top of the page. This is configured on the object in object 
+manager. We enter an error condition formula and if it evaluates to true, we display our error. 
+
+
+- We have many functions available to us in the formula builder
+  - REGEX - A series of characters that define a search pattern.
+  - VLOOLUP - VLOOKUP(field_to_return, field_on_lookup_object, lookup_value) Searches an object for a record where the specified field matches the specified lookup_value. If a match is found, returns another specified field value.
+- We can conditionally make certain fields required using validation rules
+  - AND(Account_Market = "Corporate", Test = "")
+  - This will give an error message if "Test" has no value when Account Market is "Corporate".
+
+## Duplicate rules / Matching rules
+
+- A matching rule compares field values to determine whether a record is similar enough to existing records to be considered a duplicate. For example, a matching rule can specify that if the Email and Phone values of two records match exactly, the records might be duplicates. We can not only check for exact matches, but close matches as well. We can configure this for certain standard objects, and it is called fuzzy matching. An exact match would only catch John Smith, whereas a fuzzy match rule would also catch Jon Smith, Johnny Smith, Jonathan Smith, etc. However, fuzzy matching is not perfect, and when it comes to names tends to mainly work with western names.
+- Duplicate rules work together with your matching rules to prevent users from creating duplicate records. A matching rule determines whether the record a user is creating or updating is similar enough to other records to be considered a duplicate, whereas a duplicate rule tells Salesforce what action to take when duplicates are identified. For example, a duplicate rule can block users from saving records that have been identified as possible duplicates, or simply alert users that they may be creating a duplicate but allow them to save the record anyway.
 
 ## Bulk Data Management Tools
 
@@ -279,13 +305,3 @@ If we need to interact with more than 5,000,000 records at a time, we can turn t
 As we've seen, `Data Loader` and third-party tools such as `dataloader.io` allow us to export records. But we can also use `Data Export Service`, found at `Setup` | `Data` | `Data Export`, up to once per week. To perform a weekly export, we click `Export Now` on the data export page. If we wish to schedule a weekly or monthly export, we click `Schedule Export` on the same page.
 
 Upon clicking either option, we'll be prompted to select the object(s) whose records we wish to export and begin the process. When the job is complete, we'll receive an email and be able to revisit the data export page to download an archived directory of CSV files.
-
-#### Exporting Reports
-
-The final piece of data management that we'll touch on in this module is the ability to export reports. To do so, we'll first navigate to the `Reports` tab. Then, we can click the dropdown next to the desired report (enclosed by the top red rectangle in the following image) and click `Export` (enclosed by the bottom red rectangle).
-
-<p align="center"><img src="img/export_report_one.png"/></p>
-
-On the resulting popup (shown below), we can choose the view of the report. If we choose `Formatted Report`, our file will be a Microsoft Excel file and we'll be able to export up to 100,000 rows and 100 columns. On the other hand, if we choose `Details Only`, we'll be able to export our data as either an Excel file or a CSV file and retrieve an unlimited number of rows and columns.
-
-<p align="center"><img src="img/export_report_two.png"/></p>
