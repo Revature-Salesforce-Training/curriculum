@@ -144,7 +144,7 @@ capabilities.
 ## The default workflow user 
 - Required for scheduled paths in record-triggered flows and time-dependent actions in workflow rules. If the user who triggered the automation is no longer active, the default workflow user is associated with the actions that are executed by the automation. The default workflow user always runs schedule-triggered flows.
 
-<img src="default_workflow_user.png">
+<img src="img/default_workflow_user.png">
 
 ## What is a platform event?
 Secure, scalable, and custom event notifications within salesforce or from external sources based on a publish-subscribe architecture. They can trigger a process or a flow. They are similar to custom objects and are defined in the same way but have an __e suffix. These can be published through processes, flows, Apex, or API.
