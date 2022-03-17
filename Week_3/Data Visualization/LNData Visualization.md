@@ -2,8 +2,6 @@
 
 This module introduces reports and dashboards in Salesforce.
 
-[[_TOC_]]
-
 #### Helpful References/Links
 
 * [Report Type Reference (Salesforce Help)](https://help.salesforce.com/articleView?id=reports_report_type_reference.htm&type=5)
@@ -58,7 +56,7 @@ This allows the user to define the information they want available in it. To cre
 to "Report Types" in your org settings. Here is what that looks like below. 
 
 <img src="images/customReportsCreation.png">
-<img src="images/customReports.png">
+<img src="images/custom_reports.png">
 
 #### Filters
 
