@@ -137,7 +137,7 @@ Account acc = new Account(Name='Atlantic Records');
         - <mark>casting between numeric primitive data types</mark>
             - the numeric primitive types in Apex form a hierarchy
 
-<p align="center"><img src="implicit_number_conversion.png"></p>
+<p align="center"><img src="img/implicit_number_conversion.png"></p>
 
             - we can convert a value from a hierarchically lower data type to a value of a hierarchically higher data type implicitly
 

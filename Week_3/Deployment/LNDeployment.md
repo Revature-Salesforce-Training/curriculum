@@ -105,6 +105,8 @@ If we do have `global` code in our package that we're planning to remove in futu
 
 ## Change Sets
 
+[Check here for a video from Ben, showcasing change sets](https://revature0-my.sharepoint.com/personal/benjamin_learn_revature_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fbenjamin%5Flearn%5Frevature%5Fcom%2FDocuments%2FChange%20Sets%2Emp4&parent=%2Fpersonal%2Fbenjamin%5Flearn%5Frevature%5Fcom%2FDocuments)
+
 Change sets are declarative deployment tools used to transfer groups of customizations (metadata) between _related_ orgs. Take note of the emphasis in that last sentence - a change set can only be deployed between a production org and one of its sandboxes, a sandbox and its corresponding production org, or two sandboxes with the same corresponding production org. Because this feature is unavailable in `Developer Editions` and `Trailhead Playgrounds`, we might not get a lot of hands on experience with it - so we'll be sure to walk through the related operations in detail throughout this section.
 
 Before we can deploy any change sets, we have to make a deployment connection between our sandboxes and/or production org. To do so, we navigate to `Setup` > `Environments` > `Deploy` > `Deployment Settings` in the target org (i.e. the org that will receive the change set), as shown below.
