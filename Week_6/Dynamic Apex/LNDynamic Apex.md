@@ -112,7 +112,26 @@ inputting malicious code designed to perform unintended operations. Because SOQL
 dangerous - SQL injection can result in data deletion, and while SOQL injection can't do the same, it can still expose sensitive data.
 
 A common way this could be done is by inserting single quotes into a search box for example. An attacker could use that in a way to manipulate a search string and get info 
-they normally wouldn't have access to. We do have a way to combat this issue. 
+they normally wouldn't have access to. Consider a user who has a basic knowledge of Salesforce. This user knows what SOQL queries look like and they'd like to determine if 
+a particular employee at one of our subsidiaries makes more than $1,000,000 per year (in this example, we've created a custom Salary__c field on Contact that stores this 
+information). This bad actor visits our page and enters the following query:
+
+<img src="img/soql_injection.png">
+
+Oh no - it looks like they've successfully found that Tim Barr has at least a nine-figure salary! Let's discuss how they did it, so we can understand how to prevent this 
+in the future. The malicious person ended the first filter condition with a single quote and then filtered based on Salary__c value. Because they knew that the input box 
+was expecting a string, they finished by filtering on a string value that they knew - the subsidiary that employs Tim. We can easily imagine how this could be extrapolated 
+to other situations that could expose even more sensitive information, such as credit card, bank account, and social security numbers, so let's discuss how to prevent it.
+
+In this case, we have a couple of options at our disposal. We could use a static query (i.e. a regular SOQL query with the square brackets) and bind the string variable to, 
+e.g., a filter value. The system will treat everything within the bound variable as a single string. So if the user tries to do something such as the malicious query above, 
+we'll be protected and our table will be empty, assuming we don't have a contact named Tim Barr' AND Salary__c > 1000000 AND Account.Name = 'Grand Hotels and Resorts Ltd 
+(which sounds like a very unfortunate name to have).
+
+But even though this would technically be dynamic SOQL - because we're using the bind variable - it doesn't give us the full capabilities of dynamism, so we might want to use 
+Database.query() instead. In this case, we'd turn to another option - the String.escapeSingleQuotes() method. This method will add an escape character (the backslash) before any 
+single quotes in the string it receives, ensuring that the entire user input will be treated again as a single string. 
+
 
 ```
 public static List<Contact> dynSoql(String searchTerm) {
@@ -124,8 +143,15 @@ public static List<Contact> dynSoql(String searchTerm) {
     }
 ```
 
-Here we see our example from before, with the addition of the String class method escapeSingleQuotes. This helps ensure our query is being treated as one string and that malicious 
-text cannot be used against us.
+Here we see our example from the last section, with the addition of the String class method escapeSingleQuotes. This helps ensure our query is being treated as one string and 
+that malicious text cannot be used against us.
+
+We haven't yet addressed the possibility of SOQL injection in the SELECT clause of a dynamic query. Actually, we haven't discussed dynamism with the SELECT clause at all - 
+so let's do so now. Because we have string concatenation at our disposal, we could accept user input to determine the fields our query returns in the first place.
+
+If we were to implement this, we would want to have the user choose the fields to query from, e.g., a picklist, rather than entering them in a text box to ensure that they don't 
+retrieve any information they shouldn't see. Remember, when we have controlled user input (through tools such as picklists and checkboxes), we can not only ensure that our users 
+will not be able to perform injection attacks, but prevent them from even attempting such a travesty.
 
 ## Dynamic SOSL
 
