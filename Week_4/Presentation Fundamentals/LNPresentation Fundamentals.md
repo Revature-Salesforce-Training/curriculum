@@ -102,12 +102,12 @@ In cases where the question is asked for the entire team, the team lead should s
 
 ## Bullet Points - General Tips
 
-* Have a powerpoint! (But don't rely on it completely, 50% demo if possible 50% slides!)
+* Have a powerpoint! (But don't rely on it completely!)
 * Don't just read whatever is directly on the slides! (Slides should accentuate your presentation, not define it)
 * Slides shouldn't be too crowded with content. 
 * Slides should be attention grabbing and professional. (Find a preset that isn't already built into Google slides or Powerpoint.)
 * You should have an agenda slide to set the expectations for the presentation and allude to what you will be talking about.
-* Speak bold and with confidence. 
+* Speak boldly and with confidence. (Use your command voice!)
 * Maintain eye contact. (For more western societies where that is expected. Some cultures find it rude.)
 * Stay on time! (If given an alloted time for the presentation, stick to it! Practice beforehand and time yourself with a stopwatch!)
 * Don't focus on any negatives! (You may have ran into challenges during whatever it is you are presenting about. But we want to focus on the positives. What did you accomplish?)
