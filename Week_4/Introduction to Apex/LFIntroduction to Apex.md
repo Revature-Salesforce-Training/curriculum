@@ -32,6 +32,8 @@ This module introduces Apex.
 ### Helpful References/Links
 
 * [Apex Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dev_guide.htm)
+* [Apex (Salesforce Developer Centers)](https://developer.salesforce.com/developer-centers/apex)
+* [Intro to Apex Code for Programmers Webinar (Salesforce Developers, YouTube)](https://www.youtube.com/watch?v=WBeCWlbGX38)
 * [When Should I Use Apex? (Apex Developer Guide)](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_intro_when_use_apex.htm)
 * [Salesforce Platfrom API Versions 21.0 through 30.0 Retirement](https://help.salesforce.com/s/articleView?id=000354473&type=1)
 * [Delete Custom Objects (Salesforce Help)](https://help.salesforce.com/articleView?id=dev_deleting_custom_objects.htm&type=5)

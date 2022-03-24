@@ -1,15 +1,46 @@
 # Module - Aura Component Framework
 
-This module introduces the Lightning Aura Component framework.
+This module introduces the Lightning Aura Component framework and single-page applications.
+
+## Table of Contents
+
+- [Module - Aura Component Framework](#module---aura-component-framework)
+  * [Table of Contents](#table-of-contents)
+    + [Helpful References/Links](#helpful-references-links)
+  * [AURA Component Framework](#aura-component-framework)
+  * [Single-Page Applications (SPAs)](#single-page-applications--spas-)
+  * [The Value of Single-Page Applications](#the-value-of-single-page-applications)
+  * [Components, Components, and Components](#components--components--and-components)
+  * [Aura Component Bundles](#aura-component-bundles)
+  * [Viewing Aura Components](#viewing-aura-components)
+    + [Lightning Applications](#lightning-applications)
+    + [Component Accessibility Interfaces](#component-accessibility-interfaces)
+  * [Component Attributes](#component-attributes)
+  * [Attributes and Attributes](#attributes-and-attributes)
+  * [Expression Syntax](#expression-syntax)
+  * [Value Providers](#value-providers)
+  * [MVCC Revisited](#mvcc-revisited)
+  * [The JavaScript Controller and Helper](#the-javascript-controller-and-helper)
+  * [Apex Controllers](#apex-controllers)
+    + [Calling Apex Controller Methods](#calling-apex-controller-methods)
+  * [Lightning Events](#lightning-events)
+  * [Component and Application Events](#component-and-application-events)
+    + [Creating Custom Events](#creating-custom-events)
+  * [Firing Events](#firing-events)
+    + [Firing Lightning Component Library Events](#firing-lightning-component-library-events)
+  * [Handling Events](#handling-events)
+    + [Handling System Events](#handling-system-events)
+  * [Lightning Component Library](#lightning-component-library)
+  * [Lightning Data Service](#lightning-data-service)
+    + [\<force:recordData\>](#--force-recorddata--)
+  * [Error Handling in the Aura Component Framework](#error-handling-in-the-aura-component-framework)
+  * [Security in the Aura Component Framework](#security-in-the-aura-component-framework)
+    + [Lightning Locker](#lightning-locker)
+    + [Apex Security](#apex-security)
 
 ### Helpful References/Links
 
 * [Lightning Aura Components Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/intro_framework.htm)
-
-
-
-
-
 * [Component Bundles (Lightning Aura Components Developer Guide)](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/components_bundle.htm)
 * [Component Markup (Lightning Aura Components Developer Guide)](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/components_markup.htm)
 * [Creating  Documentation Content (Lightning Aura Components Developer Guide)](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/docs_auradoc.htm)
@@ -47,8 +78,72 @@ This module introduces the Lightning Aura Component framework.
 ## AURA Component Framework
 
 The Lightning Component Framework is made of two programming archetypes: the Lightning Web Component (LWC) and Lightning Aura Component (LAC) 
-models. Both models allow us to create a SPA, but it's the latter - Lightning Aura components - that will be our primary 
-focus here.
+models. Both models allow us to create a SPA, but it's the latter - Lightning Aura components - that will be our primary focus here.
+
+## Single-Page Applications (SPAs)
+
+Throughout this module, we'll be exploring one half of the Lightning Component Framework, a programmatic Salesforce user interface framework designed 
+for making dynamic, responsive single-page applications (SPAs) that can be used by both mobile and desktop users. But before we begin our exploration, 
+let's discuss SPAs and their value more broadly using multi-page applications (MPAs for your authors lazy fingers), such as those created through the 
+use of Visualforce, as a foil.
+
+The Lightning Component Framework is made of two programming archetypes: the Lightning Web Component (LWC) and Lightning Aura Component (LAC) models. 
+Both models allow us to create the SPAs we mentioned above, but it's the latter - Lightning Aura components - that will be our primary focus here.
+
+Before we begin working with the framework itself, let's discuss some of the benefits of doing so. Like Visualforce or LWC, LAC comes with a large 
+amount of out-of-the-box, standard components that we can use. However, the LAC model has much better performance than Visualforce pages due to its SPA nature.
+
+In fact, SPAs offer many benefits over traditional, multi-page application frameworks such as Visualforce.
+
+## The Value of Single-Page Applications
+
+SPAs offer many benefits over traditional, multi-page applications (such as those created through use of the Visualforce framework). Most importantly, 
+SPAs are designed to work well with mobile devices: they include responsive styling and require fewer server calls. With responsive styling, the page 
+automatically resizes based on the size of the device using it. Rather than components taking up a set _length_ on the screen, they take up a 
+specific _percentage_ of the screen to make for a smooth transition between desktops, mobile devices, and tablets.
+
+Using fewer server calls mitigates any issues that may be caused by a weak or unstable internet connection from a user's mobile device. In order to 
+reduce the amount of server calls, the code returned from a browser includes JavaScript to handle as much user interaction as possible on the client, 
+rather than the server. The JavaScript arrives on the client, renders the initial HTML, and then changes the markup in response to events. Because the 
+page doesn't have to make a server call and wait for the response to edit the markup, the response to an event generally appears more fluid, faster, and 
+native to the user.
+
+However, we must keep in mind the mobile-first principle when writing our SPAs - there's just some logic and processing that phones will not perform quickly 
+or efficiently. In these cases, we make asynchronous calls to the server. We've discussed the differences between synchronicity and asynchronicity in the past, 
+but let's state them again here. Code normally executes synchronously - one line of code must finish executing before the next line runs. For example, if line 
+247 of program x calls a function, line 248 will not execute until that function has returned. Synchronous execution normally fits our purposes, but it is not 
+ideal if a function takes a long time to execute or if we are making a call to a remote server. When making said server call, time is a factor - we don't want 
+our users to feel as though they are waiting forever for our app to load and therefore believe that the app is slow and was poorly designed.
+
+But we also want to use asynchronicity because there is no guarantee that our call to the server will ever be returned. Perhaps the server crashes before 
+handling our request or a natural disaster destroys the data center holding the server. In either of these cases, we would not want the continued and 
+successful execution of our program to be depend on feedback from the server - any surviving users of our app would be waiting indefinitely for data that 
+will never come. Therefore, our asynchronous calls are standalone - our app will make the call and continue execution without waiting for, depending on, or 
+possibly even expecting a response.
+
+There is no hard line to determine when to do processing on the client and when to do it on the server. Obviously, anytime we want to interact with the 
+database, we will have to make a server call - there's no way around that. Any other logic needed should generally be kept on the client in order to ensure 
+robustness, app fluidity, and faster reactions to user input. But if the amount of required processing is so large that the app appears visibly slower to the 
+user, the corresponding logic should be moved from the client-side to the server.
+
+
+Aura components offer many advantages over Visualforce, arguably most importantly, that they, unlike Visualforce pages, were designed for SPAs. The Aura model 
+also promotes code-reusability through use of its components, which are self-contained, reusable units of code. It offers a responsive event-driven architecture 
+using Salesforce's Model-View-Controller-Controller (MVCC; that's two controllers!) design system and is easy to integrate with pages on the Lightning platform. 
+Finally, the framework features many out of the box (oob), pre-built components and allows us to make use of Salesforce styling.
+
+While there are some limitations with Aura components, notably that they can't be rendered as PDFs like Visualforce pages can be, the benefits far outweigh the disadvantages.
+
+## Components, Components, and Components
+
+Aura components are self-contained, reusable units of code - these are Aura component bundles. We also mentioned that the framework features many oob, pre-built 
+components. So we now once again encounter the consequences of Salesforce's not-always-the-best naming practices (there are still more on the way later, I know 
+you're excited!). You will frequently see the component bundle referred to as a component, although there is a smaller component file that is itself part of the 
+bundle, i.e. the component contains a component. Further, the pre-built components (e.g. `<lightning:card>`) are called components. Finally, to promote reusability 
+and modularity, component bundles can contain other component bundles. 
+
+To summarize, component (bundles) are made up of many parts, including components (the ones that are a part of the bundle itself), (oob) components, and possibly 
+other, smaller component (bundles). We therefore must be very careful when using the word 'component' - always take context into account and never be afraid to ask for clarification.
 
 ## Aura Component Bundles
 

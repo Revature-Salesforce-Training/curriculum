@@ -4,6 +4,8 @@
 
 [Apex Reference Guide](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_ref_guide.htm)
 
+[Apex (Salesforce Developer Centers)](https://developer.salesforce.com/developer-centers/apex)
+
 ## Introduction to Apex
 
 - <mark>Apex is Salesforce's case-insensitive</mark> (meaning that it treats method/variable/class names case-insensitively, the values of string literals in Apex are case-sensitive), <mark>cloud-hosted, Java-like, multitenant-aware, object-oriented, proprietary, strongly-typed, versioned programming language</mark>
@@ -260,7 +262,7 @@ Map<String, Account> highValueAccs = new Map<String, Account>{
 
 [Expressions and Operators (Apex Developer Guide)](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_expressions.htm)
 
-<p align="center"><img src="img/operator_precedence.png"></p>
+<p align="center"><img src="./operator_precedence.png"></p>
 
 ## Control Flow
 
