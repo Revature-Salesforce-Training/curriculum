@@ -1,6 +1,6 @@
 # Module - JavaScript
 
-This module introduces JavaScript, the DOM, and AJAX.
+This module introduces JavaScript, and many other related topics.
 
 ## Table of Contents
 
@@ -67,28 +67,31 @@ a time by the interpreter (the browser in the case of JavaScript).
 JS has single-line and block comments, with single line comments prepended by // and block comments 
 wrapped within /* and */. The console.log() function allows us to print output to the console.
 
-### JavaScript Variables
+### JavaScript Variables, data types, and scope
 
-JavaScript variables, containers used to store values, are not declared with data types, but 
-they are declared with one of three scope-enforcing keywords: var, let, and const. In non-strict 
-JS, variables declared without a scope default to var, which gives either global or function 
-scope depending on where the variable is defined. If the var variable is defined outside of any 
-function, it has global scope and can be referenced anywhere within the file. If it is defined 
-within a function, it has function scope and can be referenced anywhere within that function, but 
-not outside of it. Variables declared with the let keyword can have block scope, meaning that they 
-can be referred to in the block of code that declares them and any inner code blocks. Const can also 
+JavaScript variables, containers used to store values, are not declared with data types like some other languages, 
+but they are declared with one of three scope-enforcing keywords: var, let, and const. What is scope you ask? 
+Scope is what determines where a variable may be referenced. Variables declared without a scope default to var, 
+which gives either global or function scope depending on where the variable is defined (more on functions later). 
+If the var variable is defined outside of any function, it has global scope and can be referenced anywhere 
+within the file. If it is defined within a function, it has function scope and can be referenced anywhere within 
+that function, but not outside of it. Variables declared with the let keyword can have block scope, meaning that 
+they can be referred in the block of code that declares them and any inner code blocks. Const can also 
 enforce block scope, but cannot have its value changed after initial assignment (this rule gets a 
 little funky with objects - we cannot assign a different _object_ to a const variable, but we can 
 change the _properties_ of an object assigned to a const variable).
 
 Although we do not declare data types for variables, JS still has data types. There are six 
-primitive types: string, boolean, number, undefined, symbol, and null. Strings can be enclosed in 
-either single or double quotes. Booleans again take true or false values. Numbers can have 
-decimals, but are not required to - in contrast to some other languages, JS has just one data type for 
-all numbers. Variables take an undefined value if they are not assigned a value when they are 
-declared. The symbol data type is mostly used for the keys corresponding to an object's properties. 
-Finally, the null type is similar to undefined except that it is explicitly assigned. All variables 
-that do not hold one of these six primitive types are objects.
+primitive types: 
+
+  - string - Strings can be enclosed in either single or double quotes. 
+  - boolean - Booleans take true or false values.
+  - number - Numbers can have decimals, but are not required to - in contrast to some other languages, JS has just one data type for all numbers. The number type also has three symbolic values: +Infinity, -Infinity, and NaN ("Not a Number").
+  - undefined - Variables take an undefined value if they are not assigned a value when they are declared.
+  - symbol - Once created, it's value is kept private and for internal use. All that remains after creation is the symbol reference. Every time one is created you will get a unique symbol, guaranteed to be different from all other symbols. You can pass a parameter to symbol() to provide a description. These are often used for object properties because each one is unique. You can see an example of this in the JavaScript Objects section of this module.
+  - null - The null type is similar to undefined except that it is explicitly assigned.
+
+All variables that do not hold one of these six primitive types are objects.
 
 In order to determine a variable's type, we can use the typeof operator (except for the null type, 
 where the typeof operator is a dirty liar), as below:
@@ -108,46 +111,216 @@ where the typeof operator is a dirty liar), as below:
 	console.log(typeof(c));
 ```
 
+### JavaScript Operators
+
+Operators are the symbols we use to assign a value to a variable, do arithmetic, or evaluate expressions. 
+    
+We have already used one assignment operator earlier. 
+```let x = 3;```
+
+Our arithmetic operators:
+  - '+' addition
+  - '-' subtraction
+  - '*' multiplication
+  - '**' exponentiation
+  - '/' division
+  - '%' modulus (division remainder)
+  - '++' increment (increase value by 1)
+  - '--'decrement (decrese value by 1)
+
+The other assigment operators: 
+  - '+='  example: x+=y same as x = x + y
+  - '-='  example: x-=y same as x = x - y
+  - '*='  example: x*=y same as x = x * y
+  - '/='  example: x/=y same as x = x / y
+  - '%='  example: x%=y same as x = x % y
+  - '**=' example: x**=y same as x = x ** y
+
+String Operators (this is called concatenation)
+
+```
+let text1 = "John";
+let text2 = "Doe";
+let text3 = text1 + " " + text2;
+```
+
+With the newer versions of JavaScript we can use template literals to avoid heavy string concatenation. Notice 
+the use of backticks instead of quotes, as well as the ${} syntax to place a variable inside. 
+
+```
+let name = 'Robert Paulson';
+let str = `His name is ${name}`;
+console.log(str);
+```
+
+JavaScript Comparison Operators
+
+  - '==' equal to
+  - '===' equal to and equal data type
+  - '!=' not equal
+  - '!==' not equal value or not equal type
+  - '>' greater than 
+  - '<' less than
+  - '>=' greater than or equal to
+  - '<=' less than or equal to
+  - '?' ternary operator
+
+example for ternary operator:
+```
+function getFee(isMember) {
+	return (isMember ? '$2.00' : '$10.00');
+}
+
+console.log(getFee(true));
+// expected output: "$2.00"
+console.log(getFee(false));
+// expected output: "$10.00"
+```
+
+JavaScript Logical Operators
+
+  - '&&' and
+  - '||' or
+  - '!' not
+
+JavaScript Type Operators
+
+  - typeof - returns data type
+  - instanceof - Returns true if an object is an instance of an object type
+
+[Check out this link for more info about operators!](https://www.w3schools.com/js/js_operators.asp)
+
+### JavaScript Functions
+
+JavaScript funcitons are blocks of code that we can define and choose to run as we wish. Take a look at some 
+examples below.
+
+```
+function myFunc() {
+	console.log('This is my function!');
+}
+
+//we can call it and have it run like so:
+myFunc();
+
+//we can pass values into our functions to be used as we see fit:
+function multiply(a, b) {
+	//functions can call other functions
+	//myFunc();
+	
+	//notice we can output the results of our funciton using the return keyword
+	return a * b;
+}
+
+// in this case 5 is 'a' and 3 is 'b'. 15 will display in the console.
+console.log(multiply(5, 3));
+```
+
+We also have what is known as anonymous functions. These functions do not require a name, they are stored in a 
+variable and invoked when we use the variable name. 
+
+```
+const x = function(a,b) {return a * b};
+let z = x(4,3);
+```
+
+To add to our function toolbox we can also make use of arrow functions. This is a newer syntax and is not supported 
+in IE11 or earlier. Arrow functions allow us to omit the function keyword, the return keyword, and the curly brackets.
+
+```
+//normal
+let normalFunction = function(x, y) {
+ return x * y;
+}
+
+//arrow function
+
+//note you can only omit the return keyword and curly brackets if the function has a single statement
+const arrowFunction = (x, y) => x * y;
+```
+
+We have another consideration when using arrow funcitons however. For one thing, it's probably best to define them 
+as a const. This is a safer bet as you can be assured that your function expression will never be overwritten.
+Arrow functions are also not hoisted. Meaning they must be defined before they are used. 
+
+### Wait, explain hoisting?
+
+Hosting is an odd quirk of JavaScript. It actually allows for a variable or function to be used before it has 
+been declared. It moves all declarations automatically to the top of the scope.
+
+```
+x = 'Hello world!';
+console.log(x);
+var x;
+```
+
+The let and const keywords do not behave this way, however. They are hoisted, but not initialized. The following 
+will produce an error.
+
+```
+x = 3;
+let x;
+```
+
+Note the difference. Hoisting only moves the declaration to the top of the scope, not the initilization itself. 
+So the following will produce: '5 undefined'.
+
+```
+var num1 = 5;
+console.log(`${num1} ${num2}`);
+var num2 = 7;
+```
+
+An example of function hoisting:
+
+```
+myFunction("my message");
+
+function myFunction(x) {
+	console.log(x);
+}
+```
+
+It's usually a best pratice to just define all of your variables at the top of the scope anyway. This will help 
+you avoid any headaches that may arise from this odd quirk. 
+
 ### JavaScript Objects
 
-The JS object type includes collections, which are either arrays or objects, (yes objects are part 
-of, but not the entirety of, the object data type; for clarity, we will henceforth refer to these 
-more specific objects as key-value objects), and functions. Arrays are zero-indexed lists of 
-elements that can contain comma-separated values of different primitive or object data types. 
-JS arrays have dynamic size. Arrays can be initialized with or without values and with square 
-brackets or the Array constructor (although the latter is not considered a best practice); see below:
+JavaScript objects are a data type, but not a primitive. This means that they can be broken down into further 
+pieces. The JS object type includes collections, which are either arrays or objects, (yes objects are part 
+of, but not the entirety of, the object data type), and functions. Our first type of object we will discuss 
+is called an object literal. An object is made up of properties (similar to variables but don't confuse the two) 
+and methods (similar to functions, also don't confuse it). The terminology is important when we begin to delve 
+into Object Oriented principles. Let's take a look at an object literal below.
 
 ```
-    var myArray = [];
-    var myArray2 = [1, '2', 3];
-```
+// here is an example of the symbol primitive being used 
+const SYMBOLPROPERTY = Symbol('This is a symbol description!');
 
-The length of an array can be found through its length property.
-
-We will almost always declare key-value objects with the object literal, i.e. curly braces, 
-optionally with comma-separated key-value pairs, which are themselves colon-separated. Their 
-values are accessed through dot notation (if the key is a symbol) or square brackets (if the key 
-is a string literal) and can be either properties (i.e. variables) or methods (i.e. functions). 
-Let's take a look at an example:
-
-```
-    var myObj = {};
-    var myObj2 = {key1: 1, "key2": 2};
-    console.log(myObj2.key1);
-    console.log(myObj2["key2"]);
-```
-
-Lastly, functions are code blocks written to perform certain logic. They can be defined separately, 
-with the function keyword, then a name, parameters in parentheses, and opening and closing curly 
-braces. But they can also be assigned as values to variables, in which case a name is not included 
-in the function declaration and they are classified as anonymous functions (because of the lack of 
-a declared name). Take the following example:
-
-```
-    function myFunc(){
+let myObj = {
+    myProperty: 4,
+    myOtherProperty: 'We can store all kinds of data types',
+    [SYMBOLPROPERTY]: 'This value is paired with a symbol key',
+    myMethod: () => {
+        console.log('This is a method called from an object literal!');
     }
-    var myFunc2 = function(){
-    };
+}
+
+// we can access our objects properties and method like so
+console.log(myObj.myProperty);
+console.log(myObj[SYMBOLPROPERTY]);
+myObj.myMethod();
+```
+
+As we said, objects can include arrays as well. These are zero-indexed lists of elements that can contain 
+comma-separated values of different primitive or object data types. JS arrays have dynamic size. Arrays can 
+be initialized with or without values and with square brackets or the Array constructor (although the latter 
+is not considered a best practice). see below:
+
+```
+    let h = [1, 3];
+    console.log(typeof h); // will print 'object'
+    console.log(h.length); // to get size of array
 ```
 
 ### Falsy Values
@@ -156,10 +329,6 @@ Falsy (or falsey) values are those that evaluate to false in a conditional expre
 six falsy values in JS: false (pretty unexpected, right?), 0, empty string (either '' or "" because 
 the language accepts either single or double quotes), null, undefined, and NaN (which paradoxically 
 is a number). Every other value in JS is truthy - 1, -2, "a", true, etc.
-
-### JavaScript Operators/Comparison_Operators
-
-[Check out this link for more info about operators!](https://www.w3schools.com/js/js_operators.asp)
 
 ### JavaScript Control Flow
 
@@ -301,7 +470,6 @@ Example of a 'for-in' loop. This iterates over all enumerable properties of an o
 	// "c: 3"
 ```
 
-
 ## Running JavaScript in HTML
 
 We have three ways to make use of our JavaScript in HTML: inline, internally, or externally. We 
@@ -413,7 +581,9 @@ Once we've retrieved the reference to the element, we can edit its innerHTML, wh
 
 <p align="center"><img src="img/inner_outer_html.png"/></p>
 
-[We have more options available than just innerHTML! Check out these differences!](https://dev.to/developertharun/javascript-dom-part-4-innerhtml-vs-innertext-vs-textcontent-video-article-1b90)
+We can also make use of innerText, which will only return the text that is inside the element and also ignores 
+any spacing such as br elements. Or textContent, which will return the text inside the element and includes any 
+spacing given. 
 
 ## Events and Event Listeners
 
@@ -449,45 +619,181 @@ JS has an Event object from which all other event objects (such as the KeyboardE
 
 Lastly, the cancellable property returns a boolean value that indicates if we can cancel an event's default action, at which point we can call the preventDefault() method to stop that action. Note that preventDefault() does not stop event propagation; it only stops the automatic action associated with the HTML element, such as a redirect to a url from an \<a\> element.
 
-## AJAX
+### Putting it all together
 
-Our last major section in this module is about Asynchronous JavaScript and XML, commonly referred to as AJAX. As the name would suggest, AJAX is a protocol for asynchronous communication between the client-side webpage and a server. Let's look at an example JS function that makes an AJAX request to the balldontlie API and returns Kevin Durant's three-point shooting percentage for the 2018 season. We'll explain each line of code as we work our way through it:
+Below you can find a couple examples of events being used to manipulate the dom as well as manipulate strings.
 
-    function get3PT(){
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function(){
-            if(this.readyState == 4 && this.status == 200){
-                console.log(returnedObject.data[0].fg3_pct);
-            }
-        }
-        xhr.open("GET", "https://www.balldontlie.io/api/v1/season_averages?" + 
-            "season=2018&player_ids[]=140", true);
-        xhr.send();
+Here we are listening for the click of a button to fire off our addElem function. We can see that querySelector is 
+being used to retrieve a reference to a div element. We are then creating a paragraph element with JavaScript and 
+insterting some text into that element before appending it to the div we retrieved. 
+
+```
+let addElemBtn = document.querySelector("#addElemBtn");
+addElemBtn.addEventListener("click", addElem);
+
+function addElem() {
+    let myDiv = document.querySelector("#addElem");
+    let elem = document.createElement("p");
+    elem.textContent = "This is my new element!";
+    myDiv.appendChild(elem);
+}
+```
+
+In the example below we are waiting on a button click to fire off our createWordSalad function. We can see we are 
+using querySelector to get both an element with the id of textInput as well as worldSalad. We then create a string 
+that will be manipulated by the value of our user's textInput. We then see an example of the replace string method. 
+This is one of many string methods. This particular one will search for the text in the first parameter and replace 
+it with text in the second parameter. After that we finally set the innerHTML of our wordSalad element to our crazy 
+string we created. 
+```
+let textAreaBtn = document.querySelector("#textAreaBtn");
+textAreaBtn.addEventListener("click", createWordSalad);
+
+function createWordSalad() {
+    let wordSalad = document.querySelector("#wordSalad");
+    let textInput = document.querySelector("#textInput");
+    let str = textInput.value;
+    str = str.replace("the", "Did you ever hear the tragedy of Darth Plagueis The Wise?");
+    str += str.replace("The", "My dog ate my homework.");
+    str += str.replace("or", "Are we there yet?");
+    str += str.replace("and", "That rug really tied the room together.");
+    wordSalad.innerHTML = str;
+}
+```
+
+[Check out more string methods here!](https://www.w3schools.com/js/js_string_methods.asp)
+
+## Async JS
+
+### Event Loop
+JavaScript can be described as synchronous, blocking, or single threaded. Meaning that only one operation can be in progress at any given time. We have a few tools that we can use to try and work around that problem, but we will discuss those a bit later. 
+For now, we need to get to grips with what exactly JavaScript is doing under the hood. There are a few pieces at play here: the call stack, event loop, and message queue.
+The call stack is connected to our message queue by way of our event loop. The event loop’s job is to check if the call stack is empty and, if so, supply the call stack a function from our message queue. Our message queue is a first in, first out structure. 
+As our event loop supplies a function from the message queue, the function gets put into a stack frame. These stack frames get placed into the call stack. This is a structure that is first in, last out. When one function calls another, a new stack frame is placed on top of it. This continues until the inner most function returns, at which point the stack frame is “popped” off of the stack. This will happen for each of the functions until the call stack is empty. This is our single thread of JavaScript in action. 
+Now that we know this process, where does asynchronous behavior fit in? 
+Well, there are certain browser APIs that we have available that handle our asynchronous tasks for us. Some examples would be setTimeout, DOM events, or a XMLHttpRequest. When the JavaScript runtime detects an asynchronous function in the callstack, it returns immediately, and the process continues within the browser API. When that task finishes in the browser API the results are sent to the message queue, where it can then be picked back up by the event loop and make it’s way to the call stack to be processed.
+
+<img src="./img/eventLoop.png"/>
+
+### Callbacks
+A callback is a function that can be passed in as an argument to another function. This allows a function to call another function and the callback can then be run after another function has finished. This was used a lot more in the past with XMLHttpRequests as an example. You would have to define callback functions for success or failure scenarios depending on the data you got back. This could often lead to very nested and ugly looking code that was hard to maintain. Hence, promises. 
+
+### Promises
+Promises give you a pretty big hint of what they do right in the name. They are an action or task that is yet unfulfilled. A promise can go two ways, they can be resolved, or they can be rejected. 
+
+```
+// "Producing Code" (May take some time)
+let myPromise = new Promise(function(myResolve, myReject) {
+
+  myResolve(); // when successful
+  myReject();  // when error
+});
+
+// "Consuming Code" (Must wait for a fulfilled Promise)
+myPromise.then(
+  function(value) { /* code if successful */ } 
+)
+.catch(
+function(error) { /* code if some error */ }
+);
+```
+
+Another example
+```
+let myPromise = new Promise(function(myResolve, myReject) {
+  setTimeout(function() { myResolve("HII !!"); }, 3000);
+});
+
+myPromise.then(function(value) {
+  //do stuff here with value
+});
+```
+### Async/Await
+
+Async and Await are two keywords that we can use that make promises easier to write. Async makes a function return a promise, while await makes a function wait for a promise. These keywords can help us avoid “.then()” nesting. 
+
+```
+async function myAsync() {
+    let myPromise = new Promise(function(myResolve, myReject) {
+        setTimeout(function() { myResolve("HII x2 !!"); }, 3000);
+    });
+
+    let message = await myPromise;
+    console.log(message);
+}
+
+myAsync();
+```
+
+### Fetch API
+
+The Fetch API provides us with a way to interact with and retrieve resources from across the network and from 
+external web services. Fetch is promise based, so it works a bit differently than the older XMLHttpRequest. Let's 
+take a look at an example of using fetch to retireve data from a public API!
+
+```
+function getJoke(category) {
+	fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
+	.then(r => r.json())
+	.then(res => console.log(res.value));
+}
+```
+
+So that's a pretty simple example. Let's break it down. First of all, we are making use of the [chuck norris API](https://api.chucknorris.io/). 
+We can see on the docs for the API (public APIs will provide docs on how to comsume the service) we have info on 
+both the different types of request URLs to access the data, as well as an expected JSON result. We can then use 
+all this information to retrive and display our results. 
+
+Our function takes an input that we are using in our template literal to build the request URL. Next, as we 
+alluded to earlier, fetch will return a promise that we need to handle. So we will make use of the .then() method 
+to take our response and parse the json into a JavaScript object. Once we return that, into another .then() method, 
+we can use our JavaScript object and the value key to retrive the joke. 
+
+Let's take a look at another example below using the PokeAPI. We are going to put multiple concepts we've 
+learned today into practice. We have a simple text input that will take the name of a pokemon. Once we 
+click the submit button, it will retrieve a list of abilities for that pokemon. 
+
+Our HTML:
+```
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>PokeAPI</title>
+        <script src="index.js" defer></script>
+    </head>
+
+    <body>
+        <label for="textInput">Enter Pokemon Name:</label>
+        <input type="text" id="textInput">
+        <button id="btn">Search Pokemon Abilities!</button>
+
+        <h2>Pokemon Abilities:</h2>
+        <div id="myDiv"></div>
+    </body>
+</html>
+```
+
+Our JavaScript:
+```
+document.querySelector('#btn').addEventListener("click", getInfo);
+
+
+async function getInfo() {
+    let pokemon = document.querySelector('#textInput').value;
+    let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+    let parsedRes = await res.json();
+
+    let pokemonAbilities = parsedRes.abilities;
+    for(let i = 0; i < pokemonAbilities.length; i++) {
+        
+        let pElem = document.createElement('p');
+        pElem.innerText = pokemonAbilities[i].ability.name;
+        let myDiv = document.querySelector('#myDiv');
+        myDiv.appendChild(pElem);
     }
-
-The XMLHttpRequest (XHR) object is the heart of our AJAX request, it's common to abbreviate our instantation of this object as xhr.
-
-Each XHR object has an onreadystatechange property that holds a function that is called when the XHR 
-object's readyState property, which indicates the current status of our request, changes. A table 
-explaining the various readyState values is included later in this section, after we have further defined 
-relevant methods, but a readyState value of 4 means that our request has completed and we have received a 
-response from the server. A HTTP status code of 200 means "OK", corresponding to a successful request.
-
-So the anonymous function assigned to the object's onreadystatechange property first checks for a completed and successful call, then executes logic to handle the returned response. In the case of our example, the balldontlie API returns its response in the form of a JSON object (we will not detail JavaScript Object Notation, or JSON, here, but it looks a lot like a JS object literal except all keys/names must be in double quotes). We parse this object for the value that we want - Kevin Durant's 2018 three-point field goal percentage - and log it to the console. Again, the function isn't called when it's defined, rather it's called every time the readyState property of the XHR object changes - no extra work required from us.
-
-The XHR object's open() method creates our request. In total, this function can take five parameters. The first is the HTTP method to use ("GET" in our example). The second is the URL endpoint where our request should be sent. The third is a boolean value indicating whether the request should be asynchronous. Our value of true declares that the request should be asynchronous and this is commonplace - most, if not all, of our use cases for AJAX require or benefit from asynchronicity. The fourth and fifth parameters are a username and password for the server, because the balldontlie API is a public API that does not require authentication, we do not need to specify values for these variables in our example.
-
-Optionally, we can use the setRequestHeader() method to set our request's header values after the request has been initialized with the open() function. setRequestHeader() takes two parameters, a label and a variable, and is commonly used for purposes such as specifying the data format of our request. Finally, the send() method makes the server call.
-
-| readyState | Meaning | When It Occurs |
-| ---------- | ------- | -------------- |
-| 0 | Not Initialized | After the XMLHttpRequest object has been instantiated, but before object's open() method has been called |
-| 1 | Set Up | After the object's open() method has been called, but before its send() method has been called |
-| 2 | Sent | After the object's send() method has been called, but before a line of communication has been established with the server |
-| 3 | In Process | After communication with the server has started, but before the full response has been received from the server |
-| 4 | Completed | After the full response has been received from the server |
-
-To summarize: AJAX allows our JS to make a server call (through the send method), parse the server's response, and optionally update our HTML page with data from that response (the latter two through our onreadystatechange function). Once the request has been sent, our code continues execution _because_ it is asynchronous - it doesn't spend time waiting around for the server to reply.
+}
+```
 
 ## Out of Scope
 
@@ -522,12 +828,3 @@ Some final words of caution: don't use the document.write() method or the eval()
 erases and replaces any existing DOM elements and eval() is a door to malicious code injection.
 
 Alright, now go forth and script!
-
-## Notes for future Ethan
-* Rewrite this a little less verbose if possible
-* need to add: 
-  * classes
-  * modules
-  * decorators
-  * es6+ notations 
-  * string/array/dom manipulation

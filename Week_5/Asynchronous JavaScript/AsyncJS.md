@@ -36,7 +36,7 @@ function(error) { /* code if some error */ }
 Another example
 ```
 let myPromise = new Promise(function(myResolve, myReject) {
-  setTimeout(function() { myResolve("I love You !!"); }, 3000);
+  setTimeout(function() { myResolve("HII !!"); }, 3000);
 });
 
 myPromise.then(function(value) {
@@ -50,7 +50,7 @@ Async and Await are two keywords that we can use that make promises easier to wr
 ```
 async function myAsync() {
     let myPromise = new Promise(function(myResolve, myReject) {
-        setTimeout(function() { myResolve("I love You x2 !!"); }, 3000);
+        setTimeout(function() { myResolve("HII x2 !!"); }, 3000);
     });
 
     let message = await myPromise;
