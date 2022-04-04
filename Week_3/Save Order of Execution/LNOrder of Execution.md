@@ -97,6 +97,30 @@ When creating triggers and processes, we said that it was a best practice to sti
 
 However, if we stick to one trigger, we can determine the order of operations carried out in the code simply by the order of our lines of code. Similarly, our processes will evaluate each criteria node in the order we define them and, unlike workflow rules, the actions we define will be executed in order of their definition as well.
 
+## Let's Make Things Worse
+
+We've already gone into a level of detail on the Save Order of Execution sufficient enough for many certification exams, but let's take that next step. It's time for your author to make a confession: when we were going over the spurs for workflow rules and processes earlier, we didn't quite tell the whole story, so we're going to do so now. Behold the full workflow rule-process spur in all of its monstrous glory:
+
+<p align="center"><img src="img/workflow_rule_process_spur.png"/></p>
+
+Alright, let's verbally explain what's going on here. When the system arrives at what we originally listed as step twelve, it finds all workflow rules whose criteria are met and executes them all at once. After the associated immediate actions have occurred, the system will rerun before-update triggers and most system validation, save the now updated record, and rerun after-update triggers if at least one of those immediate actions changed a field value.
+
+Here's where things start to get tricky - let's consider three cases. First, the case that there aren't any processes with fulfilled criteria nodes and none of the field update actions from the previously executed workflow rules had the `Re-evaluate Workflow Rules After Field Change` checkbox selected. Here, the system will simply move on to executing escalation rules.
+
+Easy enough, right? Time for the second case: there aren't any processes with fulfilled criteria nodes, but at least one of the field update actions executed had the `Re-evaluate Workflow Rules After Field Change` checkbox selected. In these circumstances, the system will follow our red arrow and return to the workflow rules. If there are any workflow rules whose criteria are met but haven't yet executed, they will be executed and the system will progress through the subsequent series of steps through our after-update triggers if at least one of the field update actions changed a field value.
+
+If one of these new field updates had the `Re-evaluate Workflow Rules After Field Change` checkbox selected, the system will again follow our red arrow after the after-update triggers and return to workflow rules, continuing this cycle until it has run out of workflow rules with fulfilled criteria that haven't been executed, none of the field update actions (if there were any) in the prior cycle were configured to reevaluate workflow rules, or it has gone through this cycle a total of six times.
+
+Okay, that was a little more complicated than the first case, but our third case will kick things up another notch: in this case, there are processes with fulfilled criteria nodes. The system will then follow the black arrow after the after-update triggers and find the first such process, execute it and then continue on in our diagram if that process changes a field value.
+
+Here is where we'll have to address another simplification that we made earlier: a process that changes a field value actually reruns every step from before-save flows to auto-response rules - that's before-save flows, before-update triggers, most system validation and validation rules, duplicate rules, the save, after-update triggers, assignment rules, and auto-response rules.
+
+At this point, if there are more other processes with fulfilled criteria, the system will follow our red arrow and return to the process step, execute the actions associated with the fulfilled criteria, and again go through this mini cycle (from before-save flows to auto-response rules) as long as there are processes with fulfilled criteria to be executed. Note that, at this point, these must be _separate_ processes. Even if a process has recursion enabled and its criteria are continually fulfilled, it will not be recursively executed at this time.
+
+Once the system has run out of processes with fulfilled criteria to execute, it will return to workflow rules. Now, any workflow rules with fulfilled criteria that haven't yet been executed will run - regardless of whether any prior field update actions had the `Re-evaluate Workflow Rules After Field Change` checkbox selected.
+
+The system will then go through the cycle that we've described in the entirety of our third case study up to a total of six times or until it runs out of workflow rules with fulfilled criteria that haven't executed, whichever comes first. These subsequent trips through the cycle are where recursive processes can be executed again if their criteria nodes are fulfilled.
+
 ## Transactions
 
 Let's finish this module by discussion transactions and their boundaries. This topic is important because we 
