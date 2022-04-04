@@ -96,7 +96,7 @@ All variables that do not hold one of these six primitive types are objects.
 In order to determine a variable's type, we can use the typeof operator (except for the null type, 
 where the typeof operator is a dirty liar), as below:
 
-```
+```JavaScript
     var a = 5;
 	var b;
 	var c = null;
@@ -116,7 +116,9 @@ where the typeof operator is a dirty liar), as below:
 Operators are the symbols we use to assign a value to a variable, do arithmetic, or evaluate expressions. 
     
 We have already used one assignment operator earlier. 
-```let x = 3;```
+```JavaScript
+let x = 3;
+```
 
 Our arithmetic operators:
   - '+' addition
@@ -147,7 +149,7 @@ let text3 = text1 + " " + text2;
 With the newer versions of JavaScript we can use template literals to avoid heavy string concatenation. Notice 
 the use of backticks instead of quotes, as well as the ${} syntax to place a variable inside. 
 
-```
+```JavaScript
 let name = 'Robert Paulson';
 let str = `His name is ${name}`;
 console.log(str);
@@ -166,7 +168,7 @@ JavaScript Comparison Operators
   - '?' ternary operator
 
 example for ternary operator:
-```
+```JavaScript
 function getFee(isMember) {
 	return (isMember ? '$2.00' : '$10.00');
 }
@@ -195,7 +197,7 @@ JavaScript Type Operators
 JavaScript funcitons are blocks of code that we can define and choose to run as we wish. Take a look at some 
 examples below.
 
-```
+```JavaScript
 function myFunc() {
 	console.log('This is my function!');
 }
@@ -219,7 +221,7 @@ console.log(multiply(5, 3));
 We also have what is known as anonymous functions. These functions do not require a name, they are stored in a 
 variable and invoked when we use the variable name. 
 
-```
+```JavaScript
 const x = function(a,b) {return a * b};
 let z = x(4,3);
 ```
@@ -227,7 +229,7 @@ let z = x(4,3);
 To add to our function toolbox we can also make use of arrow functions. This is a newer syntax and is not supported 
 in IE11 or earlier. Arrow functions allow us to omit the function keyword, the return keyword, and the curly brackets.
 
-```
+```JavaScript
 //normal
 let normalFunction = function(x, y) {
  return x * y;
@@ -248,7 +250,7 @@ Arrow functions are also not hoisted. Meaning they must be defined before they a
 Hosting is an odd quirk of JavaScript. It actually allows for a variable or function to be used before it has 
 been declared. It moves all declarations automatically to the top of the scope.
 
-```
+```JavaScript
 x = 'Hello world!';
 console.log(x);
 var x;
@@ -257,7 +259,7 @@ var x;
 The let and const keywords do not behave this way, however. They are hoisted, but not initialized. The following 
 will produce an error.
 
-```
+```JavaScript
 x = 3;
 let x;
 ```
@@ -265,7 +267,7 @@ let x;
 Note the difference. Hoisting only moves the declaration to the top of the scope, not the initilization itself. 
 So the following will produce: '5 undefined'.
 
-```
+```JavaScript
 var num1 = 5;
 console.log(`${num1} ${num2}`);
 var num2 = 7;
@@ -273,7 +275,7 @@ var num2 = 7;
 
 An example of function hoisting:
 
-```
+```JavaScript
 myFunction("my message");
 
 function myFunction(x) {
@@ -293,7 +295,7 @@ is called an object literal. An object is made up of properties (similar to vari
 and methods (similar to functions, also don't confuse it). The terminology is important when we begin to delve 
 into Object Oriented principles. Let's take a look at an object literal below.
 
-```
+```JavaScript
 // here is an example of the symbol primitive being used 
 const SYMBOLPROPERTY = Symbol('This is a symbol description!');
 
@@ -317,7 +319,7 @@ comma-separated values of different primitive or object data types. JS arrays ha
 be initialized with or without values and with square brackets or the Array constructor (although the latter 
 is not considered a best practice). see below:
 
-```
+```JavaScript
     let h = [1, 3];
     console.log(typeof h); // will print 'object'
     console.log(h.length); // to get size of array
@@ -339,7 +341,7 @@ or repeat code.
 An if statement evaluates the code wrapped in parentheses to either true or false. If true, the 
 code block is executed. If false, nothing is executed.
 
-```
+```JavaScript
 if(conditionToTestIfTrue) {
 		//code to be executed here
 	}
@@ -348,7 +350,7 @@ if(conditionToTestIfTrue) {
 You will often see an if statement used in combination with an else clause. An else clause is a 
 fallback to an if statement and will only get executed if the previous if statement is false.
 
-```
+```JavaScript
 if(conditionToTestIfTrue) {
 		//code to be executed here
 	} else {
@@ -360,7 +362,7 @@ Ff statements can also be combined with an else if clause. This is like an else 
 with its own condition. It will only run if its condition is true, and the previous statement's 
 condition was false.
 
-```
+```JavaScript
 if(conditionToTestIfTrue) {
 		//code to be executed here
 	} else if(conditionToTestIfTrue) {
@@ -374,7 +376,7 @@ The ternary operator is used as a shortcut for the if-else statement. This opera
 condition; if the condition is true, it returns a certain value, otherwise it returns a different 
 value:
 
-```
+```JavaScript
 	conditionToTest ? valueToBeReturnedIfTrue : valueToBeReturnedIfFalse
 ```
 
@@ -386,7 +388,7 @@ block does not end in a break statement, the code will continue execution until 
 statement. The default keyword will run its code block of no other case matches. See the code below 
 for an example:
 
-```
+```JavaScript
     var orderNumber = 1;
     switch(orderNumber){
         /* the switch expression has been evaluated (it's only evaluated once) and the 
@@ -415,7 +417,7 @@ for an example:
 Example of a 'for' loop. We define a variable to be used to increment, the evaulation, and then 
 define our increment itself.
 
-```
+```JavaScript
     var myArray = [];
     for(let i=0; i < myArray.length; i++){
         // iteration code
@@ -424,7 +426,7 @@ define our increment itself.
 
 Example of a 'while' loop. Notice we have to increment inside the loop or we could potentially 
 create an infinite loop.
-```
+```JavaScript
     var a = 0;
     while(a < 5){
         // iteration code
@@ -434,7 +436,7 @@ create an infinite loop.
 
 Example of a 'do-while' loop. Notice how we alsways run the loop once no matter what in our 
 'do' block. Then we evaluate if we should continue with 'while'.
-```
+```JavaScript
     var b = false;
     /* because b is false, this do-while loop will only execute once and stop
     iterating once it checks its condition after the first execution */
@@ -444,7 +446,7 @@ Example of a 'do-while' loop. Notice how we alsways run the loop once no matter 
 ```
 
 Example of a 'for-of' loop. This will iterate over iterable objects. 
-```
+```JavaScript
     const array1 = ['a', 'b', 'c'];
 
 	for (const element of array1) {
@@ -457,7 +459,7 @@ Example of a 'for-of' loop. This will iterate over iterable objects.
 ```
 
 Example of a 'for-in' loop. This iterates over all enumerable properties of an object.
-```
+```JavaScript
 	const object = { a: 1, b: 2, c: 3 };
 
 	for (const property in object) {
@@ -478,7 +480,7 @@ element. Although it is common for the values of these attributes to be function
 define all of the desired functionality in the tag (our code is not enclosed within a function if 
 we do this). See the following button with an output statement tied to the onclick attribute:
 
-```
+```HTML
     <button type="button" onclick="console.log('button clicked');">Hey, I'm a button!</button>
 ```
 
@@ -487,7 +489,7 @@ With internal code, we define our functions in between the opening and closing \
 later add function calls to our event attributes in our elements. Take the following example HTML 
 file:
 
-```
+```HTML
     <!DOCTYPE html>
     <html>
         <head>
@@ -525,7 +527,7 @@ the same as placing our scripts at the end of the body. We also have the 'async'
 download the script in parallel to parsing the page, and then execute as soon as it's available. 
 Your use case will determine the method you use.
 
-```
+```HTML
 <head>
 	<title>My Title</title>
 	<meta charset="utf-8">
@@ -619,6 +621,28 @@ JS has an Event object from which all other event objects (such as the KeyboardE
 
 Lastly, the cancellable property returns a boolean value that indicates if we can cancel an event's default action, at which point we can call the preventDefault() method to stop that action. Note that preventDefault() does not stop event propagation; it only stops the automatic action associated with the HTML element, such as a redirect to a url from an \<a\> element.
 
+## Date functions
+
+Like many other languages, we have a variety of date functioncs we can make use of. Here are some of the most 
+common examples below:
+
+```JavaScript
+const date = new Date();
+console.log(date);
+console.log('Year : ' + date.getFullYear());
+console.log('Month (from 0-11) : ' + date.getMonth());
+console.log('Date (from 1-31) : ' + date.getDate());
+console.log('Day of week (from 0-6) : ' + date.getDay());
+console.log('Hour (from 0-23) : ' + date.getHours());
+console.log('Minutes (from 0-59) : ' + date.getMinutes());
+console.log('Seconds (from 0-59) : ' + date.getSeconds());
+console.log('Milliseconds (from 0-999) : ' + date.getMilliseconds());
+
+// we also have UTC equivalents for universal time
+
+console.log('UTC minutes : ' + date.getUTCMinutes());
+```
+
 ### Putting it all together
 
 Below you can find a couple examples of events being used to manipulate the dom as well as manipulate strings.
@@ -627,7 +651,7 @@ Here we are listening for the click of a button to fire off our addElem function
 being used to retrieve a reference to a div element. We are then creating a paragraph element with JavaScript and 
 insterting some text into that element before appending it to the div we retrieved. 
 
-```
+```JavaScript
 let addElemBtn = document.querySelector("#addElemBtn");
 addElemBtn.addEventListener("click", addElem);
 
@@ -639,13 +663,16 @@ function addElem() {
 }
 ```
 
+While we don't make use of these methods in the above example, we also have ```document.removeChild()``` available to us to remove a 
+html element and ```document.replaceChild(new elemenent here, old element here)``` to replace a html element. 
+
 In the example below we are waiting on a button click to fire off our createWordSalad function. We can see we are 
 using querySelector to get both an element with the id of textInput as well as worldSalad. We then create a string 
 that will be manipulated by the value of our user's textInput. We then see an example of the replace string method. 
 This is one of many string methods. This particular one will search for the text in the first parameter and replace 
 it with text in the second parameter. After that we finally set the innerHTML of our wordSalad element to our crazy 
 string we created. 
-```
+```JavaScript
 let textAreaBtn = document.querySelector("#textAreaBtn");
 textAreaBtn.addEventListener("click", createWordSalad);
 
@@ -681,7 +708,7 @@ A callback is a function that can be passed in as an argument to another functio
 ### Promises
 Promises give you a pretty big hint of what they do right in the name. They are an action or task that is yet unfulfilled. A promise can go two ways, they can be resolved, or they can be rejected. 
 
-```
+```JavaScript
 // "Producing Code" (May take some time)
 let myPromise = new Promise(function(myResolve, myReject) {
 
@@ -699,7 +726,7 @@ function(error) { /* code if some error */ }
 ```
 
 Another example
-```
+```JavaScript
 let myPromise = new Promise(function(myResolve, myReject) {
   setTimeout(function() { myResolve("HII !!"); }, 3000);
 });
@@ -712,7 +739,7 @@ myPromise.then(function(value) {
 
 Async and Await are two keywords that we can use that make promises easier to write. Async makes a function return a promise, while await makes a function wait for a promise. These keywords can help us avoid “.then()” nesting. 
 
-```
+```JavaScript
 async function myAsync() {
     let myPromise = new Promise(function(myResolve, myReject) {
         setTimeout(function() { myResolve("HII x2 !!"); }, 3000);
@@ -731,7 +758,7 @@ The Fetch API provides us with a way to interact with and retrieve resources fro
 external web services. Fetch is promise based, so it works a bit differently than the older XMLHttpRequest. Let's 
 take a look at an example of using fetch to retireve data from a public API!
 
-```
+```JavaScript
 function getJoke(category) {
 	fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
 	.then(r => r.json())
@@ -754,7 +781,7 @@ learned today into practice. We have a simple text input that will take the name
 click the submit button, it will retrieve a list of abilities for that pokemon. 
 
 Our HTML:
-```
+```HTML
 <!DOCTYPE html>
 <html>
 
@@ -775,7 +802,7 @@ Our HTML:
 ```
 
 Our JavaScript:
-```
+```JavaScript
 document.querySelector('#btn').addEventListener("click", getInfo);
 
 

@@ -1,6 +1,16 @@
 # Module - Git & Github
 
+- [Module - Git & Github](#module---git---github)
+  * [Intro to Git & Github](#intro-to-git---github)
+  * [Git Branching](#git-branching)
+  * [Working with Remote Repositories from the Command Line](#working-with-remote-repositories-from-the-command-line)
+  * [Pull Requests](#pull-requests)
+  * [Recipe](#recipe)
+
 [Git Cheat Sheet](https://training.github.com/downloads/github-git-cheat-sheet.pdf)
+[Dangit, Git!?!(https://dangitgit.com/)
+[git_training (UnseenWizard, Github)](https://github.com/UnseenWizzard/git_training)
+
 
 ## Intro to Git & Github
 

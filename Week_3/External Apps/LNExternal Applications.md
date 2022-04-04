@@ -4,15 +4,25 @@ This module covers external email services, Heroku, and factors in determining t
 
 ## Table of Contents
 
-* [External Applications](#external-applications)
+- [Module - External Applications](#module---external-applications)
+  * [Table of Contents](#table-of-contents)
+  * [Helpful References/Links](#helpful-references-links)
+  * [External Applications](#external-applications)
+  * [Heroku](#heroku)
+    + [Heroku](#heroku-1)
+        * [What is heroku](#what-is-heroku)
+        * [What are dynos?](#what-are-dynos-)
+        * [What is salesforce connect?](#what-is-salesforce-connect-)
+        * [What is postgres?](#what-is-postgres-)
+        * [What is apache kafka?](#what-is-apache-kafka-)
+        * [What is redis?](#what-is-redis-)
+        * [What is apache kafka?](#what-is-apache-kafka--1)
+  * [External Email Services](#external-email-services)
+        * [What are the capabilities of Outlook integration?](#what-are-the-capabilities-of-outlook-integration-)
+        * [What are the capabilities of Lightning for Gmail?](#what-are-the-capabilities-of-lightning-for-gmail-)
+    + [Outlook Integration and Gmail Integration](#outlook-integration-and-gmail-integration)
 
 ## Helpful References/Links
-
-
-
-
-
-
 
 * [Outlook and Gmail Integration on Desktop (Salesforce Help)](https://help.salesforce.com/articleView?id=email_int_overview.htm&type=5)
 * [Outlook and Gmail Integration and Inbox Features (Salesforce Help)](https://help.salesforce.com/articleView?id=email_int_features.htm&type=5)
@@ -41,6 +51,7 @@ Let's summarize these distinctions with the following table.
 
 
 ### Heroku
+
 ##### What is heroku
 		Heroku is a platform as a service based on a managed container system with integrated data services. Owned by salesforce, it also features salesforce connect, allowing for easy integration.
 

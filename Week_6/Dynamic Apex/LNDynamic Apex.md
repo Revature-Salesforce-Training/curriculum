@@ -4,11 +4,14 @@ This module introduces dynamic Apex, particularly dynamic SOQL and SOSL.
 
 ## Table of Contents
 
-* [Active Apex](#active-apex)
-* [Dynamic Apex Through the Schema Namespace](#dynamic-apex-through-the-schema-namespace)
-* [Dynamic SOQL](#dynamic-soql)
-* [SOQL Injection](#soql-injection)
-* [Dynamic SOSL](#dynamic-sosl)
+- [Module - Dynamic Apex](#module---dynamic-apex)
+  * [Table of Contents](#table-of-contents)
+    + [Helpful Links/References](#helpful-links-references)
+  * [Active Apex](#active-apex)
+  * [Dynamic Apex Through the Schema Namespace](#dynamic-apex-through-the-schema-namespace)
+  * [Dynamic SOQL](#dynamic-soql)
+  * [SOQL Injection](#soql-injection)
+  * [Dynamic SOSL](#dynamic-sosl)
 
 ### Helpful Links/References
 

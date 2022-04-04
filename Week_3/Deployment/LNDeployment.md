@@ -4,14 +4,17 @@ This module introduces packages and other deployment options.
 
 ## Table of Contents
 
-* [Deployment](#deployment)
-* [Packages](#packages)
-    * [Unmanaged Packages](#unmanaged-packages)
-    * [Managed Packages](#managed-packages)
-* [Change Sets](#change-sets)
-* [Workbench](#workbench)
-* [Ant Migration Tool](#ant-migration-tool)
-* [A Code Coverage Reminder](#a-code-coverage-reminder)
+- [Module - Deployment](#module---deployment)
+  * [Table of Contents](#table-of-contents)
+    + [Helpful References/Links](#helpful-references-links)
+  * [Deployment](#deployment)
+  * [Packages](#packages)
+    + [Unmanaged Packages](#unmanaged-packages)
+    + [Managed Packages](#managed-packages)
+  * [Change Sets](#change-sets)
+  * [Workbench](#workbench)
+  * [Ant Migration Tool](#ant-migration-tool)
+  * [A Code Coverage Reminder](#a-code-coverage-reminder)
 
 ### Helpful References/Links
 

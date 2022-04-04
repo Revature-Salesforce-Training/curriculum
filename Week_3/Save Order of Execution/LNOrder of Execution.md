@@ -2,6 +2,17 @@
 
 This module lists the steps involved in the Order of Execution, considers its consequences, and defines transactions.
 
+- [Module - Order of Execution](#module---order-of-execution)
+    + [Helpful Links/References](#helpful-links-references)
+  * [The Save Order of Execution](#the-save-order-of-execution)
+    + [Spurs](#spurs)
+      - [Workflow Rules](#workflow-rules)
+      - [Processes](#processes)
+      - [After-Save Flows](#after-save-flows)
+      - [Roll-Up Summaries and Cross-Object Workflows](#roll-up-summaries-and-cross-object-workflows)
+  * [Order Within Steps](#order-within-steps)
+  * [Transactions](#transactions)
+  
 ### Helpful Links/References
 
 * [Triggers and the Order of Execution (Apex Developer Guide)](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_triggers_order_of_execution.htm)
