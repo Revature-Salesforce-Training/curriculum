@@ -122,7 +122,7 @@ This is not a complete list of tags that can be used in the `head` of a document
 such as images or hyperlinks can be placed within the `head` and will still render, but it is a best 
 practice to reserve the `head` solely for metadata tags (i.e. those that we have discussed in this section).
 
-```
+```html
 <head>
 	<title>My Title</title>
 	<meta charset="utf-8">

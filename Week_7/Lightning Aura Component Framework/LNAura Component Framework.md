@@ -224,7 +224,7 @@ Reusing the harness app and naming it `harness.app` are only best practices _if_
 
 We've been talking about our ability to embed Aura components in Lightning pages, but _how_ do we do this? We do it by implementing Salesforce-made interfaces. See the `Interfaces` link in the `Helpful References/Links` section for a full list of available interfaces; we will only highlight some common and important ones here. In order to implement an interface in an Aura component, we specify the `implements` attribute with a list of comma-separated interface names within the opening `<aura:component>` tag. See the code below for an example.
 
-```
+```aura
 <aura:component implements="force:appHostable,lightning:availableForFlowActions">
 </aura:component>
 ```
@@ -241,7 +241,7 @@ and we will now make a similar discovery that the Aura framework has an analgous
 denoted by the `<aura:attribute>` tag. Aura attributes are used to store values within the 
 view (i.e. the component file of the component bundle). Let's take a look at an example attribute tag:
 
-```
+```aura
 <aura:attribute name="exampleAtt" type="String" default="This is an example string."/>
 ```
 

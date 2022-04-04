@@ -145,7 +145,7 @@ Controller extensions are custom Apex classes that provide further functionality
 
 To extend a standard controller, create an Apex class whose constructor takes an `ApexPages.StandardController` object as its sole parameter (as in the first class in the below code). To extend a custom controller, create an Apex class whose constructor takes an object of the custom controller class as its sole parameter (as in the second class in the below code, which serves as an extension of the `AccountController` custom controller). Finally, to extend a standard set controller, create an Apex class whose constructor takes an `ApexPages.StandardSetController` object as its sole parameter (as in the third class in the below code).
 
-```
+```java
 public class accountStdExtension {
     public accountStdExtension(ApexPages.StandardController sc){
     }
@@ -167,7 +167,7 @@ If you are extending a standard set controller or standard controller, you can c
 An example in action:
 
 Apex class
-```
+```java
 public class myControllerExtension {
 
     private final Account acct;
@@ -205,7 +205,7 @@ Instead of using the prebuilt standard controller, you can create your own by ma
 
 Because you are no longer using the standard controller, you must declare any record variables as properties of your class and instantiate them with any values that you wish in your constructor. Your class may contain getters, setters, or other actions that you bind to events in your Visualforce page. To save some writing, you can use Apex properties rather than coding your own getters and setters. But if you choose to define your own methods, you they must follow the format `setVariableName` and `getVariableName` (the first letter of the variable name is capital in these methods, regardless of if it is capitalized in the variable name itself). Because Apex class variables default to a private scope, we have to declare them as public as well as declaring a setter and getter for them in order to use them in our pages. Take the following Apex class, which contains an Account variable and a setter and getter method for that variable.
 
-```
+```java
 public class AccountController{
     public Account acc {get{
             if(acc == null){
@@ -221,7 +221,7 @@ public class AccountController{
 
 As you can see from the above code, another consequence of using a custom controller instead of a standard one is that we perform record retrieval ourselves using SOQL queries. Similarly, we can use DML to change/insert records. But we also have the option to instantiate and use the `StandardController` class within our class by passing it an instance of the object on which our controller is acting. For an example, see the following custom controller, which is used in a Visualforce page placed in a webpage that has a record Id in the url. It retrieves the corresponding record by way of the standard controller (note that we must type cast the returned object because the standard controller returns an instance of the `sObject` class).
 
-```
+```java
 public class AccountController{
     public Account acc{get; set;}
 
@@ -290,7 +290,7 @@ The above code demonstrates the use of many of the concepts we've discussed so f
 
 To achieve the same functionality when using a custom controller, write a save function that follows the format of the following Apex code:
 
-```
+```java
 public void saveRecord(){
     try{
         upsert acc;
@@ -427,7 +427,7 @@ Wrapper classes are a special type of Apex class that is used to collect multipl
 
 And the accompanying custom list controller:
 
-```
+```java
 public class AccountSetController {
     public List<Account> accs {get;set;}
 
@@ -511,7 +511,7 @@ To illustrate, let's create a wizard with three pages: `harryPotter.vfp`, `volde
 
 And the associated Apex controller:
 
-```
+```java
 public class WizardController {
     public PageReference harry(){
         return Page.harryPotter;
@@ -533,7 +533,7 @@ There are two parts to testing Visualforce: viewing the markup and writing test 
 
 To test the Apex code, follow all of the principles we discussed in the `Apex Testing Framework` module. Note that your test method should begin with the following lines of code to associate the testing environment with the desired Visualforce page:
 
-```
+```java
 PageReference pageRef = Page.myVisualforcePageName;
 Test.setCurrentPage(pageRef)
 ```
@@ -572,7 +572,7 @@ We can dynamically instantiate Visualforce components by using the `<apex:dynami
 
 And the associated Apex class:
 
-```
+```java
 public class DynamicController {
     public Component.Apex.OutputText getBeforeAfterNoon(){
         if(DateTime.now().hour() >= 12){

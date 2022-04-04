@@ -39,7 +39,7 @@ DescribeSObjectResult will net us info about our objects. Let's take a look at t
 
 We have a coulple ways of going about getting our information. Either through the use of a token and 
 a method (getDescribe) or through the use of a static variable. Let's look at both ways:
-```
+```java
 //using the Account.sObjectType token with the getDescribe method
 Schema.DescribeSObjectResult dsr = Account.sObjectType.getDescribe();
 
@@ -52,7 +52,7 @@ looking at the fields of our object. (We will return to other methods later.) No
 we can use the fields member variable to get information about a particular field. This will return 
 for us an instance of a DescribeFieldResult.
 
-```
+```java
 public static void getAccountIndustries() {
 		Schema.DescribeFieldResult fr = Schema.SObjectType.Account.fields.Industry;
 
@@ -99,7 +99,7 @@ get around this restriction.
 
 Let's take a look at an example:
 
-```
+```java
 public static List<Contact> dynSoql(String searchTerm) {
 
         String query = 'SELECT Id FROM Contact WHERE Name =: searchTerm';
@@ -136,7 +136,7 @@ Database.query() instead. In this case, we'd turn to another option - the String
 single quotes in the string it receives, ensuring that the entire user input will be treated again as a single string. 
 
 
-```
+```java
 public static List<Contact> dynSoql(String searchTerm) {
 
 		String sanitizedSearchTerm = String.escapeSingleQuotes(searchTerm);
@@ -166,7 +166,7 @@ This search string is enclosed by single quotes, rather than square brackets, so
 surrounding value after the `FIND` clause. As always, enabling custom user input opens the door for malicious code, so we should be sure to protect against SOSL injection, which 
 we can do through the methods we discussed for stopping SOQL injection above.
 
-```
+```java
 public static List<List<sObject>> dynSosl(String searchTerm) {
         
         String sanitizedSearchTerm = String.escapeSingleQuotes(searchTerm);

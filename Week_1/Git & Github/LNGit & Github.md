@@ -8,7 +8,7 @@
   * [Recipe](#recipe)
 
 [Git Cheat Sheet](https://training.github.com/downloads/github-git-cheat-sheet.pdf)
-[Dangit, Git!?!(https://dangitgit.com/)
+[Dangit, Git!?!](https://dangitgit.com/)
 [git_training (UnseenWizard, Github)](https://github.com/UnseenWizzard/git_training)
 
 
@@ -42,14 +42,14 @@ We can change the name and email that is associated with your Git commits using 
 
 To set this globally, meaning for every repository on your computer, execute the following command:
 
-```
+```bash
 git config --global user.name "YOUR NAME"
 git config --global user.email "email@example.com"
 ```
 
 And to change these settings for a single repository:
 
-```
+```bash
 git config user.name "YOUR NAME"
 git config user.email "email@example.com"
 
