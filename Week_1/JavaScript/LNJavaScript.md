@@ -121,22 +121,22 @@ let x = 3;
 ```
 
 Our arithmetic operators:
-  - '+' addition
-  - '-' subtraction
-  - '*' multiplication
-  - '**' exponentiation
-  - '/' division
-  - '%' modulus (division remainder)
-  - '++' increment (increase value by 1)
-  - '--'decrement (decrese value by 1)
+  - ```+``` addition
+  - ```-``` subtraction
+  - ```*``` multiplication
+  - ```**``` exponentiation
+  - ```/``` division
+  - ```%``` modulus (division remainder)
+  - ```++``` increment (increase value by 1)
+  - ```--``` decrement (decrese value by 1)
 
 The other assigment operators: 
-  - '+='  example: x+=y same as x = x + y
-  - '-='  example: x-=y same as x = x - y
-  - '*='  example: x*=y same as x = x * y
-  - '/='  example: x/=y same as x = x / y
-  - '%='  example: x%=y same as x = x % y
-  - '**=' example: x**=y same as x = x ** y
+  - ```+=```  example: ```x+=y``` same as ```x = x + y```
+  - `-=```  example: ```x-=y``` same as ```x = x - y```
+  - ```*=``` example: ```x/*=y``` same as ```x = x * y```
+  - ```/=```  example: ```x/=y``` same as ```x = x / y```
+  - ```%=```  example: ```x%=y``` same as ```x = x % y```
+  - ```**=``` example: ```x/**=y``` same as ```x = x /** y```
 
 String Operators (this is called concatenation)
 
@@ -157,15 +157,15 @@ console.log(str);
 
 JavaScript Comparison Operators
 
-  - '==' equal to
-  - '===' equal to and equal data type
-  - '!=' not equal
-  - '!==' not equal value or not equal type
-  - '>' greater than 
-  - '<' less than
-  - '>=' greater than or equal to
-  - '<=' less than or equal to
-  - '?' ternary operator
+  - ```==``` equal to
+  - ```===``` equal to and equal data type
+  - ```!=``` not equal
+  - ```!==``` not equal value or not equal type
+  - ```>``` greater than 
+  - ```<``` less than
+  - ```>=``` greater than or equal to
+  - ```<=``` less than or equal to
+  - ```?``` ternary operator
 
 example for ternary operator:
 ```JavaScript
