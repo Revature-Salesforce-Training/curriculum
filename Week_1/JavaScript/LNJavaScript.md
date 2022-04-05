@@ -132,11 +132,11 @@ Our arithmetic operators:
 
 The other assigment operators: 
   - ```+=```  example: ```x+=y``` same as ```x = x + y```
-  - `-=```  example: ```x-=y``` same as ```x = x - y```
-  - ```*=``` example: ```x/*=y``` same as ```x = x * y```
+  - ```-=```  example: ```x-=y``` same as ```x = x - y```
+  - ```*=``` example: ```x*=y``` same as ```x = x * y```
   - ```/=```  example: ```x/=y``` same as ```x = x / y```
   - ```%=```  example: ```x%=y``` same as ```x = x % y```
-  - ```**=``` example: ```x/**=y``` same as ```x = x /** y```
+  - ```**=``` example: ```x**=y``` same as ```x = x ** y```
 
 String Operators (this is called concatenation)
 
