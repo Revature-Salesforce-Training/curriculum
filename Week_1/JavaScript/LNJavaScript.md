@@ -573,17 +573,17 @@ file:
 ```HTML
 <!DOCTYPE html>
 <html>
-	<head>
-		<script>
-			function buttonClicked(){
-				console.log('button clicked');
-			}
-		</script>
-	</head>
-	<body>
-		<button type="button" onclick="buttonClicked()">Hey, I'm a button!
-		</button>
-	</body>
+  <head>
+    <script>
+	  function buttonClicked(){
+        console.log('button clicked');
+	  }
+    </script>
+  </head>
+  <body>
+    <button type="button" onclick="buttonClicked()">Hey, I'm a button!
+    </button>
+  </body>
 </html>
 ```
 
@@ -610,12 +610,12 @@ Your use case will determine the method you use.
 
 ```HTML
 <head>
-	<title>My Title</title>
-	<meta charset="utf-8">
-	<meta name="description" content="Place the meta description text here.">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="path/to/css/file">
-	<script src="demo_defer.js" defer></script>
+  <title>My Title</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Place the meta description text here.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="path/to/css/file">
+  <script src="demo_defer.js" defer></script>
 </head>
 ```
 
@@ -669,10 +669,10 @@ no need to specify the defer attribute or move the script element to the bottom 
 ```HTML
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Module Example</title>
-        <script type="module" src="index.js"></script>
-    </head>
+  <head>
+    <title>Module Example</title>
+    <script type="module" src="index.js"></script>
+  </head>
 </html>
 ```
 
@@ -780,13 +780,13 @@ The Document Object Model (DOM) is the World Wide Web Consortium (W3C) standard 
 ```HTML
 <!DOCTYPE html>
 <html>
-	<head></head>
-	<body>
-		<div class="contentBlock">
-			<p class="contentSection" id="jobDescription"></p>
-			<p class="contentSection" id="jobQualifications"></p>
-		</div>
-	</body>
+  <head></head>
+  <body>
+    <div class="contentBlock">
+	  <p class="contentSection" id="jobDescription"></p>
+	  <p class="contentSection" id="jobQualifications"></p>
+    </div>
+  </body>
 </html>
 ```
 
@@ -1039,19 +1039,19 @@ Our HTML:
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>PokeAPI</title>
-        <script src="index.js" defer></script>
-    </head>
+  <head>
+    <title>PokeAPI</title>
+    <script src="index.js" defer></script>
+  </head>
 
-    <body>
-        <label for="textInput">Enter Pokemon Name:</label>
-        <input type="text" id="textInput">
-        <button id="btn">Search Pokemon Abilities!</button>
+  <body>
+    <label for="textInput">Enter Pokemon Name:</label>
+    <input type="text" id="textInput">
+    <button id="btn">Search Pokemon Abilities!</button>
 
-        <h2>Pokemon Abilities:</h2>
-        <div id="myDiv"></div>
-    </body>
+    <h2>Pokemon Abilities:</h2>
+    <div id="myDiv"></div>
+  </body>
 </html>
 ```
 
