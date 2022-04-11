@@ -114,18 +114,18 @@ In order to determine a variable's type, we can use the typeof operator (except 
 where the typeof operator is a dirty liar), as below:
 
 ```JavaScript
-    var a = 5;
-	var b;
-	var c = null;
-	
-	//will print 'number'
-    console.log(typeof(a));
-	
-	//will print 'undefined'
-	console.log(typeof(b));
-	
-	//will print 'object'
-	console.log(typeof(c));
+var a = 5;
+var b;
+var c = null;
+
+//will print 'number'
+console.log(typeof(a));
+
+//will print 'undefined'
+console.log(typeof(b));
+
+//will print 'object'
+console.log(typeof(c));
 ```
 
 ## JavaScript Operators
@@ -187,7 +187,7 @@ JavaScript Comparison Operators
 example for ternary operator:
 ```JavaScript
 function getFee(isMember) {
-	return (isMember ? '$2.00' : '$10.00');
+  return (isMember ? '$2.00' : '$10.00');
 }
 
 console.log(getFee(true));
@@ -216,7 +216,7 @@ examples below.
 
 ```JavaScript
 function myFunc() {
-	console.log('This is my function!');
+  console.log('This is my function!');
 }
 
 //we can call it and have it run like so:
@@ -224,11 +224,11 @@ myFunc();
 
 //we can pass values into our functions to be used as we see fit:
 function multiply(a, b) {
-	//functions can call other functions
-	//myFunc();
+  //functions can call other functions
+  //myFunc();
 	
-	//notice we can output the results of our funciton using the return keyword
-	return a * b;
+  //notice we can output the results of our funciton using the return keyword
+  return a * b;
 }
 
 // in this case 5 is 'a' and 3 is 'b'. 15 will display in the console.
@@ -249,7 +249,7 @@ in IE11 or earlier. Arrow functions allow us to omit the function keyword, the r
 ```JavaScript
 //normal
 let normalFunction = function(x, y) {
- return x * y;
+  return x * y;
 }
 
 //arrow function
@@ -296,7 +296,7 @@ An example of function hoisting:
 myFunction("my message");
 
 function myFunction(x) {
-	console.log(x);
+  console.log(x);
 }
 ```
 
@@ -317,12 +317,12 @@ into Object Oriented principles. Let's take a look at an object literal below.
 const SYMBOLPROPERTY = Symbol('This is a symbol description!');
 
 let myObj = {
-    myProperty: 4,
-    myOtherProperty: 'We can store all kinds of data types',
-    [SYMBOLPROPERTY]: 'This value is paired with a symbol key',
-    myMethod: () => {
-        console.log('This is a method called from an object literal!');
-    }
+  myProperty: 4,
+  myOtherProperty: 'We can store all kinds of data types',
+  [SYMBOLPROPERTY]: 'This value is paired with a symbol key',
+  myMethod: () => {
+    console.log('This is a method called from an object literal!');
+  }
 }
 
 // we can access our objects properties and method like so
@@ -337,9 +337,9 @@ be initialized with or without values and with square brackets or the Array cons
 is not considered a best practice). see below:
 
 ```JavaScript
-    let h = [1, 3];
-    console.log(typeof h); // will print 'object'
-    console.log(h.length); // to get size of array
+let h = [1, 3];
+console.log(typeof h); // will print 'object'
+console.log(h.length); // to get size of array
 ```
 
 ## JavaScript Classes
@@ -349,24 +349,24 @@ Let's take a look at some examples to get a feel for how classes work.
 
 ```JavaScript
 class Car {
-	constructor(name, year, miles){
-		this.name = name;
-		this._year = year;
-		this.miles = miles;
-	}
-	
-	get age() {
-		const n = new Date();
-		return `The car is ${n.getFullYear() - this._year} year(s) old!`;
-	}
-	
-	set year(year) {
-		this._year = year;
-	}
-	
-	odometerAdd(distance) {
-		this.miles += distance;
-	}
+  constructor(name, year, miles){
+    this.name = name;
+    this._year = year;
+    this.miles = miles;
+  }
+
+  get age() {
+    const n = new Date();
+    return `The car is ${n.getFullYear() - this._year} year(s) old!`;
+  }
+
+  set year(year) {
+    this._year = year;
+  }
+
+  odometerAdd(distance) {
+    this.miles += distance;
+  }
 }
 ```
 
@@ -424,8 +424,8 @@ code block is executed. If false, nothing is executed.
 
 ```JavaScript
 if(conditionToTestIfTrue) {
-		//code to be executed here
-	}
+  //code to be executed here
+}
 ```
 
 You will often see an if statement used in combination with an else clause. An else clause is a 
@@ -433,10 +433,10 @@ fallback to an if statement and will only get executed if the previous if statem
 
 ```JavaScript
 if(conditionToTestIfTrue) {
-		//code to be executed here
-	} else {
-		//code to execute if condition was false
-	}
+  //code to be executed here
+} else {
+  //code to execute if condition was false
+}
 ```
 
 Ff statements can also be combined with an else if clause. This is like an else statement, but 
@@ -445,12 +445,12 @@ condition was false.
 
 ```JavaScript
 if(conditionToTestIfTrue) {
-		//code to be executed here
-	} else if(conditionToTestIfTrue) {
-		//code to execute if first condition was false
-	} else {
-		//code to execute if both were false
-	}
+  //code to be executed here
+} else if(conditionToTestIfTrue) {
+  //code to execute if first condition was false
+} else {
+  //code to execute if both were false
+}
 ```
 
 The ternary operator is used as a shortcut for the if-else statement. This operator tests a 
@@ -458,7 +458,7 @@ condition; if the condition is true, it returns a certain value, otherwise it re
 value:
 
 ```JavaScript
-	conditionToTest ? valueToBeReturnedIfTrue : valueToBeReturnedIfFalse
+conditionToTest ? valueToBeReturnedIfTrue : valueToBeReturnedIfFalse
 ```
 
 
@@ -470,27 +470,27 @@ statement. The default keyword will run its code block of no other case matches.
 for an example:
 
 ```JavaScript
-    var orderNumber = 1;
-    switch(orderNumber){
-        /* the switch expression has been evaluated (it's only evaluated once) and the 
-        value 1 has replaced the expression orderNumber for equality checks */
-        
-        case 1:
-            console.log('Ordered a hot dog.');
-        case 2:
-            /* perhaps we are running a promotion where every hot dog comes with a 
-            free side of fries, in which case we would not want to have the first case
-            end in a break statement */
-            console.log('Ordered fries.');
-            break;
-        case 3:
-            /* the break statement after the second case ensures that any number 1 or
-            2 orders will not continue execution into this case */
-            console.log('Ordered a hamburger.');
-            break;
-        default:
-            console.log('Unknown order.');
-    }
+var orderNumber = 1;
+switch(orderNumber){
+  /* the switch expression has been evaluated (it's only evaluated once) and the 
+  value 1 has replaced the expression orderNumber for equality checks */
+	
+  case 1:
+	console.log('Ordered a hot dog.');
+  case 2:
+	/* perhaps we are running a promotion where every hot dog comes with a 
+	free side of fries, in which case we would not want to have the first case
+	end in a break statement */
+	console.log('Ordered fries.');
+	break;
+  case 3:
+	/* the break statement after the second case ensures that any number 1 or
+	2 orders will not continue execution into this case */
+	console.log('Ordered a hamburger.');
+	break;
+  default:
+	console.log('Unknown order.');
+}
 ```
 
 ## Loops
@@ -499,58 +499,58 @@ Example of a 'for' loop. We define a variable to be used to increment, the evaul
 define our increment itself.
 
 ```JavaScript
-    var myArray = [];
-    for(let i=0; i < myArray.length; i++){
-        // iteration code
-    }
+var myArray = [];
+for(let i=0; i < myArray.length; i++){
+  // iteration code
+}
 ```
 
 Example of a 'while' loop. Notice we have to increment inside the loop or we could potentially 
 create an infinite loop.
 ```JavaScript
-    var a = 0;
-    while(a < 5){
-        // iteration code
-        a++;
-    }
+var a = 0;
+while(a < 5){
+  // iteration code
+  a++;
+}
 ```
 
 Example of a 'do-while' loop. Notice how we alsways run the loop once no matter what in our 
 'do' block. Then we evaluate if we should continue with 'while'.
 ```JavaScript
-    var b = false;
-    /* because b is false, this do-while loop will only execute once and stop
-    iterating once it checks its condition after the first execution */
-    do{
-        // iteration code
-    } while(b);
+var b = false;
+/* because b is false, this do-while loop will only execute once and stop
+iterating once it checks its condition after the first execution */
+do{
+  // iteration code
+} while(b);
 ```
 
 Example of a 'for-of' loop. This will iterate over iterable objects. 
 ```JavaScript
-    const array1 = ['a', 'b', 'c'];
+const array1 = ['a', 'b', 'c'];
 
-	for (const element of array1) {
-	  console.log(element);
-	}
+for (const element of array1) {
+  console.log(element);
+}
 
-	// expected output: "a"
-	// expected output: "b"
-	// expected output: "c"
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
 ```
 
 Example of a 'for-in' loop. This iterates over all enumerable properties of an object.
 ```JavaScript
-	const object = { a: 1, b: 2, c: 3 };
+const object = { a: 1, b: 2, c: 3 };
 
-	for (const property in object) {
-	  console.log(property + ': ' + object[property]);
-	}
+for (const property in object) {
+  console.log(property + ': ' + object[property]);
+}
 
-	// expected output:
-	// "a: 1"
-	// "b: 2"
-	// "c: 3"
+// expected output:
+// "a: 1"
+// "b: 2"
+// "c: 3"
 ```
 
 ## Running JavaScript in HTML
@@ -562,7 +562,7 @@ define all of the desired functionality in the tag (our code is not enclosed wit
 we do this). See the following button with an output statement tied to the onclick attribute:
 
 ```HTML
-    <button type="button" onclick="console.log('button clicked');">Hey, I'm a button!</button>
+<button type="button" onclick="console.log('button clicked');">Hey, I'm a button!</button>
 ```
 
 Internal and external JavaScript both make use of the \<script\> tag (a non-self-closing tag). 
@@ -571,20 +571,20 @@ later add function calls to our event attributes in our elements. Take the follo
 file:
 
 ```HTML
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <script>
-                function buttonClicked(){
-                    console.log('button clicked');
-                }
-            </script>
-        </head>
-        <body>
-            <button type="button" onclick="buttonClicked()">Hey, I'm a button!
-            </button>
-        </body>
-    </html>
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			function buttonClicked(){
+				console.log('button clicked');
+			}
+		</script>
+	</head>
+	<body>
+		<button type="button" onclick="buttonClicked()">Hey, I'm a button!
+		</button>
+	</body>
+</html>
 ```
 
 Recall that only the \<!DOCTYPE html\> line is required for all non-HTML5 pages, the rest 
@@ -659,7 +659,7 @@ a special type of function, so we can export those as well.
 ```JavaScript
 export const name = "john";
 export function myFunc() {
-	console.log('This is a function from my module!');
+  console.log('This is a function from my module!');
 }
 ```
 
@@ -681,7 +681,7 @@ often used to provide a default function/class from the module. Let's take a loo
 
 ```JavaScript
 export default function() {
-	//code
+  //code
 }
 ```
 
@@ -705,8 +705,8 @@ extra information describing various access to a property. Let's take a look at 
 
 ```JavaScript
 const car = {
-	topMilesPerHour : 130,
-	makeAndModel : 'Mitsubishi Lancer'
+  topMilesPerHour : 130,
+  makeAndModel : 'Mitsubishi Lancer'
 };
 
 console.log(Object.getOwnPropertyDescriptor(car, 'makeAndModel'));
@@ -715,10 +715,10 @@ console.log(Object.getOwnPropertyDescriptor(car, 'makeAndModel'));
 The console.log will print:
 
 {
-	configurable: true,
-	enumerable: true,
-	value: 'Mitsubishi Lancer',
-	writable: true
+  configurable: true,
+  enumerable: true,
+  value: 'Mitsubishi Lancer',
+  writable: true
 }
 
 */
@@ -734,8 +734,8 @@ Possible values:
 If we wish to set one of our property descriptions, we can do it like so:
 ```JavaScript
 Object.defineProperty(car, 'topMilesPerHour', {
-	writable: false,
-	value: 140
+  writable: false,
+  value: 140
 });
 ```
 
@@ -746,8 +746,8 @@ Let's write a decorator now that has the same functionality.
 Creating our decorator:
 ```JavaScript
 function readOnly(target, key, descriptor) {
-	descriptor.writable = false;
-	return descriptor;
+  descriptor.writable = false;
+  return descriptor;
 }
 ```
 
@@ -764,9 +764,9 @@ of the descriptor with our changes.
 Our class:
 ```JavaScript
 class car = {
-	@readOnly
-	topMilesPerHour : 130,
-	makeAndModel : 'Mitsubishi Lancer',
+  @readOnly
+  topMilesPerHour : 130,
+  makeAndModel : 'Mitsubishi Lancer',
 };
 ```
 
@@ -777,17 +777,18 @@ without modifying the original functionality.
 ## The DOM
 
 The Document Object Model (DOM) is the World Wide Web Consortium (W3C) standard for accessing documents - there is a core DOM, an XML DOM, and the HTML DOM. The last one will be our focus here - it's how our JavaScript can interact with and manipulate our HTML and CSS. In the HTML DOM, the Document is the html page/browser, the Objects are the elements in that page, and the Model is the way in which we access, interact with, change, add, and delete our elements. The DOM for any given HTML page can be represented by an object tree with individual nodes for each object. The root of this tree is the document object, i.e. the \<html\> tag (the window object represents the browser and contains the entire document). Let's write an example HTML file and then represent its DOM below (we'll refer back to this file throughout the remainder of this section):
-
-    <!DOCTYPE html>
-    <html>
-        <head></head>
-        <body>
-            <div class="contentBlock">
-                <p class="contentSection" id="jobDescription"></p>
-                <p class="contentSection" id="jobQualifications"></p>
-            </div>
-        </body>
-    </html>
+```HTML
+<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+		<div class="contentBlock">
+			<p class="contentSection" id="jobDescription"></p>
+			<p class="contentSection" id="jobQualifications"></p>
+		</div>
+	</body>
+</html>
+```
 
 <p align="center"><img src="img/dom_diagram.png"/></p>
 
@@ -823,9 +824,11 @@ Let's take a look at figures of the order in which elements in the HTML file fro
 
 Now that we have discussed propagation, we can return to the addEventListener and removeEventListener methods. Each take three parameters: the type of event to be handled, the code to execute when the event occurs (usually this is a function call, but it does not have to be - it can be an anonymous function; however, a function call is preferred to promote abstraction and code reusability), and whether to use capturing or bubbling. The third parameter, useCapture, is a boolean that defaults to false, meaning that bubbling is the default propagation method. It is common practice to pair these methods with the DOM selection methods we touched on earlier in order to retrieve and add/remove listeners easily. Let's look at some examples of these methods using elements from our HTML file we wrote in The DOM section:
 
-    document.querySelector("div.contentBlock").addEventListener("mouseover", handleDivHover);
-    document.querySelector("#jobDescription").addEventListener("mouseover", handleParHover);
-    document.querySelector("#jobDescription").removeEventListener("mouseover", handleParHover);
+```JavaScript
+document.querySelector("div.contentBlock").addEventListener("mouseover", handleDivHover);
+document.querySelector("#jobDescription").addEventListener("mouseover", handleParHover);
+document.querySelector("#jobDescription").removeEventListener("mouseover", handleParHover);
+```
 
 **Note**: We do not follow up the function names with parenthesis as we do not want to call it yet, just provide the reference to it.
 
@@ -872,10 +875,10 @@ let addElemBtn = document.querySelector("#addElemBtn");
 addElemBtn.addEventListener("click", addElem);
 
 function addElem() {
-    let myDiv = document.querySelector("#addElem");
-    let elem = document.createElement("p");
-    elem.textContent = "This is my new element!";
-    myDiv.appendChild(elem);
+  let myDiv = document.querySelector("#addElem");
+  let elem = document.createElement("p");
+  elem.textContent = "This is my new element!";
+  myDiv.appendChild(elem);
 }
 ```
 
@@ -894,14 +897,14 @@ let textAreaBtn = document.querySelector("#textAreaBtn");
 textAreaBtn.addEventListener("click", createWordSalad);
 
 function createWordSalad() {
-    let wordSalad = document.querySelector("#wordSalad");
-    let textInput = document.querySelector("#textInput");
-    let str = textInput.value;
-    str = str.replace(/ +the +/, " Did you ever hear the tragedy of Darth Plagueis The Wise? ");
-    str = str.replace(/ *The +/, " My dog ate my homework. ");
-    str = str.replace(/ +or +/, " Are we there yet? ");
-    str = str.replace(/ +and +/, " That rug really tied the room together. ");
-    wordSalad.textContent = str;
+  let wordSalad = document.querySelector("#wordSalad");
+  let textInput = document.querySelector("#textInput");
+  let str = textInput.value;
+  str = str.replace(/ +the +/, " Did you ever hear the tragedy of Darth Plagueis The Wise? ");
+  str = str.replace(/ *The +/, " My dog ate my homework. ");
+  str = str.replace(/ +or +/, " Are we there yet? ");
+  str = str.replace(/ +and +/, " That rug really tied the room together. ");
+  wordSalad.textContent = str;
 }
 ```
 
@@ -972,7 +975,7 @@ myPromise.then(
   function(value) { /* code if successful */ } 
 )
 .catch(
-function(error) { /* code if some error */ }
+  function(error) { /* code if some error */ }
 );
 ```
 
@@ -992,12 +995,12 @@ Async and Await are two keywords that we can use that make promises easier to wr
 
 ```JavaScript
 async function myAsync() {
-    let myPromise = new Promise(function(myResolve, myReject) {
-        setTimeout(function() { myResolve("HII x2 !!"); }, 3000);
-    });
+  let myPromise = new Promise(function(myResolve, myReject) {
+    setTimeout(function() { myResolve("HII x2 !!"); }, 3000);
+  });
 
-    let message = await myPromise;
-    console.log(message);
+  let message = await myPromise;
+  console.log(message);
 }
 
 myAsync();
@@ -1011,9 +1014,9 @@ take a look at an example of using fetch to retireve data from a public API!
 
 ```JavaScript
 function getJoke(category) {
-	fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
-	.then(r => r.json())
-	.then(res => console.log(res.value));
+  fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
+  .then(r => r.json())
+  .then(res => console.log(res.value));
 }
 ```
 
@@ -1058,18 +1061,18 @@ document.querySelector('#btn').addEventListener("click", getInfo);
 
 
 async function getInfo() {
-    let pokemon = document.querySelector('#textInput').value;
-    let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
-    let parsedRes = await res.json();
-	let myDiv = document.querySelector('#myDiv');
-	myDiv.innerHTML = "";
-    let pokemonAbilities = parsedRes.abilities;
-    for(let i = 0; i < pokemonAbilities.length; i++) {
-        
-        let pElem = document.createElement('p');
-        pElem.innerText = pokemonAbilities[i].ability.name;
-        myDiv.appendChild(pElem);
-    }
+  let pokemon = document.querySelector('#textInput').value;
+  let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+  let parsedRes = await res.json();
+  let myDiv = document.querySelector('#myDiv');
+  myDiv.innerHTML = "";
+  let pokemonAbilities = parsedRes.abilities;
+  for(let i = 0; i < pokemonAbilities.length; i++) {
+	
+    let pElem = document.createElement('p');
+    pElem.innerText = pokemonAbilities[i].ability.name;
+    myDiv.appendChild(pElem);
+  }
 }
 ```
 
