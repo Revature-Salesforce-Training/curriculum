@@ -4,23 +4,40 @@ This module introduces JavaScript, and many other related topics.
 
 ## Table of Contents
 
-* [JavaScript for Aura Component Developers](#javascript-for-aura-component-developers)
-* [JavaScript Introduction](#javascript-introduction)
-  * [JavaScript Comments and Printing to the Console](#javascript-comments-and-printing-to-the-console)
-  * [JavaScript Variables](#javascript-variables)
+- [Module - JavaScript](#module---javascript)
+  * [Table of Contents](#table-of-contents)
+  * [Helpful References/Links](#helpful-references-links)
+  * [JavaScript Introduction](#javascript-introduction)
+    + [JavaScript Comments and Printing to the Console](#javascript-comments-and-printing-to-the-console)
+  * [JavaScript Variables, data types, and scope](#javascript-variables--data-types--and-scope)
+  * [JavaScript Operators](#javascript-operators)
+  * [JavaScript Functions](#javascript-functions)
+    + [Wait, explain hoisting?](#wait--explain-hoisting-)
+  * [JavaScript Objects](#javascript-objects)
+  * [JavaScript Classes](#javascript-classes)
   * [Falsy Values](#falsy-values)
   * [JavaScript Control Flow](#javascript-control-flow)
-* [Running JavaScript in HTML](#running-javascript-in-html)
-* [The JavaScript Browser Console](#the-javascript-browser-console)
-* [The DOM](#the-dom)
-* [Events and Event Listeners](#events-and-event-listeners)
-  * [Event Propagation](#event-propagation)
-  * [Adding and Removing Event Listeners](#adding-and-removing-event-listeners)
-* [The Event Object](#the-event-object)
-* [AJAX](#ajax)
-* [Out of Scope](#out-of-scope)
+  * [Loops](#loops)
+  * [Running JavaScript in HTML](#running-javascript-in-html)
+  * [The JavaScript Browser Console](#the-javascript-browser-console)
+  * [JavaScript Modules](#javascript-modules)
+  * [JavaScript Decorators](#javascript-decorators)
+  * [The DOM](#the-dom)
+  * [Events and Event Listeners](#events-and-event-listeners)
+    + [Event Propagation](#event-propagation)
+    + [Adding and Removing Event Listeners](#adding-and-removing-event-listeners)
+    + [The Event Object](#the-event-object)
+  * [Date functions](#date-functions)
+  * [Putting it all together - String and DOM manipulation](#putting-it-all-together---string-and-dom-manipulation)
+  * [Async JS](#async-js)
+    + [Event Loop](#event-loop)
+    + [Callbacks](#callbacks)
+    + [Promises](#promises)
+    + [Async/Await](#async-await)
+    + [Fetch API](#fetch-api)
+  * [Out of Scope](#out-of-scope)
 
-### Helpful References/Links
+## Helpful References/Links
 
 * [JavaScript Data Types (w3schools)](https://www.w3schools.com/js/js_datatypes.asp)
 * [Data types (JavaScript.info)](https://javascript.info/types)
@@ -67,7 +84,7 @@ a time by the interpreter (the browser in the case of JavaScript).
 JS has single-line and block comments, with single line comments prepended by // and block comments 
 wrapped within /* and */. The console.log() function allows us to print output to the console.
 
-### JavaScript Variables, data types, and scope
+## JavaScript Variables, data types, and scope
 
 JavaScript variables, containers used to store values, are not declared with data types like some other languages, 
 but they are declared with one of three scope-enforcing keywords: var, let, and const. What is scope you ask? 
@@ -111,7 +128,7 @@ where the typeof operator is a dirty liar), as below:
 	console.log(typeof(c));
 ```
 
-### JavaScript Operators
+## JavaScript Operators
 
 Operators are the symbols we use to assign a value to a variable, do arithmetic, or evaluate expressions. 
     
@@ -192,7 +209,7 @@ JavaScript Type Operators
 
 [Check out this link for more info about operators!](https://www.w3schools.com/js/js_operators.asp)
 
-### JavaScript Functions
+## JavaScript Functions
 
 JavaScript funcitons are blocks of code that we can define and choose to run as we wish. Take a look at some 
 examples below.
@@ -286,7 +303,7 @@ function myFunction(x) {
 It's usually a best pratice to just define all of your variables at the top of the scope anyway. This will help 
 you avoid any headaches that may arise from this odd quirk. 
 
-### JavaScript Objects
+## JavaScript Objects
 
 JavaScript objects are a data type, but not a primitive. This means that they can be broken down into further 
 pieces. The JS object type includes collections, which are either arrays or objects, (yes objects are part 
@@ -325,14 +342,78 @@ is not considered a best practice). see below:
     console.log(h.length); // to get size of array
 ```
 
-### Falsy Values
+## JavaScript Classes
+
+JavaScript classes act as a blueprint to create objects. They were introduced in ECMAScript 2015 (ES6). 
+Let's take a look at some examples to get a feel for how classes work.
+
+```JavaScript
+class Car {
+	constructor(name, year, miles){
+		this.name = name;
+		this._year = year;
+		this.miles = miles;
+	}
+	
+	get age() {
+		const n = new Date();
+		return `The car is ${n.getFullYear() - this._year} year(s) old!`;
+	}
+	
+	set year(year) {
+		this._year = year;
+	}
+	
+	odometerAdd(distance) {
+		this.miles += distance;
+	}
+}
+```
+
+In this example of a class we are making use of a few concepts, let's break down each. First is the class constructor, 
+this is a block of code that will execute upon instantiation of a car object. Meaning once the below code is run, we will 
+expect to have a car object created in memory that has the name of 'Hyundai' and has 113,000 miles on it. Note that due to 
+hoisting, we must delcare our class before we initialize our object. While the class may get hoisted, its initilizations will 
+not.
+
+```JavaScript
+let c = new Car('Hyundai', 2016, 113000);
+```
+
+Next we see 'get age'. This is a javascript getter, a block of code that will execute whenever the property is accessed. 
+```JavaScript
+let c = new Car('Hyundai', 2016, 113000);
+c.age;
+// will print:
+// 'The car is currentYear-2016 year(s) old!'
+```
+
+Next we see a JavaScript setter. This is a block of code that will execute when an assignment is applied. Note 
+the naming of the setter and property here. The property has been named '_year' so we can distinguish between the two. 
+```JavaScript
+let c = new Car('Hyundai', 2016, 113000);
+c.year = 2021;
+c.age;
+//c.age will print based on our updated call to the setter
+```
+
+The 'odometerAdd' is a method, not a getter or setter. It's simply adding miles to our odometer.
+
+There is a lot more to JavaScript classes. Including: private fields, static fields, inheritence through the extends keyword, 
+and more. We won't go over it all here, but we will have a longer discussion about object oriented principles when we discuss 
+future topics. 
+
+## Falsy Values
 
 Falsy (or falsey) values are those that evaluate to false in a conditional expression. There are 
 six falsy values in JS: false (pretty unexpected, right?), 0, empty string (either '' or "" because 
 the language accepts either single or double quotes), null, undefined, and NaN (which paradoxically 
 is a number). Every other value in JS is truthy - 1, -2, "a", true, etc.
 
-### JavaScript Control Flow
+Null and undefined values are only equal to other null and undefined values, respectively. In addition, NaN is 
+not equal to any value, not even itself.
+
+## JavaScript Control Flow
 
 Since we've just talked about values in conditional expressions, it's a great time to talk about 
 control flow in JS. Control flow allows us to skip certain lines of code/only execute certain code 
@@ -412,7 +493,7 @@ for an example:
     }
 ```
 
-### Loops
+## Loops
 
 Example of a 'for' loop. We define a variable to be used to increment, the evaulation, and then 
 define our increment itself.
@@ -558,6 +639,141 @@ To open a similar console in Firefox, click the button in the top red rectangle 
 
 <p align="center"><img src="img/firefox_console_path_2.png"/></p>
 
+## JavaScript Modules
+
+A module is simply a JavaScript file with its own variables, functions, ect. that can be imported into another JavaScript file. 
+
+We have two keywords to remember, import and export. Both keywords may only be used within a module. Because 
+these keywords can only be used within a module, that means that we will have a 'top level' module to consider. 
+Let's take a look at an example to get an idea. 
+
+index.js - Notice the import statement. We can take one or more imports at a time. 
+```JavaScript
+import {name, myFunc} from './moduleTest.js';
+console.log(name);
+myFunc();
+```
+
+moduleTest.js - Notice the export statements. We can export primitives, functions, and objects. Classes are 
+a special type of function, so we can export those as well.
+```JavaScript
+export const name = "john";
+export function myFunc() {
+	console.log('This is a function from my module!');
+}
+```
+
+index.html - Notice the type="module" attribute. This is required to specify the file as a module. As only 
+modules can use import/export statements. Also make note that modules are always deffered by default, so 
+no need to specify the defer attribute or move the script element to the bottom of the body. 
+```HTML
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Module Example</title>
+        <script type="module" src="index.js"></script>
+    </head>
+</html>
+```
+
+So far we've only been working with named exports. We also have what is known as default exports. These are 
+often used to provide a default function/class from the module. Let's take a look.
+
+```JavaScript
+export default function() {
+	//code
+}
+```
+
+```JavaScript
+import myDefaultFunction from './moduleTest.js';
+```
+
+Note the lack of curly braces on our import statement. We can only have one default export per module, and 
+we know in this case it's our function, so really we could name it whatever we want in our import. We just 
+chose to name it 'myDefaultFunction' here to demonstrate. 
+
+Much like our discussion of classes, there is a lot more to modules that we will not cover here. Please 
+refer to the documentation or your trainer for more specifics.
+
+## JavaScript Decorators
+
+A decorator is a function that changes the behavior of functions/methods, properties, and classes that is passed to it by returning 
+a new function. This allows us to add features without modifying the orginal functionality. The JavaScript implementation of decorators is a 
+little different compared to other languages. For example, JavaScript has properties with its objects, and these properties have values and 
+extra information describing various access to a property. Let's take a look at that:
+
+```JavaScript
+const car = {
+	topMilesPerHour : 130,
+	makeAndModel : 'Mitsubishi Lancer'
+};
+
+console.log(Object.getOwnPropertyDescriptor(car, 'makeAndModel'));
+
+/*
+The console.log will print:
+
+{
+	configurable: true,
+	enumerable: true,
+	value: 'Mitsubishi Lancer',
+	writable: true
+}
+
+*/
+```
+
+Possible values:
+- configurable - tracks if the property can be changed/deleted
+- enumerable - whether or not the property shows up when you enumerate the properties, such as in a for loop
+- writable - determines if you can change the property value with the assigment operator '='
+- value - the value of the property. Could be a primitive, collection, or a function itself.
+- get & set - any getters or setters; these are the access descriptors
+
+If we wish to set one of our property descriptions, we can do it like so:
+```JavaScript
+Object.defineProperty(car, 'topMilesPerHour', {
+	writable: false,
+	value: 140
+});
+```
+
+The above example effectively makes the topMilesPerHour field read only.
+
+Let's write a decorator now that has the same functionality.
+
+Creating our decorator:
+```JavaScript
+function readOnly(target, key, descriptor) {
+	descriptor.writable = false;
+	return descriptor;
+}
+```
+
+Let's break all that down, starting with the parameters we are passing into the function.
+
+- target - class of our object
+- key - string of the property name we are using the decorator on
+- descriptor - the property's descriptor object
+
+We then see that we are changing the descriptor object of whatever property gets passed in from our target/key. 
+In this case we are changing the 'descriptor.writable = true' to false, thereby making this property read only. We do this by returning a new version 
+of the descriptor with our changes.
+
+Our class:
+```JavaScript
+class car = {
+	@readOnly
+	topMilesPerHour : 130,
+	makeAndModel : 'Mitsubishi Lancer',
+};
+```
+
+This was a simple example of a class member decorator. There are a variety of use cases for decorators, and those will depend on your business need. 
+Ideally, decorators can be used to help write clean and scalable code by allowing you to add features to methods, classes, and properties in an easy way 
+without modifying the original functionality.
+
 ## The DOM
 
 The Document Object Model (DOM) is the World Wide Web Consortium (W3C) standard for accessing documents - there is a core DOM, an XML DOM, and the HTML DOM. The last one will be our focus here - it's how our JavaScript can interact with and manipulate our HTML and CSS. In the HTML DOM, the Document is the html page/browser, the Objects are the elements in that page, and the Model is the way in which we access, interact with, change, add, and delete our elements. The DOM for any given HTML page can be represented by an object tree with individual nodes for each object. The root of this tree is the document object, i.e. the \<html\> tag (the window object represents the browser and contains the entire document). Let's write an example HTML file and then represent its DOM below (we'll refer back to this file throughout the remainder of this section):
@@ -615,7 +831,7 @@ Now that we have discussed propagation, we can return to the addEventListener an
 
 Let's take note of some things about the above code. First, because the third parameter in both methods has a default value, we don't have to specify an argument for it unless we want to use capturing instead of bubbling. Second, the events in our method calls differ from their corresponding attributes in HTML elements in that the "on" is removed - e.g., the event in our above code is "mouseover" instead of "onmouseover." Lastly, because we are using bubbling, when a user moves the mouse over the paragraph element with the jobDescription id, the handleParHover() method will be called first, followed by the handleDivHover() method. This correlates to the order in which the event arrives at the corresponding elements in the target and bubbling phases (assume that we have defined the handleParHover() and handleDivHover() methods elsewhere).
 
-## The Event Object
+### The Event Object
 
 JS has an Event object from which all other event objects (such as the KeyboardEvent object) inherit, giving common properties and methods to all events. Here, we will detail those methods and properties that assist us in stopping and cancelling events. The stopPropagation() and stopImmediatePropagation() functions end an event's journey through the object tree. stopPropagation() does not allow any other elements to handle the event - i.e. if we are in the capturing phase and an event listener calls this method, no children of the element holding that event listener can handle that event in the remainder of the capturing phase and no elements _period_ can handle the event in the bubbling phase. stopImmediatePropagation() is even more restrictive: in addition to performing the functionality of stopPropagation(), this method also prevents any not-yet-fired handlers on the element that holds the handler calling this method from firing. In contrast, cancelBubble() only stops the bubbling phase of an event.
 
@@ -643,7 +859,7 @@ console.log('Milliseconds (from 0-999) : ' + date.getMilliseconds());
 console.log('UTC minutes : ' + date.getUTCMinutes());
 ```
 
-### Putting it all together
+## Putting it all together - String and DOM manipulation
 
 Below you can find a couple examples of events being used to manipulate the dom as well as manipulate strings.
 
@@ -668,9 +884,10 @@ html element and ```document.replaceChild(new elemenent here, old element here)`
 
 In the example below we are waiting on a button click to fire off our createWordSalad function. We can see we are 
 using querySelector to get both an element with the id of textInput as well as worldSalad. We then create a string 
-that will be manipulated by the value of our user's textInput. We then see an example of the replace string method. 
+that will be manipulated with the value of our user's textInput. We then see an example of the replace string method. 
 This is one of many string methods. This particular one will search for the text in the first parameter and replace 
-it with text in the second parameter. After that we finally set the innerHTML of our wordSalad element to our crazy 
+it with text in the second parameter. In our example, instead of text in the first parameter, we opted to use a regular 
+expression. After that we finally set the textContent of our wordSalad element to our crazy 
 string we created. 
 ```JavaScript
 let textAreaBtn = document.querySelector("#textAreaBtn");
@@ -680,15 +897,49 @@ function createWordSalad() {
     let wordSalad = document.querySelector("#wordSalad");
     let textInput = document.querySelector("#textInput");
     let str = textInput.value;
-    str = str.replace("the", "Did you ever hear the tragedy of Darth Plagueis The Wise?");
-    str += str.replace("The", "My dog ate my homework.");
-    str += str.replace("or", "Are we there yet?");
-    str += str.replace("and", "That rug really tied the room together.");
-    wordSalad.innerHTML = str;
+    str = str.replace(/ +the +/, " Did you ever hear the tragedy of Darth Plagueis The Wise? ");
+    str = str.replace(/ *The +/, " My dog ate my homework. ");
+    str = str.replace(/ +or +/, " Are we there yet? ");
+    str = str.replace(/ +and +/, " That rug really tied the room together. ");
+    wordSalad.textContent = str;
 }
 ```
 
-[Check out more string methods here!](https://www.w3schools.com/js/js_string_methods.asp)
+Below we can see some short examples of other common string methods:
+```JavaScript
+let text = 'This is my string!';
+console.log(text.length);
+// 18
+
+// extracts part of a string and returns the extracted part in a new string
+console.log(text.slice(5,7));
+// 'is'
+
+// if the parameters are negative, the position will start from the end of the string. Notice how you can omit the second parameter and it will simply include the rest of the string. 
+console.log(text.slice(-7));
+// 'string!'
+
+// similar to slice but can not accept negative indexes
+console.log(text.substring(5,7))
+// 'is'
+
+// Another example of replace
+console.log(text.replace('string', 'super cool string'));
+// 'This is my super cool string!'
+
+//uppercase and lower case
+console.log(text.toUpperCase());
+// 'THIS IS MY STRING!'
+console.log(text.toLowerCase());
+// 'this is my string!'
+
+//remove white space from both sides of a string
+let str = '     whoa     ';
+console.log(str);
+// '     whoa     '
+console.log(str.trim());
+// 'whoa'
+```
 
 ## Async JS
 
@@ -810,13 +1061,13 @@ async function getInfo() {
     let pokemon = document.querySelector('#textInput').value;
     let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
     let parsedRes = await res.json();
-
+	let myDiv = document.querySelector('#myDiv');
+	myDiv.innerHTML = "";
     let pokemonAbilities = parsedRes.abilities;
     for(let i = 0; i < pokemonAbilities.length; i++) {
         
         let pElem = document.createElement('p');
         pElem.innerText = pokemonAbilities[i].ability.name;
-        let myDiv = document.querySelector('#myDiv');
         myDiv.appendChild(pElem);
     }
 }
@@ -830,20 +1081,15 @@ scope of this module. However, your author always seeks to be as helpful as poss
 documentation on some of these topics are included in the Helpful References/Links section. Let's touch on 
 them and briefly explain some other topics.
 
-First, useful string and array methods that we did not talk about in the JavaScript Variables section can be 
-found at the JavaScript String Reference (w3schools) and JavaScript Array Reference (w3schools) links, 
-respectively.
+First, any useful string and array methods that we did not talk about can be found at the JavaScript String 
+Reference (w3schools) and JavaScript Array Reference (w3schools) links, respectively.
 
-When discussing falsy values in the appropriately named Falsy Values section, we neglected to say that null 
-and undefined values are only equal to other null and undefined values, respectively. In addition, NaN is 
-not equal to any value, not even itself.
+In our DOM sections, we briefly talked about ways to manipulate the DOM including creating, inserting, 
+removing, and appending elements. To get the parents, siblings, or children nodes of an object on the DOM 
+tree, information can be found at the JavaScript HTML DOM Elements (Nodes) (w3schools) 
+and The HTML DOM Element Object (w3schools) references.
 
-In our DOM sections, we did not talk about other ways to manipulate the DOM including creating, inserting, 
-removing, and appending elements or getting the parents, siblings, or children nodes of an object on the DOM 
-tree, information about these topics can be found at the JavaScript HTML DOM Elements (Nodes) (w3schools) 
-and The HTML DOM Element Object (w3schools) references, respectively.
-
-Additional methods and properties of the XMLHttpRequest object can be found at The XMLHttpRequest Object 
+To learn more about the older XMLHttpRequest object, you can find info at The XMLHttpRequest Object 
 (w3schools). Some further information about JSON is located at JSON - Introduction (w3schools).
 
 JS has no single authoritative documentation source. But this is not to say that there is not good 
