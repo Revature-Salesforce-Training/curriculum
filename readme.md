@@ -15,7 +15,7 @@ get your new careers kicked off!
 As you can see everything is broken down by week, with each of the topics having their 
 own folder. You will find the lecture notes for each topic in those folders, as well 
 as any relevant examples or exercises. Some of the lecture notes may be long form (LF) or 
-smaller bullet point lecture notes (LN). I suggest you read everything and do so multiple 
+smaller lecture notes (LN). I suggest you read everything and do so multiple 
 times as we progress. Yes this is similar to college, you will need to study thouroughly. 
 However, don't be fooled by the "college feel". This is first and foremost a workplace 
 and I have expectations for all of you. Remember what we talked about above? This will be 
@@ -33,14 +33,13 @@ a collaborative process, we need to work together to achieve success!
 ### Projects
 
 4 Projects in total (starting at zero index)
-P0 - Indvidual project
-P1-P3 - Team based projects
+
+- P0 & P1 - Indvidual project (P1 is presented as a team, however)
+- P2 & P3 - Team based projects
 
 P3 - Final project, cohort wide team, often presented to clients.
 
-Our projects and their requirements will be found on GitHub as well. For P0, you will notice 
-that it is broken down into three parts. Each part is in our first few weeks. Each week we will be 
-exploring new content that will build on (and add new requirements) to your first project. 
+Our projects and their requirements will be found here on GitHub.
 
 ### Self Assesments
 
