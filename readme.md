@@ -51,7 +51,7 @@ the context of an interview setting. I do not care how you record the video,
 even if it's a phone. I also don't care where you upload the video, just 
 send me the link. (Unlisted Youtube videos are a pretty good option.) 
 The breakdown of how I grade is in the table below. There is room for 
-variance. If for example someone was awesome and middling they don't 
+variance. If for example someone got :thumbsup: and :no_entry: they don't 
 necessarily get a 75%. It's just a ballpark estimate. Much like a real 
 interview situation, there is a little subjectivity involved.
 
