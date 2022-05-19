@@ -97,6 +97,29 @@ Weeks without a project:
 
 >QC is seperate from the rest of our evaluations. But still very important! It's how we can make sure you are interview ready!
 
+### Camera/Zoom Policy
+
+Our clients expect candidates that are fully present. While we are working from home, this means being engaged 
+with our cameras turned on. With that said, here are the expectations surrounding Cameras and Zoom 
+during training:
+
+* You will not be required to have your camera on at all times. (Camera fatigue is real)
+* I will require you to have cameras on when I ask.
+* Cameras should always be on during:
+  * QC
+  * While taking quizzes
+  * 1-on-1 meetings
+  * Any time another Revature employee comes in to give a presentation.(Unless they specify otherwise)
+  * During project presentations
+  
+### Attendance Policy
+
+Your trainer tracks attendance daily. Some things to note:
+
+* If you think you will be absent or tardy, just let me know with ideally 24 hours notice if possible.
+* If I excuse your tardiness or absence, then it will not count against you.
+* Excessive unexcused tardiness or absences will have consequences up to and including release from the program.
+
 ### Best ways to contact me?
 
 Either my email: ethan.wilson@revature.com
