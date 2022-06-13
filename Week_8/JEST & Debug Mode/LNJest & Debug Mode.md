@@ -1,37 +1,51 @@
-## Unit testing vs End-to-end testing
-[DOCS Reference](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.testing_dom_api)
+## Testing Lightning Web Components
 
-unit - one slice of cake
-end-to-end - the whole cake
+[Unit Test Lightning Web Components with Jest](https://developer.salesforce.com/blogs/2019/03/unit-test-lightning-web-components-with-jest)
 
-## Jest
-[DOCS Reference](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/testing)
+[Jest cheatsheet (devhints.io)](https://devhints.io/jest)
 
-Jest is a JavaScript testing suite used to help ensure our code is robust and working as intended. The primary tool for unit testing our LWC.
+- end-to-end and unit testing are two of the main testing paradigms
+    - end-to-end testing uses libraries such as Selenium to automate the actions a user can take as they navigate throughout the entirety of an application
+    - with unit testing, we instead focus on testing smaller pieces of code that can be isolated from the remainder of the application
+- while end-to-end testing is valuable, unit testing better suits our use case when writing tests for LWCs because
+    - unit tests are more resilient to changes in our codebase such as refactoring
+        - depending on the library and approach we're using for end-to-end testing, the tests we write can have a tight coupling to the structure of the codebase at the time they're written
+        - because we're testing smaller pieces of functionality (e.g. components) with unit testing, there's less of a dependence on the broad structure of the codebase and any necessary rewriting will generally be faster because the tests themselves will be smaller
+    - unit tests can help ensure that we don't introduce regressions into our codebase when adding new functionality or refactoring/updating existing functionality
+        - when we have regression in our codebase, it means that the introduction of new code/modification of existing code has caused features that were working before to stop working
+        - if we have a robust set of unit tests, we can execute them to confirm that they pass both before and after we've made changes to our codebase
+    - unit tests help us catch bugs faster
+        - when we write unit tests as part of our regular development workflow, we can catch bugs much earlier in the development process - i.e. before they enter production and possibly even before they enter quality assurance
+        - the longer bugs go without being caught, the more people who need to be involved in finding/resolving the issue and the greater the amount of code that needs to be changed to fix the problem
+        - therefore, the quicker we catch bugs, the less expensive they'll be
+- as much as we want to isolate our components for unit testing, many components depend on and make use of other standard and custom components
+    - to ensure that our unit tests for a particular component are only testing that component's behavior and not that of its dependencies (i.e. the standard and custom components it contains), we'll use mock components
+    - mocking is a common unit testing practice where we replace dependencies with mocks that imitate their behavior
+    - this ensures that our tests have consistent and predetermined dependency values to work with
+- to unit test our LWCs, we use Jest, a popular JavaScript testing framework
+- Jest requires that we have Node.js and npm (which is automatically installed with Node.js) installed
+- once we've installed Node.js, we can install the `sfdx-lwc-jest` node package and Jest by running the `sfdx force:lightning:lwc:test:setup` command in the terminal from our SFDX project folder
+- we'll use Jest to test
+    - the values of our component's public properties and methods
+    - mock user interaction with our component
+    - how our component handles responses to the server calls that it invokes
+ 
+### Creating Jest Tests
 
-To install Jest into our project:
-```
-sfdx force:lightning:lwc:test:setup
-```
+- we'll store our test files in a `__tests__` folder inside of our component's folder
+    - this folder is included in our project's `.forceignore` file by default, which means that any Jest tests that we write for our components will not be deployed to our orgs
+- our Jest files will be JS files that we inside this folder
+    - as a convention, we end our names of our test files with `.test`, e.g. `exampleTest.test.js`
+- we can create the `__tests__` folder and our test files manually or through the `SDFX: Create Lightning Web Component Test` command palette command
+    - if we choose the command, we'll first select our desired parent directory (e.g. `force-app`)
+    - we'll then select the name of the component that we're testing that exists inside of that parent directory
+    - the command will then create a `__tests__` directory inside of the corresponding component bundle folder and a test file whose name follows the format `componentName.test.js` (e.g. `dropdown.test.js`)
+ 
+### Jest Test File Structure
 
-## Creating Jest Tests
+- the default test file is as follows:
 
-To make a Jest for a component, we first need the tests folder inside of our component's folder. Our Jest files will be JS files that we create in 
-the tests folder the tests folder is included in our project's .forceignore file by default. This means that any Jest tests that we write for our 
-components will not be deployed to our orgs as a convention, we end our names of our test files with .test, e.g. exampleTest.test.js. Rather than 
-manually creating the tests folder and test files, we can use the SDFX: Create Lightning Web Component Test command palette command. When we run 
-this command, we'll choose the parent folder of the main/default/lwc directory that contains the component we're writing a test for as well as the 
-component that we're testing. This command will create a tests directory inside of the folder for our chosen component and a test file named 
-componentName.test.js.
-
-We could also use the cli
-```
-sfdx force:lightning:lwc:test:create -f force-app/main/default/lwc/myComponent/myComponent.js
-```
-
-## Jest Test Structure
-
-```
+```js
 import { createElement } from 'lwc';
 import ComponentName from 'c/componentName';
 describe('c-component-name', () => {
@@ -46,40 +60,100 @@ describe('c-component-name', () => {
             is: ComponentName
         });
         document.body.appendChild(element);
-		const div = element.shadowRoot.querySelector('div');
-        expect(div.textContent).toBe('Something');
+        expect(1).toBe(2);
     });
 }
 ```
 
-Within our test file, we'll begin by importing the component that we're testing as follows 
+- the first line of a test file imports the component that we're testing, adhering to the following format
 
+```js
+import ComponentName from 'namespace/componentName';
 ```
-import ComponentName from 'namespace/componentName'; 
-```
 
-We'll also import the createElement method from the lwc module, which we can use to create the component in our test setup. Each test suite is 
-denoted through a describe block, our call to the describe method takes two parameters - a description for the test suite and an anonymous function 
-containing our test suite code. To work our component in our tests, we'll create it with a call to createElement. This method takes two parameters - 
-the name of component we're creating and the reference to the imported component as the value for the is property of an object literal. Within our 
-test suites, we use it or test methods to denote single tests. Each it or test method call takes two parameters - a description for the test and an 
-anonymous function containg our test code. Once we've instantiated the component that we're testing in our test blocks, we can insert it into the 
-DOM by calling the appendChild() method on the document object. To make an assert statement, we call the expect method using one of the Jest 
-framework's matchers (e.g. the toBe() matcher to test equality). We can perform setup and cleanup for our test suites through calls to the 
-beforeEach() and afterEach() methods. These methods take a single parameter - an anonymous function containing the code to execute before or 
-after each test method within the suite. 
+- recall that the class in our component's JS module begins with the `export default` keywords
+    - this denotes that the class is the default export from our JS module, which is what allows us to import our component into our test file
+- we'll also import the `createElement` method from the `lwc` module, which is only available in test files
+- each test suite - i.e. a group of one or more tests - is denoted through a `describe` block
+- our call to the `describe` method takes two parameters - a description for the test suite and an anonymous function containing our test suite code
+- to work with our component in tests, we'll first create it with a call to `createElement`
+    - this method takes two parameters - the name of component we're creating and the reference to the imported component as the value for the `is` property of an object literal
+- within our test suites, we use `it` or `test` methods to denote single tests - discrete definitions of expected behavior
+    - each `it` or `test` method call takes two parameters - a description for the test and an anonymous function containing our test code
+- once we've instantiated the component that we're testing, we insert it into the DOM by calling the `appendChild()` method on the `document` object
+- to make an assert statement, we call the `expect` method using one of the Jest framework's matchers (e.g. the `toBe()` matcher to test equality)
+- we can perform setup and cleanup for our test suites through calls to the `beforeEach()` and `afterEach()` methods, respectively
+    - these methods declare a single parameter - an anonymous function containing the code to execute before or after each test method within the suite runs
+- if we want to work with the contents of a component that we've inserted into the DOM, we'll call the` querySelector()` method on its `shadowRoot` property to retrieve the component
+    - `shadowRoot` references the root of an element's shadow DOM and is only available in test files
 
-If we want to work with the contents of a component that we've inserted into the DOM, we'll call 
-the querySelector() method on its shadowRoot property. It's a test-only API that lets you peek across the shadow boundary to inspect a 
-component’s shadow tree. It’s the test equivalent of this.template.
+### Running Tests
 
-[DOCS for Jest, Jest Matchers](https://jestjs.io/docs/using-matchers)
+- we can run tests through npm with `npm run test:unit` command
+- we can also run our test files within Visual Studio Code through the use of the Salesforce Extension Pack
 
-## Running Tests
+### Testing Components that Use the Wire Service
 
-We can run tests through npm with npm run test:unit command. If we run this command from a component folder, only the tests for that LWC will be 
-executed. If we run this command from the root folder of our SFDX project, all tests within the project will be executed. We can also run our test 
-files within Visual Studio Code through the use of the Salesforce Extension Pack.
+- because unit tests shouldn't make calls to outside entities, we want to mock the data that we'd get back from an adapter method
+- to mock this data, we'll create a `data` folder and nested JSON file inside of our `__tests__` folder
+- the JSON file will contain a mock of the data we'd get back from invoking the adapter method
+    - we can get such a mock by, e.g., logging the returned value from the wired method and saving it as a JSON file (provided that the returned value doesn't contain any sensitive information)
+- in our test file, we'll import the wired method
+- we'll also import the mock data through a call to the `require()` method, passing this method a relative path to the JSON file that holds our mock data
+- within our test file following our imports, we'll invoke the `emit()` method on the imported adapter method, passing the imported mock data as an argument
+- because wired methods and imperative Apex calls return promises, we must resolve the promise before making any assertions
 
-## Testing Components that Use the Wire Service
-[DOCS Reference](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.unit_testing_using_wire_utility)
+### Mocks
+
+[Jest Test Patterns and Mock Dependencies](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.unit_testing_using_jest_patterns)
+
+[sfdx-lwc-jest (Salesforce, Github)](https://github.com/salesforce/sfdx-lwc-jest/)
+
+[Beginner's guide to regular expressions (Carl Alexander)](https://carlalexander.ca/beginners-guide-regular-expressions/)
+
+- as we said earlier, we want to use mocks of standard and custom components to isolate the specific component that any set of unit tests is evaluating
+- to mock standard Lightning components, we can use the mocks included in the `lightning-stubs` directory of the `sfdx-lwc-jest` package (from the root of our project, the full path to this directory is `node_modules/@salesforce/sfdx-lwc-jest/src/lightning-stubs`)
+    - for example, the JavaScript module for the `lightning-button` standard component:
+
+    ```js
+    /*
+    * Copyright (c) 2018, salesforce.com, inc.
+    * All rights reserved.
+    * SPDX-License-Identifier: MIT
+    * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/MIT
+    */
+    import { LightningElement, api } from 'lwc';
+
+    export default class Button extends LightningElement {
+        @api disabled;
+        @api iconName;
+        @api iconPosition;
+        @api label;
+        @api name;
+        @api type;
+        @api value;
+        @api variant;
+    }
+    ```
+
+    - as we can see from the above code, the mock consists of exposed fields with the same names as the attributes of the standard `lightning-button` component
+    - we can also see that the mock doesn't fire a `click` event
+        - none of the base component mocks fire the events that the real components do, but we can call `dispatchEvent()` on the mock components within our tests to simulate the firing and then handling of these events
+- if we want to mock custom LWCs, we'll need to create the mock files ourselves
+    - e.g., to mock a component named `c-account-card`, we'll create `accountCard.html` and `accountCard.js` files that contain the bare minimum needed for our tests (e.g. any properties that the component we're testing depends on)
+    - then we'd modify the `jest.config.js` file in our project's directory to indicate the `accountCard` directory that contains these mock components by adding a key-value pair to the `moduleNameMapper` key
+    - e.g.
+
+    ```js
+    const { jestConfig } = require('@salesforce/sfdx-lwc-jest/config');
+
+    module.exports = {
+        ...jestConfig,
+        moduleNameMapper: {
+            '^c/accountCard$': '<rootDir>/path/to/accountCard/'
+        }
+    };
+    ```
+
+    - the caret (`^`) and dollar sign (`$`) delimiting the mock name indicate that this value is a regular expression
+        - carets and dollar signs are frequently used to denote the beginning and end, respectively, of a regular expression string

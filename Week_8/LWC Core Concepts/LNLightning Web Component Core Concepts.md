@@ -375,163 +375,134 @@ JS named exPublicProperty -->
     - to avoid this behavior, we can
         - avoid passing any non-primitive values through custom events entirely
         - copy any non-primitive values to new variables and assigning those new variables to the `detail` property instead
+		
+##  Lightning Data Service
 
-## Testing Lightning Web Components
+The LDS is a tool that can be used to load, create, edit, or delete a record in a component without the use of Apex code.
+LDS handles sharing rules and field-level security automatically. LDS is also very effecient in its performance, so it would be 
+considered a best practice to use LDS whenever feasible. 
 
-[Unit Test Lightning Web Components with Jest](https://developer.salesforce.com/blogs/2019/03/unit-test-lightning-web-components-with-jest)
+One big reason LDS is so effecient:
+  * It has a cache that is shared with all components that use it. 
+    * This means that records only need to be loaded once and can be accessed by other components utilizing LDS. 
+	
+To interact with LDS we make use of some built-in components of the Salesforce Lightning Component Library.
 
-[Jest cheatsheet (devhints.io)](https://devhints.io/jest)
+## lightning-record-form
+[Docs reference](https://developer.salesforce.com/docs/component-library/bundle/lightning-record-form/documentation)
 
-- end-to-end and unit testing are two of the main testing paradigms
-    - end-to-end testing uses libraries such as Selenium to automate the actions a user can take as they navigate throughout the entirety of an application
-    - with unit testing, we instead focus on testing smaller pieces of code that can be isolated from the remainder of the application
-- while end-to-end testing is valuable, unit testing better suits our use case when writing tests for LWCs because
-    - unit tests are more resilient to changes in our codebase such as refactoring
-        - depending on the library and approach we're using for end-to-end testing, the tests we write can have a tight coupling to the structure of the codebase at the time they're written
-        - because we're testing smaller pieces of functionality (e.g. components) with unit testing, there's less of a dependence on the broad structure of the codebase and any necessary rewriting will generally be faster because the tests themselves will be smaller
-    - unit tests can help ensure that we don't introduce regressions into our codebase when adding new functionality or refactoring/updating existing functionality
-        - when we have regression in our codebase, it means that the introduction of new code/modification of existing code has caused features that were working before to stop working
-        - if we have a robust set of unit tests, we can execute them to confirm that they pass both before and after we've made changes to our codebase
-    - unit tests help us catch bugs faster
-        - when we write unit tests as part of our regular development workflow, we can catch bugs much earlier in the development process - i.e. before they enter production and possibly even before they enter quality assurance
-        - the longer bugs go without being caught, the more people who need to be involved in finding/resolving the issue and the greater the amount of code that needs to be changed to fix the problem
-        - therefore, the quicker we catch bugs, the less expensive they'll be
-- as much as we want to isolate our components for unit testing, many components depend on and make use of other standard and custom components
-    - to ensure that our unit tests for a particular component are only testing that component's behavior and not that of its dependencies (i.e. the standard and custom components it contains), we'll use mock components
-    - mocking is a common unit testing practice where we replace dependencies with mocks that imitate their behavior
-    - this ensures that our tests have consistent and predetermined dependency values to work with
-- to unit test our LWCs, we use Jest, a popular JavaScript testing framework
-- Jest requires that we have Node.js and npm (which is automatically installed with Node.js) installed
-- once we've installed Node.js, we can install the `sfdx-lwc-jest` node package and Jest by running the `sfdx force:lightning:lwc:test:setup` command in the terminal from our SFDX project folder
-- we'll use Jest to test
-    - the values of our component's public properties and methods
-    - mock user interaction with our component
-    - how our component handles responses to the server calls that it invokes
- 
-### Creating Jest Tests
+Using this component to create record forms is easier than building forms manually with lightning-record-edit-form or lightning-record-view-form. 
+The lightning-record-form component provides these helpful features:
 
-- we'll store our test files in a `__tests__` folder inside of our component's folder
-    - this folder is included in our project's `.forceignore` file by default, which means that any Jest tests that we write for our components will not be deployed to our orgs
-- our Jest files will be JS files that we inside this folder
-    - as a convention, we end our names of our test files with `.test`, e.g. `exampleTest.test.js`
-- we can create the `__tests__` folder and our test files manually or through the `SDFX: Create Lightning Web Component Test` command palette command
-    - if we choose the command, we'll first select our desired parent directory (e.g. `force-app`)
-    - we'll then select the name of the component that we're testing that exists inside of that parent directory
-    - the command will then create a `__tests__` directory inside of the corresponding component bundle folder and a test file whose name follows the format `componentName.test.js` (e.g. `dropdown.test.js`)
- 
-### Jest Test File Structure
+  * Switches between view and edit modes automatically when the user begins editing a field in a view form
+  * Provides Cancel and Save buttons automatically in edit forms
+  * Uses the object's default record layout with support for multiple columns
+  * Loads all fields in the object's compact or full layout, or only the fields you specify
+  
+However, lightning-record-form is less customizable. To customize the form layout or provide custom rendering of record data, use 
+lightning-record-edit-form (add or update a record) and lightning-record-view-form (view a record).
 
-- the default test file is as follows:
+## lightning-record-view-form
+[Docs reference](https://developer.salesforce.com/docs/component-library/bundle/lightning-record-view-form/documentation)
 
-```js
-import { createElement } from 'lwc';
-import ComponentName from 'c/componentName';
-describe('c-component-name', () => {
-    afterEach(() => {
-        // The jsdom instance is shared across test cases in a single file so reset the DOM
-        while (document.body.firstChild) {
-            document.body.removeChild(document.body.firstChild);
-        }
-    });
-    it('TODO: test case generated by CLI command, please fill in test logic', () => {
-        const element = createElement('c-component-name', {
-            is: ComponentName
-        });
-        document.body.appendChild(element);
-        expect(1).toBe(2);
-    });
-}
+Use the lightning-record-view-form component to create a form that displays Salesforce record data for specified fields associated with that 
+record. The fields are rendered with their labels and current values as read-only.
+
+Use the lightning-output-field component to render fields as read only. 
+
+```
+<lightning-record-view-form
+    object-api-name={objectApiName}
+    record-id={recordId}
+>
+    <lightning-output-field field-name={nameField}> </lightning-output-field>
+</lightning-record-view-form>
 ```
 
-- the first line of a test file imports the component that we're testing, adhering to the following format
+## lightning-record-edit-form
+[Docs reference](https://developer.salesforce.com/docs/component-library/bundle/lightning-record-edit-form/documentation)
 
-```js
-import ComponentName from 'namespace/componentName';
+Use the lightning-record-edit-form component to create a form that's used to add a Salesforce record or update fields in an existing record on 
+an object. The component displays fields with their labels and the current values, and enables you to edit their values.
+
+lightning-record-edit-form supports the following features.
+
+  * Editing a record's specified fields, given the record ID.
+  * Creating a record using specified fields.
+  * Customizing the form layout
+  * Custom rendering of record data
+  
+To specify editable fields, use lightning-input-field components inside lightning-record-edit-form component.
+
+To display record fields as read-only in lightning-record-edit-form, use lightning-output-field components to specify those fields. You can also 
+use HTML and other display components such as lightning-formatted-name to display non-editable content.
+
+To display all fields as read-only, use the lightning-record-form component with mode="readonly" or the lightning-record-view-form component 
+instead of lightning-record-edit-form.
+
+```
+<lightning-record-edit-form
+    object-api-name="{objectApiName}"
+    record-id="{recordId}"
+>
+    <lightning-input-field field-name="{nameField}"> </lightning-input-field>
+    <div class="slds-var-m-top_medium">
+        <lightning-button variant="brand" type="submit" label="Save">
+        </lightning-button>
+    </div>
+</lightning-record-edit-form>
+
 ```
 
-- recall that the class in our component's JS module begins with the `export default` keywords
-    - this denotes that the class is the default export from our JS module, which is what allows us to import our component into our test file
-- we'll also import the `createElement` method from the `lwc` module, which is only available in test files
-- each test suite - i.e. a group of one or more tests - is denoted through a `describe` block
-- our call to the `describe` method takes two parameters - a description for the test suite and an anonymous function containing our test suite code
-- to work with our component in tests, we'll first create it with a call to `createElement`
-    - this method takes two parameters - the name of component we're creating and the reference to the imported component as the value for the `is` property of an object literal
-- within our test suites, we use `it` or `test` methods to denote single tests - discrete definitions of expected behavior
-    - each `it` or `test` method call takes two parameters - a description for the test and an anonymous function containing our test code
-- once we've instantiated the component that we're testing, we insert it into the DOM by calling the `appendChild()` method on the `document` object
-- to make an assert statement, we call the `expect` method using one of the Jest framework's matchers (e.g. the `toBe()` matcher to test equality)
-- we can perform setup and cleanup for our test suites through calls to the `beforeEach()` and `afterEach()` methods, respectively
-    - these methods declare a single parameter - an anonymous function containing the code to execute before or after each test method within the suite runs
-- if we want to work with the contents of a component that we've inserted into the DOM, we'll call the` querySelector()` method on its `shadowRoot` property to retrieve the component
-    - `shadowRoot` references the root of an element's shadow DOM and is only available in test files
+## What about delete?
 
-### Running Tests
+So we can view with the view-form. Go figure. We can view/edit with the record-form and we can view/edit/create with the record-edit-form. All with 
+various levels of customizations and baked in features. But earlier we said we can delete. So what about that? This is where wire adapters and 
+functions come into play. 
 
-- we can run tests through npm with `npm run test:unit` command
-- we can also run our test files within Visual Studio Code through the use of the Salesforce Extension Pack
+## Wire Adapters and Functions
+[Docs Reference](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_ui_api)
 
-### Testing Components that Use the Wire Service
+Wire adapters and JavaScript functions are built on top of Lightning Data Service (LDS) and User Interface API. Use these wire adapters and 
+functions to work with Salesforce data and metadata.
 
-- because unit tests shouldn't make calls to outside entities, we want to mock the data that we'd get back from an adapter method
-- to mock this data, we'll create a `data` folder and nested JSON file inside of our `__tests__` folder
-- the JSON file will contain a mock of the data we'd get back from invoking the adapter method
-    - we can get such a mock by, e.g., logging the returned value from the wired method and saving it as a JSON file (provided that the returned value doesn't contain any sensitive information)
-- in our test file, we'll import the wired method
-- we'll also import the mock data through a call to the `require()` method, passing this method a relative path to the JSON file that holds our mock data
-- within our test file following our imports, we'll invoke the `emit()` method on the imported adapter method, passing the imported mock data as an argument
-- because wired methods and imperative Apex calls return promises, we must resolve the promise before making any assertions
-
-### Mocks
-
-[Jest Test Patterns and Mock Dependencies](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.unit_testing_using_jest_patterns)
-
-[sfdx-lwc-jest (Salesforce, Github)](https://github.com/salesforce/sfdx-lwc-jest/)
-
-[Beginner's guide to regular expressions (Carl Alexander)](https://carlalexander.ca/beginners-guide-regular-expressions/)
-
-- as we said earlier, we want to use mocks of standard and custom components to isolate the specific component that any set of unit tests is evaluating
-- to mock standard Lightning components, we can use the mocks included in the `lightning-stubs` directory of the `sfdx-lwc-jest` package (from the root of our project, the full path to this directory is `node_modules/@salesforce/sfdx-lwc-jest/src/lightning-stubs`)
-    - for example, the JavaScript module for the `lightning-button` standard component:
-
-    ```js
-    /*
-    * Copyright (c) 2018, salesforce.com, inc.
-    * All rights reserved.
-    * SPDX-License-Identifier: MIT
-    * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/MIT
-    */
-    import { LightningElement, api } from 'lwc';
-
-    export default class Button extends LightningElement {
-        @api disabled;
-        @api iconName;
-        @api iconPosition;
-        @api label;
-        @api name;
-        @api type;
-        @api value;
-        @api variant;
-    }
-    ```
-
-    - as we can see from the above code, the mock consists of exposed fields with the same names as the attributes of the standard `lightning-button` component
-    - we can also see that the mock doesn't fire a `click` event
-        - none of the base component mocks fire the events that the real components do, but we can call `dispatchEvent()` on the mock components within our tests to simulate the firing and then handling of these events
-- if we want to mock custom LWCs, we'll need to create the mock files ourselves
-    - e.g., to mock a component named `c-account-card`, we'll create `accountCard.html` and `accountCard.js` files that contain the bare minimum needed for our tests (e.g. any properties that the component we're testing depends on)
-    - then we'd modify the `jest.config.js` file in our project's directory to indicate the `accountCard` directory that contains these mock components by adding a key-value pair to the `moduleNameMapper` key
-    - e.g.
-
-    ```js
-    const { jestConfig } = require('@salesforce/sfdx-lwc-jest/config');
-
-    module.exports = {
-        ...jestConfig,
-        moduleNameMapper: {
-            '^c/accountCard$': '<rootDir>/path/to/accountCard/'
-        }
-    };
-    ```
-
-    - the caret (`^`) and dollar sign (`$`) delimiting the mock name indicate that this value is a regular expression
-        - carets and dollar signs are frequently used to denote the beginning and end, respectively, of a regular expression string
+These wire adapters and functions first need to be imported in from a module before we can use them. There are many at our disposal:
+  * lightning/uiListsApi
+  * lightning/uiObjectInfoApi
+  * lightning/uiRecordApi
+  * and more...
+  
+ For our purposes, and what you will likely run into the most for now, is the uiRecordApi. This is also where we can start to use the LDS to delete 
+ a record if we so wish.
+ 
+ First the import.
+ ```
+import { deleteRecord } from 'lightning/uiRecordApi';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+ ```
+ 
+ Then perhaps we have a button press that calls a method in our component's class. Note that deleteRecord from the uiRecordApi will return a promise 
+ that we can manipulate. In this case, we are displaying a toast message.
+ 
+ ```
+ delete(event) {
+	deleteRecord(this.recordId)
+	.then(() => {
+		this.dispatchEvent(
+			new ShowToastEvent({
+				title: 'Success',
+				message: 'Record deleted',
+				variant: 'success'
+			})
+		)
+		.catch(error => {
+			this.dispatchEvent(
+				new ShowToastEvent({
+					title: 'Error deleting record',
+					message: error.body.message,
+					variant: 'error'
+				})
+			);
+		});
+ }
+ ```
