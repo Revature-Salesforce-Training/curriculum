@@ -1,0 +1,15 @@
+1. Return Account(name, type,) with all its related Contacts(name, email)
+
+2. Retrun all Accounts that have contacts that were created in the last 6 months.
+
+3. Return all Accounts and Order by AnnualRevenue in descending order.
+
+4. Return all Contacts(Name) where the related Account(AnnualRevenue > 40000)
+
+5. Return the Sum of AnnualRevenue by Account type.
+
+6. Return the Account Ids that have more than 2 related contacts.
+
+7. Return all Account(name) records that have a related contact where contact(firstName contains 'Bertha')
+
+8. Return Accounts that have no cases.

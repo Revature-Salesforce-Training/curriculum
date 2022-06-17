@@ -1,0 +1,26 @@
+<!--
+    Created by: Jared Longnecker
+    Last Updated: 03/17/2022
+    Description: Component to demonstrate how to test LWC
+-->
+
+<template>
+  <p if:true={myRecord.data}>{name}</p>
+  <p if:true={apexAccount}>{apexAccount.Name}</p>
+  <lightning-button label="Get Apex" onclick={getApexAccount}></lightning-button>
+  <!--
+        Unit Tests vs End-to-End Tests
+        - Unit Tests
+          - Intended to test 1 thing and only 1
+          - If evertyhing is unit tested, the system integrity is enhanced
+          - Easy to write, and catches defects early and quickly
+        - End-to-End Tests
+          - Intented to test the application from start to finish
+          - Tests a flow and ensures components communicate properly
+
+        Salesforce calls out these testing methodologies and points out that End to End tests will require
+        constant maintenance due to the ever-changing standards around HTML and modern web components.
+        Salesforce also recommends that for any end-to-end tests we use Selenium WebDriver. We won't be going into
+        end-to-end testing, but we will be taking a look at unit testing via Jest
+    -->
+</template>

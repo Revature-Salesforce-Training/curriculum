@@ -1,0 +1,24 @@
+p {
+    color: rgb(16, 187, 1);
+}
+
+.container {
+    width: 70vw;
+    padding: 1rem;
+    background: rgb(255, 255, 255);
+}
+
+.child {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.element-list {
+    text-align: center;
+}
+
+.element-container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+}

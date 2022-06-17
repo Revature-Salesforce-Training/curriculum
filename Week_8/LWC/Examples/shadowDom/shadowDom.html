@@ -1,0 +1,50 @@
+<!--
+    Created by: Jared Longnecker
+    Last Updated: 03/17/2022
+    Description: Demo to understand Shadow DOM interaction
+-->
+
+<template>
+    <div class="container">
+        <span>#Shadow Boundary</span>
+        <p>Here's a visual representation of the Shadow DOM in action</p>
+        <p>All p tags are styled to be green</p>
+        <p>Below is the child component</p>
+        <div class="child">
+            <c-shadow-child onclick={updateTarget}>
+                <p slot="slot1">Notice the styling carries over</p>
+                <lightning-button slot="slot1" variant="brand" label="Click Me!"></lightning-button>
+                <p>This text is in the child via a slot</p>
+                <lightning-button variant="brand" label="Click Me!"></lightning-button>
+            </c-shadow-child>
+        </div>
+        <p>Try clicking on the buttons. The target will be displayed here: {eventTarget}</p>
+        <div class="element-container">
+            <div if:true={elements}>
+                <template iterator:it={elements}>
+                    <span class="element-list" key={it.value.outerHTML}>
+                        <p if:true={it.first}>These elements are accessible via the Shadow Tree:</p>
+                        <p>{it.value.localName}</p>
+                    </span>
+                </template>
+            </div>
+            <div>
+                <p>There's no slots, so there's no markup available from slots.</p>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!--
+    ==== Lightning Locker ====
+    Lightning Locker is a system that provides component isolation and security to allow your code to execute and interact securely. Some features of Lightning Locker:
+    - **JS Strict Mode: use strict enforced for us, we don't need to define it
+    - **DOM Containment: Enforces the Shadow DOM properties
+    - **Secure Wrappers: Hides global objects or wraps global objects in a secure wrapper (window wrapped to SecureWindow)
+    - **Limited eval() Function Use: eval() runs code dynamically. This function use is severely limited with Lightning Locker
+    - **Blocks Third Party Web Components: Does what it says
+    - MIME Types Permitted: Analyzes MIME (content) types in Blobs to ensure they are cleaned or blocked
+    - Restricts SF Global Variables: Some JS objects available in other features are blocked
+    - Browser Support: Disables itself in unsupported browsers (looking at you, Internet Explorer)
+    - Arrays Passed to Children: Wraps arrays passed to children in a proxy (proxy can redefine the object for protection purposes)
+-->

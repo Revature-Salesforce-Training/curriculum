@@ -1,0 +1,9 @@
+1. Find all Contacts(name, email) with a search string of 'John'
+
+2. Return Account(name) and Contact(name) where search string is 'un'
+
+3. Return all Account(name, AnnualRevenue) and sort them by AnnualRevenue is descending order with a search string of 'comm'.
+
+4. Return all Account(name, AnnualRevenue) where the annual revenue is greater than 5 million and sort them by annual revenue in ascending order where the search string is 'comm'.
+
+5. Same as 4 but also limit your results to 3 records and offset by 2.

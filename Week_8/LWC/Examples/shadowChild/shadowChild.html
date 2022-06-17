@@ -1,0 +1,38 @@
+<!--
+    Created by: Jared Longnecker
+    Last Updated: 03/17/2022
+    Description: Child in the Shadow DOM demo illustrating Shadow DOM encapsulation properties
+-->
+
+<template>
+    <span>#Shadow Boundary</span>
+    <p>In the child, the p styling doesn't reach!</p>
+    <div class="slot-holder" onclick={updateTarget}>
+        <div class="slot">
+            <slot></slot>
+            <lightning-button label="Click Me!"></lightning-button>
+            <div if:true={elements}>
+                <template iterator:it={elements}>
+                    <span class="element-list" key={it.value.outerHTML}>
+                        <p if:true={it.first}>These elements are accessible via the Shadow Tree:</p>
+                        <p>{it.value.localName}</p>
+                    </span>
+                </template>
+            </div>
+        </div>
+        <div class="slot">
+            <slot name="slot1"></slot>
+            <lightning-button label="Click Me!"></lightning-button>
+            <div if:true={miscElements}>
+                <template iterator:it={miscElements}>
+                    <span class="element-list" key={it.value.outerHTML}>
+                        <p if:true={it.first}>These elements are accessible via slots:</p>
+                        <p>{it.value.localName}</p>
+                    </span>
+                </template>
+            </div>
+        </div>
+    </div>
+    <p>The blue buttons are passed in via slots, while the white ones are not.</p>
+    <p>This is what the child hears for the click: {eventTarget}</p>
+</template>

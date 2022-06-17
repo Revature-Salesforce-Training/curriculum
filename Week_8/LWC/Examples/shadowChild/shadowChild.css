@@ -1,0 +1,23 @@
+span, p {
+    margin-left: 4rem;
+}
+
+.slot-holder {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.slot {
+    padding: 1rem;
+}
+
+.element-list {
+    margin: 0;
+}
+
+.element-list p {
+    margin: 0;
+    text-align: center;
+}
