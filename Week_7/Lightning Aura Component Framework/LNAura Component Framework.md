@@ -180,23 +180,67 @@ Just like the Visualforce framework, Aura has its own opening and closing markup
 </aura:component>
 ```
 
-Before we move on to the resources included in the bundle, let's quickly discuss the concept of composition. Composition is the process of breaking a large component down into multiple smaller, independent components, thus promoting reusability and allowing for modularity. Although we should always practice composition, its place within our development process is a personal choice: we can start off by building a large component and then break it down when it becomes too big or we have implemented our desired functionality, or we can build small, manageable components from the start.
+Before we move on to the resources included in the bundle, let's quickly discuss the concept of composition. Composition is 
+the process of breaking a large component down into multiple smaller, independent components, thus promoting reusability and 
+allowing for modularity. Although we should always practice composition, its place within our development process is a personal 
+choice: we can start off by building a large component and then break it down when it becomes too big or we have implemented 
+our desired functionality, or we can build small, manageable components from the start.
 
-The next parts of the bundle are the controller and helper, JavaScript files for handling events. We cannot name these files (or any resources) independently - the framework automatically appends `Controller.js` and `Helper.js`, respectively, to the file extension-free name of the component file when they are created. The Aura model offers a close binding between the component and controller files (which we will further detail later in this module) so that the component can easily fire and handle any events in its included controller. Because of this close binding, we do not have to declare the name of the JavaScript files in our markup as we have to when writing HTML - the framework is already aware that `childComponentController.js` is the JavaScript file for `childComponent.cmp`.
+The next parts of the bundle are the controller and helper, JavaScript files for handling events. We cannot name these files 
+(or any resources) independently - the framework automatically appends `Controller.js` and `Helper.js`, respectively, to the 
+file extension-free name of the component file when they are created. The Aura model offers a close binding between the 
+component and controller files (which we will further detail later in this module) so that the component can easily fire and 
+handle any events in its included controller. Because of this close binding, we do not have to declare the name of the 
+JavaScript files in our markup as we have to when writing HTML - the framework is already aware that 
+`childComponentController.js` is the JavaScript file for `childComponent.cmp`.
 
-It is considered a best practice to keep the controller as free of business logic as possible and move all appropriate logic to the helper. This is both to keep the controller short and readable _and_ because the underlying implementation of the Aura model results in increased efficiency when as much logic as possible is in the helper. Consider our `parentComponent.cmp` example and assume that the `childComponent` bundle contains a controller and helper in addition to the markup file. By instantiating two `childComponent` bundles, we cause the framework to instantiate the `.cmp` file and JS controller twice. But the framework only initializes the helper once - the one helper file is used by both `childComponent` bundles - meaning that we don't consume extra memory by duplicating the helper.
+It is considered a best practice to keep the controller as free of business logic as possible and move all appropriate logic to 
+the helper. This is both to keep the controller short and readable _and_ because the underlying implementation of the Aura 
+model results in increased efficiency when as much logic as possible is in the helper. Consider our `parentComponent.cmp` 
+example and assume that the `childComponent` bundle contains a controller and helper in addition to the markup file. By 
+instantiating two `childComponent` bundles, we cause the framework to instantiate the `.cmp` file and JS controller twice. 
+But the framework only initializes the helper once - the one helper file is used by both `childComponent` bundles - meaning 
+that we don't consume extra memory by duplicating the helper.
 
-Next, we have the style, a `.css` file that has the same name as the extension-free `.cmp` file and contains any custom styling for the component. As we said earlier, one of the benefits of the Aura model is the provided Salesforce-like styling, but we still have the ability to further customize the appearance of our components. Under the hood, the framework applies the `.THIS` class to each of our elements in the `.cmp` file in order to ensure one component's styling does not override another by applying a sort of namespace to our file. For that reason, the `.THIS` class must be included in all selectors in our style resource. Note that we can still apply additional classes to our component elements.
+Next, we have the style, a `.css` file that has the same name as the extension-free `.cmp` file and contains any custom styling 
+for the component. As we said earlier, one of the benefits of the Aura model is the provided Salesforce-like styling, but we 
+still have the ability to further customize the appearance of our components. Under the hood, the framework applies the 
+`.THIS` class to each of our elements in the `.cmp` file in order to ensure one component's styling does not override another 
+by applying a sort of namespace to our file. For that reason, the `.THIS` class must be included in all selectors in our style 
+resource. Note that we can still apply additional classes to our component elements.
 
-The documentation resource has the same name as the extension-free `.cmp` file with the `.auradoc` extension and it contains HTML markup that provides more targeted information than may be found in, for example, a project-wide repository. However, this is not an excuse to avoid writing documentation for the project as a whole, rather it is another feature driven by the desire for reusability - anyone wanting to use our component for a purpose other than the original project it was written for will only have to reference this bundle-specific documentation to understand its purpose and how it works. This file can contain escaped component code samples by using `<pre>` tags and using the `&lt;` entity code. For further information on how to implement this, see the `Creating Documentation Link` in the `Helpful References/Links` section.
+The documentation resource has the same name as the extension-free `.cmp` file with the `.auradoc` extension and it contains 
+HTML markup that provides more targeted information than may be found in, for example, a project-wide repository. However, 
+this is not an excuse to avoid writing documentation for the project as a whole, rather it is another feature driven by the 
+desire for reusability - anyone wanting to use our component for a purpose other than the original project it was written for 
+will only have to reference this bundle-specific documentation to understand its purpose and how it works. This file can 
+contain escaped component code samples by using `<pre>` tags and using the `&lt;` entity code. For further information on how 
+to implement this, see the `Creating Documentation Link` in the `Helpful References/Links` section.
 
-Earlier, we stated that the Aura model makes it easy to include components in pages on the Lightning platform, especially when utilizing Lightning App Builder, and our next resource, the design resource, can assist us in this endeavor. Like the documentation resource, the design file has the same name as the extension-free component file, but with a `.design` extension. We will further discuss this file when we talk about component attributes.
+Earlier, we stated that the Aura model makes it easy to include components in pages on the Lightning platform, especially when 
+utilizing Lightning App Builder, and our next resource, the design resource, can assist us in this endeavor. Like the 
+documentation resource, the design file has the same name as the extension-free component file, but with a `.design` 
+extension. This resource helps us control which attributes are available to our variouis builder tools such as: the Lightning 
+App Builder, Experience Builder, or Flow Builder (More on attributes later). You can also make use of this resource's label 
+attribute like so: ```<design:component label="labelNameHere">``` Setting the label in this manner will set the name of the 
+component as it appears in our various builder tools. 
 
-The renderer resource is another JavaScript file and has the extension-free name of the component file with `Renderer.js` appended. This resource is used to create custom rendering for component elements; but it is much easier to handle the `render` event in the controller and helper, so we will not provide further detail for this resource (see the `Create a Custom Renderer` link in the `Helpful References/Links` section if you would like more information).
+The renderer resource is another JavaScript file and has the extension-free name of the component file with `Renderer.js` 
+appended. This resource is used to create custom rendering for component elements; but it is much easier to handle the `render` 
+event in the controller and helper, so we will not provide further detail for this resource (see the `Create a Custom Renderer` 
+link in the `Helpful References/Links` section if you would like more information).
 
-The last member of the bundle is the SVG file, having the same name as the component, with the `.svg` extension in place of `.cmp`. SVG stands for scalable vector graphics and is used to define a custom icon for a component in the Lightning App Builder's component menu.
+The last member of the bundle is the SVG file, having the same name as the component, with the `.svg` extension in place of 
+`.cmp`. SVG stands for scalable vector graphics and is used to define a custom icon for a component in the Lightning App 
+Builder's component menu.
 
-See the below image for an example of a bundle with all eight resources in the Developer Console. The panel on the far right indicates which resources are part of the component bundle (because we have a full bundle, all of the parts are blue; non-included parts would have a gray background). You can quickly navigate to/open a desired bundle member by either using the written keyboard shortcuts or clicking on the corresponding part (e.g. we would click `CONTROLLER` in the far right pane to switch to the `exampleComponentController.js` file). Note that you may choose whether to create each resource when making an Aura component in the Developer Console (again, this does not include the `.cmp` file, which is always required). However, if you create your bundle through Visual Studio Code, all resources will automatically be created for you.
+See the below image for an example of a bundle with all eight resources in the Developer Console. The panel on the far right 
+indicates which resources are part of the component bundle (because we have a full bundle, all of the parts are blue; 
+non-included parts would have a gray background). You can quickly navigate to/open a desired bundle member by either using 
+the written keyboard shortcuts or clicking on the corresponding part (e.g. we would click `CONTROLLER` in the far right pane 
+to switch to the `exampleComponentController.js` file). Note that you may choose whether to create each resource when making 
+an Aura component in the Developer Console (again, this does not include the `.cmp` file, which is always required). However, 
+if you create your bundle through Visual Studio Code, all resources will automatically be created for you.
 
 <img src="img/component_bundle.png"/>
 

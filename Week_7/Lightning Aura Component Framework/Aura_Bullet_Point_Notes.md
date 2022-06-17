@@ -8,7 +8,7 @@
 	* Helper - contains all the business logic. It is a best practice to keep business logic here, as the helper is instatiated only once if the component is in multiple places in the markup. The controller will appear every time.
 	* style - contains the css to style the component. all selectors are prepended with '.THIS' to unsure that one components styles do not effect another.
 	* documentation - contains html markup that provides info on how are component can be used and what its purpose is
-	* design - 
+	* design - controls which attributes are exposed to builder tools such as LAB, Experience builder, or flow builder; We can set the label attribute on the design:component tag itself to change the name of the component as it appears in various builder tools. 
 	* renderer - used to create custom rendering for component elements; a lot easier to just use the render method in JS though so this is pretty rare
 	* SVG - defines the custom icon for a component in the Lightning App Builder's component menu
 	
